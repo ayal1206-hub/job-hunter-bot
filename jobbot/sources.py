@@ -30,8 +30,7 @@ def _get_json(url: str, params: dict | None = None):
 
 
 def fetch_greenhouse(company: dict) -> list[Job]:
-    host = "boards-api.eu.greenhouse.io" if company.get("region") == "eu" else "boards-api.greenhouse.io"
-    data = _get_json(f"https://{host}/v1/boards/{company['token']}/jobs")
+    data = _get_json(f"https://boards-api.greenhouse.io/v1/boards/{company['token']}/jobs")
     jobs = []
     for item in data.get("jobs", []):
         jobs.append(Job(

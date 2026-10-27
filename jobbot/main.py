@@ -67,12 +67,16 @@ def run_check(cfg: dict) -> None:
     by_company: dict[str, list] = {}
     for job in jobs:
         by_company.setdefault(job.company, []).append(job)
-    print("\nJobs in the search area, per company:")
+    print(f"\n{'company':<20} {'total':>5} {'in area':>8} {'matches':>8}")
     for company, items in sorted(by_company.items()):
         local = [j for j in items if location_ok(j.location, cfg)]
-        print(f"  {company:<20} {len(local):>3} of {len(items)}")
+        matched = [j for j in local if classify(j, cfg)]
+        print(f"{company:<20} {len(items):>5} {len(local):>8} {len(matched):>8}")
+        for j in matched:
+            print(f"    -> {j.title} ({j.location})")
     if failures:
-        print(f"\n{len(failures)} board(s) failed - fix or remove them in config.yaml")
+        print(f"\n{len(failures)} board(s) failed - fix or remove them in config.yaml:")
+        print("  " + "\n  ".join(failures))
 
 
 def run(cfg: dict) -> int:

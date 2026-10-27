@@ -67,31 +67,41 @@ junior_tracks: [qa, support]
 max_alerts_per_run: 15
 
 # Companies to scan. Unreachable boards are skipped and reported in the run log.
-# greenhouse: the board token from boards.greenhouse.io/<token>  (add region: eu for EU boards)
+# greenhouse: the board token from boards.greenhouse.io/<token>
 # lever:      the company slug from jobs.lever.co/<slug>
 # comeet:     uid + token from the company's Comeet careers page source
 companies:
   greenhouse:
-    - {name: Optimove, token: optimove, region: eu}
-    - {name: Sweet Security, token: sweetsecurity}
-    - {name: Lemonade, token: lemonade}
-    - {name: Riskified, token: riskified}
-    - {name: Payoneer, token: payoneer}
-    - {name: Fiverr, token: fiverr}
-    - {name: Similarweb, token: similarweb}
-    - {name: Taboola, token: taboola}
-    - {name: Gong, token: gongio}
-    - {name: Armis, token: armissecurity}
+    # Verified working (check run, 2026-10-27)
     - {name: Cato Networks, token: catonetworks}
-    - {name: Pagaya, token: pagaya}
+    - {name: Similarweb, token: similarweb}
+    - {name: Payoneer, token: payoneer}
+    - {name: Taboola, token: taboola}
+    - {name: Riskified, token: riskified}
+    - {name: Gong, token: gongio}
     - {name: Melio, token: melio}
-    - {name: Hibob, token: hibob}
-    - {name: Cyera, token: cyera}
-    - {name: Snyk, token: snyk}
-  lever:
-    - {name: Lightricks, slug: lightricks}
-    - {name: Yotpo, slug: yotpo}
-    - {name: Jfrog, slug: jfrog}
-    - {name: Outbrain, slug: outbrain}
+    - {name: Sweet Security, token: sweetsecurity}
+    # Not yet verified - the next check run will show which ones work
+    - {name: AppsFlyer, token: appsflyer}
+    - {name: Wiz, token: wizinc}
+    - {name: Axonius, token: axonius}
+    - {name: Forter, token: forter}
+    - {name: Tipalti, token: tipalti}
+    - {name: Lusha, token: lusha}
+    - {name: HoneyBook, token: honeybook}
+    - {name: Papaya Global, token: papayaglobal}
+    - {name: Hunters, token: hunters}
+    - {name: Transmit Security, token: transmitsecurity}
+    - {name: Checkmarx, token: checkmarx}
+    - {name: Cloudinary, token: cloudinary}
+    - {name: BigPanda, token: bigpanda}
+    - {name: Coralogix, token: coralogix}
+    - {name: Aidoc, token: aidoc}
+    - {name: Moon Active, token: moonactive}
+    - {name: Via, token: via}
+    - {name: VAST Data, token: vastdata}
+    - {name: Justt, token: justt}
+    - {name: Nayax, token: nayax}
+  lever: []
   comeet: []
     # - {name: Example, uid: "XX.XXX", token: "XXXXXXXX"}
