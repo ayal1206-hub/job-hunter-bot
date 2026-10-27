@@ -13,6 +13,7 @@ from pathlib import Path
 
 import yaml
 
+from .email_alerts import fetch_alert_emails, format_alert
 from .filters import classify, evaluate, location_ok
 from .sources import FETCHERS, SourceError
 from .telegram import Telegram, format_job
@@ -98,6 +99,29 @@ def run_check(cfg: dict) -> None:
     REPORT_PATH.write_text(report, encoding="utf-8")
 
 
+def relay_email_alerts(cfg: dict, telegram: Telegram, seen: dict, today: str) -> None:
+    """Forward new AllJobs/Drushim alert emails from Gmail to Telegram."""
+    ecfg = cfg.get("email_alerts") or {}
+    address, password = os.environ.get("GMAIL_ADDRESS"), os.environ.get("GMAIL_APP_PASSWORD")
+    if not ecfg.get("enabled") or not (address and password):
+        print("Email alerts: skipped (not configured)")
+        return
+    try:
+        alerts = fetch_alert_emails(
+            address, password.replace(" ", ""), ecfg["senders"],
+            ecfg.get("lookback_days", 3), ecfg.get("max_jobs_per_email", 10),
+        )
+    except Exception as exc:  # IMAP problems must never break the job-board alerts
+        print(f"Email alerts: failed ({type(exc).__name__}: {exc})")
+        return
+    new = [a for a in alerts if f"email:{a.message_id}" not in seen]
+    for alert in new:
+        telegram.send(format_alert(alert))
+        seen[f"email:{alert.message_id}"] = today
+        save_seen(seen)
+    print(f"Email alerts: {len(alerts)} found, {len(new)} new forwarded")
+
+
 def run(cfg: dict) -> int:
     telegram = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
     seen = load_seen()
@@ -123,6 +147,8 @@ def run(cfg: dict) -> int:
 
     if deferred:
         telegram.send(f"➕ {len(deferred)} more matching jobs - they'll arrive in the next run.")
+
+    relay_email_alerts(cfg, telegram, seen, today)
 
     save_seen(seen)
     print(f"\nScanned {len(jobs)} jobs, {len(new_matches)} new matches, sent {len(to_send)}.")

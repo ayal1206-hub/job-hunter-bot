@@ -10,7 +10,7 @@ I built it to stop refreshing career pages by hand during my second year of a Co
 GitHub Actions (every 4 hours)
         │
         ▼
- fetch jobs from Greenhouse, Lever and Comeet APIs
+ fetch jobs from Greenhouse, Lever, Comeet  +  read job-alert emails (Gmail IMAP)
         │
         ▼
  filter: location, seniority, role track
@@ -25,6 +25,7 @@ GitHub Actions (every 4 hours)
 - **Sources:** public JSON APIs of the three applicant-tracking systems most Israeli tech companies use. No scraping of sites that forbid it, so the bot doesn't get blocked.
 - **Filtering:** a job matches when its location is in the search area, its title is student- or junior-level, and it belongs to a role track (QA, tech support, development). Senior roles are excluded. Keywords work in English and Hebrew, with whole-word matching so "sr" doesn't hit inside other words.
 - **Memory:** sent jobs are stored in `seen.json`, which the workflow commits back to the repo. Entries expire after 180 days.
+- **Email relay:** job sites that forbid scraping (AllJobs, Drushim) are covered through their own official alert emails. The bot reads them from Gmail over IMAP in read-only mode, extracts the job links and forwards them to Telegram. This is how security, lifeguard and other non-tech jobs arrive.
 - **Robustness:** a board that fails (company switched ATS, wrong token) is skipped and reported in the log; the run fails only if every board fails.
 
 Applications are always sent by me. The bot only finds and reports.
@@ -43,6 +44,7 @@ python -m jobbot.main --check
 
 1. Create a Telegram bot with [@BotFather](https://t.me/BotFather) and get your chat id.
 2. Add two repository secrets: `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`.
+   Optional, for the email relay: `GMAIL_ADDRESS` and `GMAIL_APP_PASSWORD` (a Google app password).
 3. Enable GitHub Actions. The bot runs every 4 hours, or on demand from the Actions tab.
 
 Run locally (prints alerts instead of sending them when no token is set):
@@ -59,6 +61,7 @@ pytest
 jobbot/
   sources.py    # Greenhouse, Lever, Comeet fetchers
   filters.py    # location + seniority + track rules
+  email_alerts.py  # Gmail IMAP relay for job-site alert emails
   telegram.py   # message formatting and sending
   main.py       # orchestration, dedupe, CLI
 tests/          # unit tests for the filters and formatting

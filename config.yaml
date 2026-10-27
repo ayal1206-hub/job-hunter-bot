@@ -72,6 +72,15 @@ junior_tracks: [qa, support]
 # (e.g. "IT Support Specialist"). Often open to students; sent with a separate label.
 possible_tracks: [qa, support]
 
+# Relay the official "smart agent" alert emails from job sites that don't allow
+# scraping (security, lifeguard and other general jobs). Read-only Gmail access
+# via the GMAIL_ADDRESS + GMAIL_APP_PASSWORD secrets; skipped when they're missing.
+email_alerts:
+  enabled: true
+  senders: [alljobs.co.il, drushim.co.il, jobmaster.co.il]
+  lookback_days: 3
+  max_jobs_per_email: 10
+
 # Max alerts per run. Anything beyond this is summarised in one message.
 max_alerts_per_run: 15
 
