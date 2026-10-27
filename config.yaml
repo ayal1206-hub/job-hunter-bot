@@ -1,0 +1,97 @@
+# Job Hunter Bot configuration.
+# Edit this file to change what the bot looks for. No code changes needed.
+
+# Locations that count as a match (case-insensitive substring of the job's location).
+# South up to Ashkelon, plus the Tel Aviv metro area.
+locations:
+  - tel aviv
+  - tel-aviv
+  - ramat gan
+  - givatayim
+  - herzliya
+  - petah tikva
+  - petach tikva
+  - holon
+  - bnei brak
+  - bat yam
+  - rishon
+  - rehovot
+  - ness ziona
+  - ashdod
+  - ashkelon
+  - beer sheva
+  - be'er sheva
+  - beersheba
+  - sderot
+  - netivot
+  - kiryat gat
+  - ofakim
+  - תל אביב
+  - רמת גן
+  - הרצליה
+  - פתח תקווה
+  - ראשון לציון
+  - רחובות
+  - אשדוד
+  - אשקלון
+  - באר שבע
+  - שדרות
+
+# A location that only says "Israel" (no city) is usually hybrid/flexible - keep it.
+accept_country_only: true
+
+# Role tracks. A job is tagged with the first track whose keywords appear in its title.
+tracks:
+  qa:
+    label: "QA / Testing"
+    keywords: [qa, quality assurance, tester, testing, test engineer, automation, verification, validation, בודק, בדיקות]
+  support:
+    label: "Tech Support / IT"
+    keywords: [support, helpdesk, help desk, it technician, it specialist, noc, system administrator, sysadmin, technical operations, תמיכה, טכנאי]
+  dev:
+    label: "Development"
+    keywords: [developer, software engineer, software developer, programmer, full stack, fullstack, backend, back-end, frontend, front-end, data engineer, data analyst, python, java, c++, מפתח, פיתוח]
+
+# Title words that mark a job as student / entry level.
+student_keywords: [student, intern, internship, סטודנט, סטודנטית, משרת סטודנט]
+junior_keywords: [junior, entry level, entry-level, graduate, ג'וניור, גוניור, ללא ניסיון]
+
+# Title words that disqualify a job.
+exclude_keywords: [senior, sr, lead, principal, staff, manager, head of, director, architect, vp, team leader, בכיר, ראש צוות, מנהל]
+
+# Rule: student jobs in any track always match.
+# Junior jobs match only when they are in qa or support (dev junior roles usually want experience).
+junior_tracks: [qa, support]
+
+# Max alerts per run. Anything beyond this is summarised in one message.
+max_alerts_per_run: 15
+
+# Companies to scan. Unreachable boards are skipped and reported in the run log.
+# greenhouse: the board token from boards.greenhouse.io/<token>  (add region: eu for EU boards)
+# lever:      the company slug from jobs.lever.co/<slug>
+# comeet:     uid + token from the company's Comeet careers page source
+companies:
+  greenhouse:
+    - {name: Optimove, token: optimove, region: eu}
+    - {name: Sweet Security, token: sweetsecurity}
+    - {name: Lemonade, token: lemonade}
+    - {name: Riskified, token: riskified}
+    - {name: Payoneer, token: payoneer}
+    - {name: Fiverr, token: fiverr}
+    - {name: Similarweb, token: similarweb}
+    - {name: Taboola, token: taboola}
+    - {name: Gong, token: gongio}
+    - {name: Armis, token: armissecurity}
+    - {name: Cato Networks, token: catonetworks}
+    - {name: Pagaya, token: pagaya}
+    - {name: Melio, token: melio}
+    - {name: Hibob, token: hibob}
+    - {name: Cyera, token: cyera}
+    - {name: Snyk, token: snyk}
+  lever:
+    - {name: Lightricks, slug: lightricks}
+    - {name: Yotpo, slug: yotpo}
+    - {name: Jfrog, slug: jfrog}
+    - {name: Outbrain, slug: outbrain}
+  comeet: []
+    # - {name: Example, uid: "XX.XXX", token: "XXXXXXXX"}
