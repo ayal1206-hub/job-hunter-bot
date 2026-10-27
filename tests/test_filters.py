@@ -39,6 +39,10 @@ def test_locations_outside_area(location):
     ("Data Analyst Student", "dev", "student"),
     ("IT Support Specialist", "support", "possible"),
     ("QA Engineer", "qa", "possible"),
+    ("Security Analyst (Student Position)", "tech", "student"),
+    ("Cloud Monitoring Engineer (Student Position)", "tech", "student"),
+    ("Service Desk Specialist", "support", "possible"),
+    ("תומכ.ת טכני.ת", "support", "possible"),
 ])
 def test_matches(title, track, level):
     m = classify(job(title), CFG)
@@ -57,6 +61,8 @@ def test_matches(title, track, level):
     "Experienced Software Engineer",
     "Finance Student",             # student but no tech track
     "Marketing Intern",            # student but no tech track
+    "FP&A Analyst - Student Position",  # analyst alone is not tech
+    "Security Engineer",           # broad tech track is student-only
 ])
 def test_rejects(title):
     assert classify(job(title), CFG) is None
@@ -67,9 +73,10 @@ def test_rejects_student_job_outside_area():
 
 
 def test_whole_word_matching_avoids_false_hits():
-    # "sr" must not match inside "SRE"-like words or "israel"; "it" must not match inside "security".
-    assert classify(job("Security Research Student"), CFG) is None  # no track keyword
-    assert classify(job("Site Reliability Student, SRE"), CFG) is None
+    # "it" must not match inside "community" / "security"; "sr" must not match inside "israel".
+    assert classify(job("Community Student"), CFG) is None
+    assert classify(job("QA Student - Israel"), CFG).level == "student"
+    assert classify(job("Security Officer"), CFG) is None
 
 
 def test_message_escapes_html():

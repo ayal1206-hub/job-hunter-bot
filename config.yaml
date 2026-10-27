@@ -47,10 +47,14 @@ tracks:
     keywords: [qa, quality assurance, tester, testing, test engineer, test automation, verification, validation, בודק, בדיקות]
   support:
     label: "Tech Support / IT"
-    keywords: [support, helpdesk, help desk, it technician, it specialist, noc, system administrator, sysadmin, technical operations, תמיכה, טכנאי]
+    keywords: [support, helpdesk, help desk, service desk, it technician, it specialist, it administrator, noc, system administrator, sysadmin, technical operations, תמיכה, תומך, תומכ, טכנאי]
   dev:
     label: "Development"
     keywords: [developer, software engineer, software developer, programmer, full stack, fullstack, backend, back-end, frontend, front-end, data engineer, data analyst, python, java, c++, מפתח, פיתוח]
+  tech:
+    label: "Tech (other)"
+    # Broad tech words. Not in junior_tracks/possible_tracks, so only student positions use it.
+    keywords: [engineer, engineering, security, cyber, cloud, devops, monitoring, network, it, algorithm, research, ai, ml, sre, סייבר, הנדסה]
 
 # Title words that mark a job as student / entry level.
 student_keywords: [student, intern, internship, סטודנט, סטודנטית, משרת סטודנט]
@@ -60,6 +64,7 @@ junior_keywords: [junior, entry level, entry-level, graduate, ג'וניור, ג�
 exclude_keywords: [senior, sr, expert, experienced, lead, principal, staff, manager, head of, director, architect, vp, team leader, בכיר, ראש צוות, מנהל]
 
 # Rule: student jobs in any track always match.
+#
 # Junior jobs match only when they are in qa or support (dev junior roles usually want experience).
 junior_tracks: [qa, support]
 
@@ -94,7 +99,6 @@ companies:
   lever: []
   # comeet: slug + uid from the careers page URL comeet.com/jobs/<slug>/<uid>
   comeet:
-    - {name: Globalbit, slug: globalbit, uid: "D5.006"}
     - {name: VAST Data, slug: vastdata, uid: "43.001"}
     - {name: Global-e, slug: global-e, uid: "62.002"}
     - {name: Claroty, slug: claroty, uid: "f2.004"}
@@ -108,7 +112,6 @@ companies:
     - {name: CommIT, slug: comm-it, uid: "76.008"}
     - {name: Team8, slug: team8, uid: "61.003"}
     - {name: Samsung Israel, slug: samsung, uid: "D4.005"}
-    - {name: Playtika, slug: playtika, uid: "01.001"}
     - {name: KPMG Israel, slug: somekhchaikin, uid: "f3.007"}
     - {name: Deloitte Israel, slug: deloitte, uid: "F7.00B"}
     - {name: Alma Lasers, slug: almalasers, uid: "67.006"}
