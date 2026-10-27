@@ -92,5 +92,23 @@ companies:
     - {name: Transmit Security, token: transmitsecurity}
     - {name: Via, token: via}
   lever: []
-  comeet: []
-    # - {name: Example, uid: "XX.XXX", token: "XXXXXXXX"}
+  # comeet: slug + uid from the careers page URL comeet.com/jobs/<slug>/<uid>
+  comeet:
+    - {name: Globalbit, slug: globalbit, uid: "D5.006"}
+    - {name: VAST Data, slug: vastdata, uid: "43.001"}
+    - {name: Global-e, slug: global-e, uid: "62.002"}
+    - {name: Claroty, slug: claroty, uid: "f2.004"}
+    - {name: Exodigo, slug: exodigo, uid: "89.005"}
+    - {name: AllCloud, slug: allcloud, uid: "71.008"}
+    - {name: DRS RADA, slug: rada, uid: "73.009"}
+    - {name: Upwind, slug: upwind, uid: "49.004"}
+    - {name: Kela, slug: kelatechnologies, uid: "2A.007"}
+    - {name: Dream, slug: dreamgroup, uid: "99.002"}
+    - {name: Fetcherr, slug: fetcherr, uid: "68.006"}
+    - {name: CommIT, slug: comm-it, uid: "76.008"}
+    - {name: Team8, slug: team8, uid: "61.003"}
+    - {name: Samsung Israel, slug: samsung, uid: "D4.005"}
+    - {name: Playtika, slug: playtika, uid: "01.001"}
+    - {name: KPMG Israel, slug: somekhchaikin, uid: "f3.007"}
+    - {name: Deloitte Israel, slug: deloitte, uid: "F7.00B"}
+    - {name: Alma Lasers, slug: almalasers, uid: "67.006"}

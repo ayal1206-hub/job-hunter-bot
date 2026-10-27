@@ -4,6 +4,9 @@ Each fetcher returns a list of Job objects, or raises SourceError when the
 board can't be read (wrong token, company moved to another ATS, network error).
 """
 
+import json
+import re
+
 import requests
 
 from .models import Job
@@ -63,24 +66,75 @@ def fetch_lever(company: dict) -> list[Job]:
     return jobs
 
 
-def fetch_comeet(company: dict) -> list[Job]:
-    url = f"https://www.comeet.co/careers-api/2.0/company/{company['uid']}/positions"
-    data = _get_json(url, params={"token": company["token"], "details": "false"})
-    if not isinstance(data, list):
-        raise SourceError("unexpected response shape")
+DEBUG_DIR = None  # set by check mode to save pages that couldn't be parsed
+
+
+def _comeet_jobs(company: dict, items: list) -> list[Job]:
     jobs = []
-    for item in data:
+    for item in items:
+        if not isinstance(item, dict):
+            continue
         loc = item.get("location") or {}
-        location = ", ".join(p for p in (loc.get("city"), loc.get("country")) if p)
+        if isinstance(loc, dict):
+            location = loc.get("name") or ", ".join(p for p in (loc.get("city"), loc.get("country")) if p)
+        else:
+            location = str(loc)
         jobs.append(Job(
             source="comeet",
             company=company["name"],
             job_id=str(item.get("uid", "")),
-            title=item.get("name", "").strip(),
-            location=location,
-            url=item.get("url_active_page") or item.get("url_comeet_hosted_page", ""),
+            title=(item.get("name") or "").strip(),
+            location=location or "",
+            url=item.get("url_active_page") or item.get("url_comeet_hosted_page") or "",
         ))
     return jobs
+
+
+def _extract_json_array(text: str, start: int):
+    """Parse the JSON array that begins at text[start] ('[')."""
+    try:
+        value, _ = json.JSONDecoder().raw_decode(text, start)
+        return value
+    except ValueError:
+        return None
+
+
+def fetch_comeet(company: dict) -> list[Job]:
+    """Comeet: use the API when a token is configured, otherwise read the
+    public hosted careers page (comeet.com/jobs/<slug>/<uid>), which embeds
+    the open positions as JSON."""
+    if company.get("token"):
+        url = f"https://www.comeet.co/careers-api/2.0/company/{company['uid']}/positions"
+        data = _get_json(url, params={"token": company["token"], "details": "false"})
+        if not isinstance(data, list):
+            raise SourceError("unexpected response shape")
+        return _comeet_jobs(company, data)
+
+    page_url = f"https://www.comeet.com/jobs/{company['slug']}/{company['uid']}"
+    try:
+        resp = requests.get(page_url, headers=HEADERS, timeout=TIMEOUT)
+    except requests.RequestException as exc:
+        raise SourceError(f"network error: {exc}") from exc
+    if resp.status_code != 200:
+        raise SourceError(f"HTTP {resp.status_code}")
+    html = resp.text
+
+    # 1) positions embedded in the page
+    m = re.search(r"COMPANY_POSITIONS_DATA\s*=\s*\[", html)
+    if m:
+        data = _extract_json_array(html, m.end() - 1)
+        if isinstance(data, list):
+            return _comeet_jobs(company, data)
+
+    # 2) an API token embedded in the page
+    t = re.search(r'["\']?token["\']?\s*[:=]\s*["\']([A-Za-z0-9]{8,})["\']', html)
+    if t:
+        return fetch_comeet({**company, "token": t.group(1)})
+
+    if DEBUG_DIR is not None:
+        DEBUG_DIR.mkdir(parents=True, exist_ok=True)
+        (DEBUG_DIR / f"{company['slug']}.html").write_text(html, encoding="utf-8")
+    raise SourceError("no positions data found in page")
 
 
 FETCHERS = {

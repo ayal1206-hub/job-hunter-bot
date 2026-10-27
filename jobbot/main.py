@@ -68,6 +68,8 @@ def run_check(cfg: dict) -> None:
     The full report is written to reports/check.txt so it can be reviewed
     from the repo instead of the Actions log.
     """
+    from . import sources
+    sources.DEBUG_DIR = REPORT_PATH.parent / "debug"
     jobs, failures = fetch_all(cfg)
     by_company: dict[str, list] = {}
     for job in jobs:
