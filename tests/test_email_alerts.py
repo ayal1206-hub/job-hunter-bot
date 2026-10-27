@@ -84,3 +84,14 @@ def test_fetch_alert_emails_reads_mailbox_readonly():
     text = ea.format_alert(a)
     assert "📄 CV: General (Hebrew)" in text
     assert "JobID=222" in text
+
+
+def test_cv_label_follows_job_type():
+    import yaml
+    from pathlib import Path
+    cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
+    mk = lambda titles: ea.AlertEmail("id", "alljobs.co.il", "s", [(t, "https://x/" + t) for t in titles])
+    assert "CV: Tech (English)" in ea.format_alert(mk(["סטודנט/ית QA", "סטודנט לתמיכה טכנית"]), cfg)
+    assert "CV: General (Hebrew)" in ea.format_alert(mk(["מאבטח/ת לובי", "מציל/ה לבריכה"]), cfg)
+    mixed = ea.format_alert(mk(["סטודנט פיתוח תוכנה", "מאבטח/ת"]), cfg)
+    assert "💻 = Tech (English)" in mixed and "💻 <a" in mixed and "• <a" in mixed

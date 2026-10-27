@@ -116,7 +116,7 @@ def relay_email_alerts(cfg: dict, telegram: Telegram, seen: dict, today: str) ->
         return
     new = [a for a in alerts if f"email:{a.message_id}" not in seen]
     for alert in new:
-        telegram.send(format_alert(alert))
+        telegram.send(format_alert(alert, cfg))
         seen[f"email:{alert.message_id}"] = today
         save_seen(seen)
     print(f"Email alerts: {len(alerts)} found, {len(new)} new forwarded")

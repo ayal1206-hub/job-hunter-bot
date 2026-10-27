@@ -47,10 +47,10 @@ tracks:
     keywords: [qa, quality assurance, tester, testing, test engineer, test automation, verification, validation, בודק, בדיקות]
   support:
     label: "Tech Support / IT"
-    keywords: [support, helpdesk, help desk, service desk, it technician, it specialist, it administrator, noc, system administrator, sysadmin, technical operations, תמיכה, תומך, תומכ, טכנאי]
+    keywords: [support, helpdesk, help desk, service desk, it technician, it specialist, it administrator, noc, system administrator, sysadmin, technical operations, תמיכה, תומך, תומכ, טכנאי, הלפדסק, מחשבים]
   dev:
     label: "Development"
-    keywords: [developer, software engineer, software developer, programmer, full stack, fullstack, backend, back-end, frontend, front-end, data engineer, data analyst, python, java, c++, מפתח, פיתוח]
+    keywords: [developer, software engineer, software developer, programmer, full stack, fullstack, backend, back-end, frontend, front-end, data engineer, data analyst, python, java, c++, מפתח, פיתוח, תוכנה, תוכניתן]
   tech:
     label: "Tech (other)"
     # Broad tech words. Not in junior_tracks/possible_tracks, so only student positions use it.

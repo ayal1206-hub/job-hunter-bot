@@ -17,6 +17,8 @@ from datetime import date, timedelta
 from email.header import decode_header, make_header
 from html.parser import HTMLParser
 
+from .filters import _any
+
 IMAP_HOST = "imap.gmail.com"
 
 # Link texts that are navigation, not jobs.
@@ -116,11 +118,29 @@ def fetch_alert_emails(address: str, app_password: str, senders: list[str],
     return results
 
 
-def format_alert(alert: AlertEmail) -> str:
+def is_tech(title: str, cfg: dict | None) -> bool:
+    """True when the title matches any role track (QA, support, dev, tech)."""
+    if not cfg:
+        return False
+    text = title.lower()
+    return any(_any(text, t["keywords"]) for t in cfg.get("tracks", {}).values())
+
+
+def format_alert(alert: AlertEmail, cfg: dict | None = None) -> str:
     lines = [f"📬 <b>{html.escape(alert.sender)}</b>: {html.escape(alert.subject)}"]
+    tech_flags = []
     for title, url in alert.jobs:
-        lines.append(f'• <a href="{html.escape(url, quote=True)}">{html.escape(title)}</a>')
+        tech = is_tech(title, cfg)
+        tech_flags.append(tech)
+        icon = "💻" if tech else "•"
+        lines.append(f'{icon} <a href="{html.escape(url, quote=True)}">{html.escape(title)}</a>')
     if not alert.jobs:
         lines.append("(no job links found - open the email)")
-    lines.append("📄 CV: General (Hebrew)")
+
+    if tech_flags and all(tech_flags):
+        lines.append("📄 CV: Tech (English)")
+    elif any(tech_flags):
+        lines.append("📄 CV: 💻 = Tech (English), • = General (Hebrew)")
+    else:
+        lines.append("📄 CV: General (Hebrew)")
     return "\n".join(lines)
