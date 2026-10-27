@@ -37,6 +37,8 @@ def test_locations_outside_area(location):
     ("Junior IT Technician", "support", "junior"),
     ("סטודנט/ית לבדיקות תוכנה", "qa", "student"),
     ("Data Analyst Student", "dev", "student"),
+    ("IT Support Specialist", "support", "possible"),
+    ("QA Engineer", "qa", "possible"),
 ])
 def test_matches(title, track, level):
     m = classify(job(title), CFG)
@@ -49,7 +51,10 @@ def test_matches(title, track, level):
     "Sr. Software Engineer",       # sr abbreviation
     "QA Team Lead",                # lead
     "Junior Backend Developer",    # junior dev is not in junior_tracks
-    "QA Engineer",                 # not student or junior
+    "Data Engineer",               # dev with no level is not a possible fit
+    "Network Automation Engineer", # 'automation' alone is not QA
+    "Expert Backend Engineer",     # expert
+    "Experienced Software Engineer",
     "Finance Student",             # student but no tech track
     "Marketing Intern",            # student but no tech track
 ])

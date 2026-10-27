@@ -1,5 +1,11 @@
 from dataclasses import dataclass
 
+LEVEL_LABELS = {
+    "student": "🎓 Student",
+    "junior": "🌱 Junior",
+    "possible": "🔎 Possible fit (no level stated)",
+}
+
 
 @dataclass(frozen=True)
 class Job:

@@ -44,7 +44,7 @@ accept_country_only: true
 tracks:
   qa:
     label: "QA / Testing"
-    keywords: [qa, quality assurance, tester, testing, test engineer, automation, verification, validation, בודק, בדיקות]
+    keywords: [qa, quality assurance, tester, testing, test engineer, test automation, verification, validation, בודק, בדיקות]
   support:
     label: "Tech Support / IT"
     keywords: [support, helpdesk, help desk, it technician, it specialist, noc, system administrator, sysadmin, technical operations, תמיכה, טכנאי]
@@ -57,11 +57,15 @@ student_keywords: [student, intern, internship, סטודנט, סטודנטית, 
 junior_keywords: [junior, entry level, entry-level, graduate, ג'וניור, גוניור, ללא ניסיון]
 
 # Title words that disqualify a job.
-exclude_keywords: [senior, sr, lead, principal, staff, manager, head of, director, architect, vp, team leader, בכיר, ראש צוות, מנהל]
+exclude_keywords: [senior, sr, expert, experienced, lead, principal, staff, manager, head of, director, architect, vp, team leader, בכיר, ראש צוות, מנהל]
 
 # Rule: student jobs in any track always match.
 # Junior jobs match only when they are in qa or support (dev junior roles usually want experience).
 junior_tracks: [qa, support]
+
+# "Possible fit": QA / support titles with no seniority marker at all
+# (e.g. "IT Support Specialist"). Often open to students; sent with a separate label.
+possible_tracks: [qa, support]
 
 # Max alerts per run. Anything beyond this is summarised in one message.
 max_alerts_per_run: 15

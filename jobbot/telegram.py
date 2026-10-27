@@ -6,13 +6,13 @@ import time
 import requests
 
 from .filters import Match
-from .models import Job
+from .models import LEVEL_LABELS, Job
 
 API = "https://api.telegram.org/bot{token}/sendMessage"
 
 
 def format_job(job: Job, match: Match) -> str:
-    level = "🎓 Student" if match.level == "student" else "🌱 Junior"
+    level = LEVEL_LABELS[match.level]
     return (
         f"<b>{html.escape(job.title)}</b>\n"
         f"🏢 {html.escape(job.company)}\n"

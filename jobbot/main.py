@@ -24,7 +24,7 @@ REPORT_PATH = ROOT / "reports" / "check.txt"
 SEEN_TTL_DAYS = 180
 
 TRACK_ORDER = {"qa": 0, "support": 1, "dev": 2}
-LEVEL_ORDER = {"student": 0, "junior": 1}
+LEVEL_ORDER = {"student": 0, "junior": 1, "possible": 2}
 
 
 def load_config() -> dict:

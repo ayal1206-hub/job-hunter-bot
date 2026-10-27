@@ -58,6 +58,8 @@ def evaluate(job: Job, cfg: dict) -> tuple[Match | None, str]:
         level = "student"
     elif _any(title, cfg["junior_keywords"]):
         level = "junior"
+    elif track in cfg.get("possible_tracks", []):
+        level = "possible"
     else:
         return None, f"not student/junior ({track or 'no track'})"
 
