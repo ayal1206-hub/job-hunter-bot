@@ -40,14 +40,14 @@ class Match:
     level: str  # "student" | "junior"
 
 
-def classify(job: Job, cfg: dict) -> Match | None:
-    """Return a Match if the job should be sent, else None."""
+def evaluate(job: Job, cfg: dict) -> tuple[Match | None, str]:
+    """Return (match, reason). reason explains a rejection, or is 'match'."""
     title = job.title.lower()
 
-    if _any(title, cfg["exclude_keywords"]):
-        return None
     if not location_ok(job.location, cfg):
-        return None
+        return None, "outside area"
+    if _any(title, cfg["exclude_keywords"]):
+        return None, "senior / lead / manager"
 
     track = next(
         (name for name, t in cfg["tracks"].items() if _any(title, t["keywords"])),
@@ -59,12 +59,17 @@ def classify(job: Job, cfg: dict) -> Match | None:
     elif _any(title, cfg["junior_keywords"]):
         level = "junior"
     else:
-        return None
+        return None, f"not student/junior ({track or 'no track'})"
 
     if track is None:
         # A student job outside our tracks (e.g. "Student - Finance") is not relevant.
-        return None
+        return None, f"{level}, but not a tech track"
     if level == "junior" and track not in cfg["junior_tracks"]:
-        return None
+        return None, f"junior {track} (only junior {'/'.join(cfg['junior_tracks'])} accepted)"
 
-    return Match(track=track, track_label=cfg["tracks"][track]["label"], level=level)
+    return Match(track=track, track_label=cfg["tracks"][track]["label"], level=level), "match"
+
+
+def classify(job: Job, cfg: dict) -> Match | None:
+    """Return a Match if the job should be sent, else None."""
+    return evaluate(job, cfg)[0]

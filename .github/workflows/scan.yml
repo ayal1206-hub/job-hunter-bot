@@ -35,6 +35,15 @@ jobs:
         if: ${{ inputs.check }}
         run: python -m jobbot.main --check
 
+      - name: Save check report
+        if: ${{ inputs.check }}
+        run: |
+          git config user.name "job-hunter-bot"
+          git config user.email "job-hunter-bot@users.noreply.github.com"
+          git add reports/check.txt
+          git diff --cached --quiet || git commit -m "Update check report [skip ci]"
+          git push
+
       - name: Scan and send alerts
         if: ${{ !inputs.check }}
         env:

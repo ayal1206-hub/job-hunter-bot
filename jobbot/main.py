@@ -13,13 +13,14 @@ from pathlib import Path
 
 import yaml
 
-from .filters import classify, location_ok
+from .filters import classify, evaluate, location_ok
 from .sources import FETCHERS, SourceError
 from .telegram import Telegram, format_job
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config.yaml"
 SEEN_PATH = ROOT / "seen.json"
+REPORT_PATH = ROOT / "reports" / "check.txt"
 SEEN_TTL_DAYS = 180
 
 TRACK_ORDER = {"qa": 0, "support": 1, "dev": 2}
@@ -62,21 +63,37 @@ def fetch_all(cfg: dict):
 
 
 def run_check(cfg: dict) -> None:
-    """Report which boards work and how many of their jobs are in our area."""
+    """Report which boards work, and why each in-area job matched or not.
+
+    The full report is written to reports/check.txt so it can be reviewed
+    from the repo instead of the Actions log.
+    """
     jobs, failures = fetch_all(cfg)
     by_company: dict[str, list] = {}
     for job in jobs:
         by_company.setdefault(job.company, []).append(job)
-    print(f"\n{'company':<20} {'total':>5} {'in area':>8} {'matches':>8}")
+
+    lines = [f"Check run {date.today().isoformat()}", "",
+             f"{'company':<20} {'total':>5} {'in area':>8} {'matches':>8}"]
+    details = []
     for company, items in sorted(by_company.items()):
         local = [j for j in items if location_ok(j.location, cfg)]
-        matched = [j for j in local if classify(j, cfg)]
-        print(f"{company:<20} {len(items):>5} {len(local):>8} {len(matched):>8}")
-        for j in matched:
-            print(f"    -> {j.title} ({j.location})")
+        verdicts = [(j, evaluate(j, cfg)[1]) for j in local]
+        n_match = sum(1 for _, r in verdicts if r == "match")
+        lines.append(f"{company:<20} {len(items):>5} {len(local):>8} {n_match:>8}")
+        if verdicts:
+            details.append(f"\n## {company}")
+            for j, reason in sorted(verdicts, key=lambda v: (v[1] != "match", v[1], v[0].title)):
+                mark = "MATCH" if reason == "match" else "     "
+                details.append(f"{mark} {j.title}  [{j.location}]  -> {reason}")
     if failures:
-        print(f"\n{len(failures)} board(s) failed - fix or remove them in config.yaml:")
-        print("  " + "\n  ".join(failures))
+        lines += ["", f"{len(failures)} board(s) failed:"] + [f"  {f}" for f in failures]
+    lines += ["", "In-area jobs and the filter's verdict:"] + details
+
+    report = "\n".join(lines) + "\n"
+    print(report)
+    REPORT_PATH.parent.mkdir(exist_ok=True)
+    REPORT_PATH.write_text(report, encoding="utf-8")
 
 
 def run(cfg: dict) -> int:

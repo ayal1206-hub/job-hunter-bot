@@ -72,7 +72,7 @@ max_alerts_per_run: 15
 # comeet:     uid + token from the company's Comeet careers page source
 companies:
   greenhouse:
-    # Verified working (check run, 2026-10-27)
+    # All verified working (check runs, 2026-10-27)
     - {name: Cato Networks, token: catonetworks}
     - {name: Similarweb, token: similarweb}
     - {name: Payoneer, token: payoneer}
@@ -81,27 +81,12 @@ companies:
     - {name: Gong, token: gongio}
     - {name: Melio, token: melio}
     - {name: Sweet Security, token: sweetsecurity}
-    # Not yet verified - the next check run will show which ones work
     - {name: AppsFlyer, token: appsflyer}
     - {name: Wiz, token: wizinc}
     - {name: Axonius, token: axonius}
     - {name: Forter, token: forter}
-    - {name: Tipalti, token: tipalti}
-    - {name: Lusha, token: lusha}
-    - {name: HoneyBook, token: honeybook}
-    - {name: Papaya Global, token: papayaglobal}
-    - {name: Hunters, token: hunters}
     - {name: Transmit Security, token: transmitsecurity}
-    - {name: Checkmarx, token: checkmarx}
-    - {name: Cloudinary, token: cloudinary}
-    - {name: BigPanda, token: bigpanda}
-    - {name: Coralogix, token: coralogix}
-    - {name: Aidoc, token: aidoc}
-    - {name: Moon Active, token: moonactive}
     - {name: Via, token: via}
-    - {name: VAST Data, token: vastdata}
-    - {name: Justt, token: justt}
-    - {name: Nayax, token: nayax}
   lever: []
   comeet: []
     # - {name: Example, uid: "XX.XXX", token: "XXXXXXXX"}
