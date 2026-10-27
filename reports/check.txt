@@ -1,22 +1,59 @@
 Check run 2026-10-27
 
 company              total  in area  matches
+AllCloud                25       15        0
+Alma Lasers             40        0        0
 AppsFlyer               51       22        0
 Axonius                 21        5        0
-Cato Networks          102       36        0
+Cato Networks          102       36        3
+Claroty                 25       10        1
+CommIT                 130       19        0
+DRS RADA                61        2        0
+Deloitte Israel         60       48        0
+Dream                   34       27        0
+Exodigo                 50        9        1
+Fetcherr                37        8        1
 Forter                  21        4        0
+Global-e                48       17        1
 Gong                    89       12        0
+KPMG Israel             32       29        0
+Kela                    33       26        1
 Melio                   21        9        0
 Payoneer               106       27        0
 Riskified               36       13        0
+Samsung Israel          14        0        0
 Similarweb              72       31        0
 Sweet Security           2        1        0
 Taboola                 84       26        0
+Team8                   65       47        0
 Transmit Security       14       12        0
+Upwind                  96       26        2
+VAST Data              266       28        3
 Via                    181        9        0
 Wiz                    123       23        0
 
+2 board(s) failed:
+  comeet/Globalbit: no positions data found in page
+  comeet/Playtika: no positions data found in page
+
 In-area jobs and the filter's verdict:
+
+## AllCloud
+      Junior Office & Operations Assistant  [Israel]  -> junior, but not a tech track
+      Data Engineer  [Israel]  -> not student/junior (dev)
+      Account Executive - Enterprise Sector  [Israel]  -> not student/junior (no track)
+      DevOps Engineer  [Israel]  -> not student/junior (no track)
+      DevOps Engineer  [Israel]  -> not student/junior (no track)
+      Machine Learning Engineer  [Israel]  -> not student/junior (no track)
+      Sales Development Representative  [Israel]  -> not student/junior (no track)
+      AI and Data Science Team Lead  [Israel]  -> senior / lead / manager
+      D&A - Senior Data Engineer  [Israel]  -> senior / lead / manager
+      Data Architect  [Israel]  -> senior / lead / manager
+      Salesforce Solutions Architect  [Israel]  -> senior / lead / manager
+      Senior AI Engineer  [Israel]  -> senior / lead / manager
+      Senior Software Engineer GenAI  [Israel]  -> senior / lead / manager
+      Technical Project Manager  [Israel]  -> senior / lead / manager
+      Paralegal Law Student  [Israel]  -> student, but not a tech track
 
 ## AppsFlyer
       Backend Software Engineer- 2938  [Herzliya]  -> not student/junior (dev)
@@ -50,6 +87,9 @@ In-area jobs and the filter's verdict:
       Senior Security Researcher  [Tel Aviv, Israel]  -> senior / lead / manager
 
 ## Cato Networks
+MATCH Agentic AI Engineer - Product Support  [Tel Aviv District, Israel]  -> match
+MATCH IT Support Specialist  [Tel Aviv District, Israel]  -> match
+MATCH Support Enablement Engineer  [Tel Aviv District, Israel]  -> match
       Full Stack Developer  [Tel Aviv District, Israel]  -> not student/junior (dev)
       Software Engineer (Endpoint DLP)  [Tel Aviv District, Israel]  -> not student/junior (dev)
       Software Engineer – Networking Group  [Tel Aviv District, Israel]  -> not student/junior (dev)
@@ -57,9 +97,11 @@ In-area jobs and the filter's verdict:
       Software Engineer, Lakehouse (Data Platform Group)  [Tel Aviv District, Israel]  -> not student/junior (dev)
       AI Security - Applied AI Researcher  [Tel Aviv District, Israel]  -> not student/junior (no track)
       Application Security Researcher  [Tel Aviv District, Israel]  -> not student/junior (no track)
+      Automation Engineer  [Tel Aviv District, Israel]  -> not student/junior (no track)
       Biz Ops Coordinator (Temporary position for Maternity Leave)  [Tel Aviv District, Israel]  -> not student/junior (no track)
       IT System Engineer  [Tel Aviv District, Israel]  -> not student/junior (no track)
       MDR Security Analyst (Threat Hunting)  [Tel Aviv District, Israel]  -> not student/junior (no track)
+      Network Automation Engineer  [Tel Aviv District, Israel]  -> not student/junior (no track)
       Office Admin  [Tel Aviv District, Israel]  -> not student/junior (no track)
       Payroll Admin  [Tel Aviv District, Israel]  -> not student/junior (no track)
       Research Engineer (Cyber security)  [Tel Aviv District, Israel]  -> not student/junior (no track)
@@ -67,11 +109,6 @@ In-area jobs and the filter's verdict:
       Research SW Engineer  [Tel Aviv District, Israel]  -> not student/junior (no track)
       SW Engineer - Enterprise Browser team  [Tel Aviv District, Israel]  -> not student/junior (no track)
       macOS/iOS SW Engineer  [Tel Aviv District, Israel]  -> not student/junior (no track)
-      Automation Engineer  [Tel Aviv District, Israel]  -> not student/junior (qa)
-      Network Automation Engineer  [Tel Aviv District, Israel]  -> not student/junior (qa)
-      Agentic AI Engineer - Product Support  [Tel Aviv District, Israel]  -> not student/junior (support)
-      IT Support Specialist  [Tel Aviv District, Israel]  -> not student/junior (support)
-      Support Enablement Engineer  [Tel Aviv District, Israel]  -> not student/junior (support)
       AI Security - AI Platform Team Lead  [Tel Aviv District, Israel]  -> senior / lead / manager
       AI Security - Senior Software Engineer  [Tel Aviv District, Israel]  -> senior / lead / manager
       IT System Team Lead  [Tel Aviv District, Israel]  -> senior / lead / manager
@@ -87,11 +124,167 @@ In-area jobs and the filter's verdict:
       Software Architect  [Tel Aviv District, Israel]  -> senior / lead / manager
       VP of Product Management, Management Platform & Network and Security Operations  [Tel Aviv District, Israel]  -> senior / lead / manager
 
+## Claroty
+MATCH QA Automation Engineer  [Israel]  -> match
+      AI Platform, Backend Software Engineer  [Israel]  -> not student/junior (dev)
+      Backend Software Engineer  [Israel]  -> not student/junior (dev)
+      DevOps Engineer  [Israel]  -> not student/junior (no track)
+      AI Platform- Software Engineer Team Leader  [Israel]  -> senior / lead / manager
+      Director of Data & AI  [Israel]  -> senior / lead / manager
+      Manager, Security Operations Engineering  [Israel]  -> senior / lead / manager
+      Senior Product Manager  [Israel]  -> senior / lead / manager
+      Senior Security Operations Engineer  [Israel]  -> senior / lead / manager
+      Vulnerability Research Team Lead  [Israel]  -> senior / lead / manager
+
+## CommIT
+      Analytics Data Engineer  [Israel]  -> not student/junior (dev)
+      Data Engineer  [Petah Tikva]  -> not student/junior (dev)
+      Analytics Engineer (Artifactory Product Analytics)  [Tel Aviv]  -> not student/junior (no track)
+      DevOps Engineer  [Petah Tikva]  -> not student/junior (no track)
+      PMO  [Petah Tikva]  -> not student/junior (no track)
+      מומחה/ית תשתיות תקשוב  [Rishon Le-Zion]  -> not student/junior (no track)
+      Automation Team Lead  [Petah Tikva]  -> senior / lead / manager
+      Backend & Cloud Infrastructure Team Lead (Node.js / AWS)  [Herzliya]  -> senior / lead / manager
+      DevOps Team Lead  [Petah Tikva]  -> senior / lead / manager
+      Network Team Lead  [Petah Tikva]  -> senior / lead / manager
+      RevOps Expert  [Petah Tikva]  -> senior / lead / manager
+      Senior Automation Engineer  [Petah Tikva]  -> senior / lead / manager
+      Senior Computer Vision / ML Engineer  [Israel]  -> senior / lead / manager
+      Senior Full Stack Developer  [Petah Tikva]  -> senior / lead / manager
+      Senior Project Manager  [Petah Tikva]  -> senior / lead / manager
+      Senior System Architect  [Petah Tikva]  -> senior / lead / manager
+      Software Architect  [Petah Tikva]  -> senior / lead / manager
+      Software Project Manager  [Petah Tikva]  -> senior / lead / manager
+      Software Team Lead  [Petah Tikva]  -> senior / lead / manager
+
+## DRS RADA
+      Radar Performance Analyst  [Beer Sheva]  -> not student/junior (no track)
+      Service Desk Specialist  [Beer Sheva]  -> not student/junior (no track)
+
+## Deloitte Israel
+      Junior Research & Risk Management Analyst  [Tel-Aviv]  -> junior, but not a tech track
+      Full Stack Developer  [Tel-Aviv]  -> not student/junior (dev)
+      GCP/Spark and BigQuery Data Engineer  [Tel-Aviv]  -> not student/junior (dev)
+      AI Engineer- R&D and Innovation Center  [Tel-Aviv]  -> not student/junior (no track)
+      AI assurance & soc 2 Consultant  [Tel-Aviv]  -> not student/junior (no track)
+      Audit Associate - High Tech Sector  [Tel-Aviv]  -> not student/junior (no track)
+      Audit Manage  [Tel-Aviv]  -> not student/junior (no track)
+      Audit, SOX & Controls Consultant - Financial Sector  [Tel-Aviv]  -> not student/junior (no track)
+      Cyber GRC & AI Consultant  [Tel-Aviv]  -> not student/junior (no track)
+      DevOps engineer  [Tel-Aviv]  -> not student/junior (no track)
+      Export Audit  [Tel-Aviv]  -> not student/junior (no track)
+      Export US Tax  [Tel-Aviv]  -> not student/junior (no track)
+      Finance & Billing Transformation Consultant  [Tel-Aviv]  -> not student/junior (no track)
+      Forward Deployed Engineer (FDE) – AI Transformation  [Tel-Aviv]  -> not student/junior (no track)
+      Google Alliance Sales Executive  [Tel-Aviv]  -> not student/junior (no track)
+      Internal Audit Consultant  [Tel-Aviv]  -> not student/junior (no track)
+      NetSuite Implementer  [Tel-Aviv]  -> not student/junior (no track)
+      Oracle  Implementer  [Tel-Aviv]  -> not student/junior (no track)
+      Risk Consultant  [Tel-Aviv]  -> not student/junior (no track)
+      SAP Implementer  [Tel-Aviv]  -> not student/junior (no track)
+      Software Development Leader – GenAI & LLM Engineering  [Tel-Aviv]  -> not student/junior (no track)
+      compliance & regulatory Risk Consultant  [Tel-Aviv]  -> not student/junior (no track)
+      יריד תעסוקה אוניברסיטת בר אילן 27.5  [Tel-Aviv]  -> not student/junior (no track)
+      Audit Manager  [Tel-Aviv]  -> senior / lead / manager
+      Audit Senior  [Tel-Aviv]  -> senior / lead / manager
+      Audit, SOX & Controls Manager  - Financial Sector  [Tel-Aviv]  -> senior / lead / manager
+      Cloud Security Architect  [Tel-Aviv]  -> senior / lead / manager
+      Export Audit Manager  [Tel-Aviv]  -> senior / lead / manager
+      Financial Consultant Manager  [Tel-Aviv]  -> senior / lead / manager
+      FullStack Tech Lead  [Tel-Aviv]  -> senior / lead / manager
+      Head of AI Solutions-R&D and Innovation Center  [Tel-Aviv]  -> senior / lead / manager
+      Indirect Tax Manager  [Tel-Aviv]  -> senior / lead / manager
+      Indirect Tax Senior  [Tel-Aviv]  -> senior / lead / manager
+      International Tax Manager  [Tel-Aviv]  -> senior / lead / manager
+      International Tax Manager  [Tel-Aviv]  -> senior / lead / manager
+      Lead Forward Deployed Engineer - AI Transformation  [Tel-Aviv]  -> senior / lead / manager
+      Legal Counsel and Risk Manager -  Commercial & Technology  [Tel-Aviv]  -> senior / lead / manager
+      Marketing Lead  [Tel-Aviv]  -> senior / lead / manager
+      Microsoft 365 Security Senior Consultant  [Tel-Aviv]  -> senior / lead / manager
+      Product Manager- R&D and Innovation Center  [Tel-Aviv]  -> senior / lead / manager
+      Project Manager  [Tel-Aviv]  -> senior / lead / manager
+      Project Manager  – Compliance, Privacy & Technology Governance  [Tel-Aviv]  -> senior / lead / manager
+      Senior Transformation Consultant  [Tel-Aviv]  -> senior / lead / manager
+      US Tax Manager  [Tel-Aviv]  -> senior / lead / manager
+      maintenance staff  [Tel-Aviv]  -> senior / lead / manager
+      Audit Intern - Financial Sector  [Tel-Aviv]  -> student, but not a tech track
+      Audit Intern - Student Position  [Tel-Aviv]  -> student, but not a tech track
+      IT Risk Management Intern  [Tel-Aviv]  -> student, but not a tech track
+
+## Dream
+      Software Engineer- Posture  [Tel Aviv]  -> not student/junior (dev)
+      Research Infra Engineer  [Tel Aviv]  -> not student/junior (no track)
+      Security Researcher  [Tel Aviv]  -> not student/junior (no track)
+      Security Researcher- Posture  [Tel Aviv]  -> not student/junior (no track)
+      Talent Acquisition Partner  [Tel Aviv]  -> not student/junior (no track)
+      Applied Science Team Lead  [Tel Aviv]  -> senior / lead / manager
+      Engineering Team Lead (Recon)  [Tel Aviv]  -> senior / lead / manager
+      Engineering Team Lead (Triage)  [Tel Aviv]  -> senior / lead / manager
+      Lead Product Designer  [Tel Aviv]  -> senior / lead / manager
+      Senior Application Security Engineer  [Tel Aviv]  -> senior / lead / manager
+      Senior Applied Researcher- AI Research  [Tel Aviv]  -> senior / lead / manager
+      Senior Applied Scientist-  Agentic AI & NLP  [Tel Aviv]  -> senior / lead / manager
+      Senior Applied Scientist- Computer Vision  [Tel Aviv]  -> senior / lead / manager
+      Senior Applied Scientist- Model Training (Supervised/RL) & Optimization  [Tel Aviv]  -> senior / lead / manager
+      Senior Backend Engineer- Agentic AI  [Tel Aviv]  -> senior / lead / manager
+      Senior DevOps Platform Engineer- CTI  [Tel Aviv]  -> senior / lead / manager
+      Senior Malware Researcher  [Tel Aviv]  -> senior / lead / manager
+      Senior Product Manager - Cybersecurity  [Tel Aviv]  -> senior / lead / manager
+      Senior Product Manager - Sovereign AI  [Tel Aviv]  -> senior / lead / manager
+      Senior Program Manager- Sovereign AI  [Tel Aviv]  -> senior / lead / manager
+      Senior QA Engineer – Cyber & AI  [Tel Aviv]  -> senior / lead / manager
+      Senior Threat Intelligence Researcher  [Tel Aviv]  -> senior / lead / manager
+      Senior Windows Kernel Engineer- Detection  [Tel Aviv]  -> senior / lead / manager
+      Sensor Team Lead- Detection  [Tel Aviv]  -> senior / lead / manager
+      Solution Architect  [Tel Aviv]  -> senior / lead / manager
+      Sr. Threat Researcher- Detection  [Tel Aviv]  -> senior / lead / manager
+      Technology Alliances Manager  [Tel Aviv]  -> senior / lead / manager
+
+## Exodigo
+MATCH Student Tier 1 Support Specialist  [Israel]  -> match
+      Algorithm Developer  [Israel]  -> not student/junior (dev)
+      Algorithm Developer – Data Intelligence  [Israel]  -> not student/junior (dev)
+      AI Algorithms Engineer  [Israel]  -> not student/junior (no track)
+      Computer Vision Engineer  [Israel]  -> not student/junior (no track)
+      Utilities Coordinator  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Algorithms Team Lead  [Israel]  -> senior / lead / manager
+      Logistics Manager  [Tel Aviv, Israel]  -> senior / lead / manager
+      Senior CAD/BIM Drafter & Modeler - Civil 3D  [Tel Aviv, Israel]  -> senior / lead / manager
+
+## Fetcherr
+MATCH Support Engineer  [Tel Aviv]  -> match
+      Data Scientist - Deep Learning Forecasting  [Tel Aviv]  -> not student/junior (no track)
+      Algorithm team lead  [Tel Aviv]  -> senior / lead / manager
+      Data Science Team Lead  [Tel Aviv]  -> senior / lead / manager
+      Devops Team Lead  [Tel Aviv]  -> senior / lead / manager
+      Director of Data Science  [Tel Aviv]  -> senior / lead / manager
+      Engineering Team Lead  [Tel Aviv]  -> senior / lead / manager
+      Senior DevOps Engineer  [Tel Aviv]  -> senior / lead / manager
+
 ## Forter
       Accounts Payable Specialist  [Israel - Tel Aviv]  -> not student/junior (no track)
       General Application (Israel)  [Israel - Tel Aviv]  -> not student/junior (no track)
       People Partner (Maternity Leave Replacement - 1 Year)  [Israel - Tel Aviv]  -> not student/junior (no track)
       Senior Full Stack Engineer II - CX Offering  [Israel - Tel Aviv]  -> senior / lead / manager
+
+## Global-e
+MATCH NOC Engineer- Student Position  [Israel, Petah Tikva]  -> match
+      Data Analyst  [Israel, Petah Tikva]  -> not student/junior (dev)
+      Applicative SQL Server DBA  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Assistant Controller  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Commercial Legal Counsel  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Customer Service Agent  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Delivery Solution Engineer  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Duty Drawback Analyst  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Marketing Content Writer  [Israel, Petah Tikva]  -> not student/junior (no track)
+      PPC Campaign Specialist  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Payroll Specialist  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Trade Analyst - Temporary position  [Israel, Petah Tikva]  -> not student/junior (no track)
+      Finance Operations Team Lead  [Israel, Petah Tikva]  -> senior / lead / manager
+      Senior Product Manager  [Israel, Petah Tikva]  -> senior / lead / manager
+      Senior Product Manager - Finance  [Israel, Petah Tikva]  -> senior / lead / manager
+      Technical Project Manager  [Israel, Petah Tikva]  -> senior / lead / manager
+      FP&A Analyst - Student Position  [Israel, Petah Tikva]  -> student, but not a tech track
 
 ## Gong
       Developer Experience (DevEx) Team Lead  [Tel Aviv]  -> senior / lead / manager
@@ -107,6 +300,65 @@ In-area jobs and the filter's verdict:
       Senior Director of Quality  [Tel Aviv]  -> senior / lead / manager
       Software Architect, AI Applications  [Tel Aviv]  -> senior / lead / manager
 
+## KPMG Israel
+      .NET Backend Developer  [תל אביב]  -> not student/junior (dev)
+      Data Engineer  [תל אביב]  -> not student/junior (dev)
+      AI & Data Consultant  [תל אביב]  -> not student/junior (no track)
+      Compliance & Anti-Money Laundering Consultant  [תל אביב]  -> not student/junior (no track)
+      Engagement Operations Specialist  [תל אביב]  -> not student/junior (no track)
+      FP&A  [תל אביב]  -> not student/junior (no track)
+      Forensic and Fraud Risk Management Consultant  [תל אביב]  -> not student/junior (no track)
+      Generative AI Engineer  [תל אביב]  -> not student/junior (no track)
+      IT Audit Consultant  [תל אביב]  -> not student/junior (no track)
+      International Tax Associate  [תל אביב]  -> not student/junior (no track)
+      Regulatory Compliance Consultant  [תל אביב]  -> not student/junior (no track)
+      Risk & Business Advisory Consultant  [תל אביב]  -> not student/junior (no track)
+      SAP Learning & Content Specialist (Freelance)  [תל אביב]  -> not student/junior (no track)
+      אחראי.ת אחזקה ותפעול  [תל אביב]  -> not student/junior (no track)
+      חשב.ת שכר  [תל אביב]  -> not student/junior (no track)
+      יועצ.ת כלכלי.ת בתחום האנרגיה|Energy Economics Consultant  [תל אביב]  -> not student/junior (no track)
+      יועצ.ת מס למחלקת מיסוי ישראלי  [תל אביב]  -> not student/junior (no track)
+      עו"ד לביקורת משרדי עו"ד  [תל אביב]  -> not student/junior (no track)
+      רפרנט.ית מכרזים  [תל אביב]  -> not student/junior (no track)
+      תומכ.ת טכני.ת  [תל אביב]  -> not student/junior (no track)
+      Capital Markets Compliance & Risk Lead  [תל אביב]  -> senior / lead / manager
+      Director – Operational Excellence, Banking Sector  [תל אביב]  -> senior / lead / manager
+      Risk & Business Advisory Manager  [תל אביב]  -> senior / lead / manager
+      Senior/Manager - Risk Management & Quality Control Department  [תל אביב]  -> senior / lead / manager
+      מנהל.ת SOX  [תל אביב]  -> senior / lead / manager
+      מנהל.ת אדמינסטרטיבית  [תל אביב]  -> senior / lead / manager
+      מנהל.ת חשבונות  [תל אביב]  -> senior / lead / manager
+      מנהל.ת חשבונות מתחיל.ה  [תל אביב]  -> senior / lead / manager
+      מנהל.ת למחלקת מיסים עקיפים  [תל אביב]  -> senior / lead / manager
+
+## Kela
+MATCH Support Engineer (NOC / Tier 1)  [Tel aviv]  -> match
+      3D Algorithm Developer  [Tel aviv]  -> not student/junior (dev)
+      Machine Learning Developer  [Tel aviv]  -> not student/junior (dev)
+      Buyer  [Tel aviv]  -> not student/junior (no track)
+      Data / ML Platform Engineer  [Tel aviv]  -> not student/junior (no track)
+      Forward Deployed Engineer (FDE)  [Tel aviv]  -> not student/junior (no track)
+      Global Talent Acquisition Partner  [Tel aviv]  -> not student/junior (no track)
+      Hardware Engineer  [Tel aviv]  -> not student/junior (no track)
+      IT Administrator  [Tel aviv]  -> not student/junior (no track)
+      Mechanical Design Engineer  [Tel aviv]  -> not student/junior (no track)
+      Mechanical Design Engineer  [Tel aviv]  -> not student/junior (no track)
+      Professional Services Engineer  [Tel aviv]  -> not student/junior (no track)
+      Resident  [Tel aviv]  -> not student/junior (no track)
+      Technical Deployment Engineer  [Tel aviv]  -> not student/junior (no track)
+      Director of FP&A  [Tel aviv]  -> senior / lead / manager
+      Head Of Manufacturing  [Tel aviv]  -> senior / lead / manager
+      Internal Operations Lead  [Tel aviv]  -> senior / lead / manager
+      Lead Flight Control Engineer - Tactical Munitions  [Tel aviv]  -> senior / lead / manager
+      Member of Technical Staff  [Tel aviv]  -> senior / lead / manager
+      Senior Algorithm Developer — Robotics Team  [Tel aviv]  -> senior / lead / manager
+      Senior Legal Counsel - Commercial  [Tel aviv]  -> senior / lead / manager
+      Senior Legal Counsel – Compliance and Regulation  [Tel aviv]  -> senior / lead / manager
+      Senior Software Engineer — Base Protection  [Tel aviv]  -> senior / lead / manager
+      Senior System Engineer  [Tel aviv]  -> senior / lead / manager
+      Senior Systems Engineer - Aerial Systems  [Tel aviv]  -> senior / lead / manager
+      Technical Program Manager  [Tel aviv]  -> senior / lead / manager
+
 ## Melio
       Data Engineer  [Tel Aviv]  -> not student/junior (dev)
       Data Scientist  [Tel Aviv]  -> not student/junior (no track)
@@ -121,11 +373,11 @@ In-area jobs and the filter's verdict:
 ## Payoneer
       Application Security Engineer  [Herzliya, Tel Aviv District, Israel]  -> not student/junior (no track)
       Banking Ops Associate  [Herzliya, Tel Aviv District, Israel]  -> not student/junior (no track)
-      Card Processing Expert  [Herzliya, Tel Aviv District, Israel]  -> not student/junior (no track)
       Finance Transformation Specialist  [Herzliya, Tel Aviv District, Israel]  -> not student/junior (no track)
       GRC Security Specialist  [Herzliya, Tel Aviv District, Israel]  -> not student/junior (no track)
       Reconciliation Infrastructure Associate  [Herzliya, Tel Aviv District, Israel]  -> not student/junior (no track)
       Salesforce Engineer  [Herzliya, Tel Aviv District, Israel]  -> not student/junior (no track)
+      Card Processing Expert  [Herzliya, Tel Aviv District, Israel]  -> senior / lead / manager
       Director of Product, Growth  [Herzliya, Tel Aviv District, Israel]  -> senior / lead / manager
       Director, Corporate Strategy  [Herzliya, Tel Aviv District, Israel]  -> senior / lead / manager
       Director, Portfolio Risk Management, Working Capital  [Herzliya, Tel Aviv District, Israel]  -> senior / lead / manager
@@ -199,8 +451,6 @@ In-area jobs and the filter's verdict:
       Product Manager  [Tel-Aviv, Israel]  -> senior / lead / manager
 
 ## Taboola
-      Experienced Full Stack Engineer  [Tel Aviv, Israel]  -> not student/junior (dev)
-      Experienced Software Engineer  [Tel Aviv, Israel]  -> not student/junior (dev)
       Ad Operation Specialist  [Tel Aviv, Israel]  -> not student/junior (no track)
       Algorithm Engineer (RTB)  [Tel Aviv, Israel]  -> not student/junior (no track)
       Product Analyst  [Tel Aviv, Israel]  -> not student/junior (no track)
@@ -209,6 +459,8 @@ In-area jobs and the filter's verdict:
       Business Applications Manager  [Tel Aviv, Israel]  -> senior / lead / manager
       Business Applications Team Lead  [Tel Aviv, Israel]  -> senior / lead / manager
       Data Platform Engineering Team Leader  [Tel Aviv, Israel]  -> senior / lead / manager
+      Experienced Full Stack Engineer  [Tel Aviv, Israel]  -> senior / lead / manager
+      Experienced Software Engineer  [Tel Aviv, Israel]  -> senior / lead / manager
       Marketing Manager, Israel- Maternity Leave Cover  [Tel Aviv, Israel]  -> senior / lead / manager
       Product Design Team Lead  [Tel Aviv, Israel]  -> senior / lead / manager
       Programmatic Account Manager- Maternity Leave Cover  [Tel Aviv, Israel]  -> senior / lead / manager
@@ -226,6 +478,55 @@ In-area jobs and the filter's verdict:
       Tax Manager  [Tel Aviv, Israel]  -> senior / lead / manager
       VP R&D  [Tel Aviv, Israel]  -> senior / lead / manager
 
+## Team8
+      Bluespine- Junior Medical Fraud & Anomaly  [Tel Aviv, Israel]  -> junior, but not a tech track
+      Briya- Backend Engineer  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Briya- Full Stack Engineer (Frontend Oriented)  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Monogoto-Full Stack Developer  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Panax- Full Stack Developer  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Popai Health- Full Stack Developer  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Reindeer- Software Engineer (Backend)  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Reindeer- Software Engineer (Infrastructure)  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Sawmills.ai- Full Stack Engineer, Fully Remote Position  [Israel]  -> not student/junior (dev)
+      Team8 Stealth Cyber Startup- Software Developer  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Team8 Stealth Cyber Startup- Software Engineer  [Tel Aviv, Israel]  -> not student/junior (dev)
+      Bluespine- Medical Fraud & Anomaly  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Bluespine-AI Engineer  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Charm Security-Product Designer  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Popai Health- AI Engineer  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Reindeer- AI Engineer  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Reindeer- AI Solutions Engineer (IL)  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Sawmills.ai- BE Engineer, Fully Remote Position  [Israel]  -> not student/junior (no track)
+      Team8 Cyber Stealth Startup- Business Development Representative (BDR)  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Team8 Cyber Stealth Startup-AI GTM Engineer  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Team8 Stealth Cyber Startup - Founding Vulnerability Researcher  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Team8 Stealth Cyber Startup- Solution Engineer  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Team8 Stealth Startup- CTO  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Team8- Bookkeeper  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Team8- Financial Controller:  Maternity Leave Cover  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Team8- Marketing Graphic Designer  [Tel Aviv, Israel]  -> not student/junior (no track)
+      Bluespine-Product, Delivery & Operations Lead  [Tel Aviv, Israel]  -> senior / lead / manager
+      Charm Security- Senior Backend Engineer – Platform  [Tel Aviv, Israel]  -> senior / lead / manager
+      Charm Security-Senior Full Stack Software Engineer  [Tel Aviv, Israel]  -> senior / lead / manager
+      Espresso Clinical - Senior Full Stack Developer  [Tel Aviv, Israel]  -> senior / lead / manager
+      FlowRx-  Product Lead  [Tel Aviv, Israel]  -> senior / lead / manager
+      FlowRx- Senior Automation Engineer / RPA Specialist  [Tel Aviv, Israel]  -> senior / lead / manager
+      Lumia Security- Office & Employee Experience Manager | Full-time  [Tel Aviv, Israel]  -> senior / lead / manager
+      Lumia Security- Senior Software Engineer  [Tel Aviv, Israel]  -> senior / lead / manager
+      Lumia Security- Senior Software Engineer  [Tel Aviv, Israel]  -> senior / lead / manager
+      Lumia Security- Senior Software Engineer (Endpoint)  [Tel Aviv, Israel]  -> senior / lead / manager
+      Popai Health- Senior Product Manager  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8  -Security & IT Manager  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8 - Cybersecurity Business Development Manager  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8 Cyber Stealth Startup- Product Manager, SASE Infrastructure  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8 Cyber Stealth Startup-Product Manager, AI Security  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8 Stealth Cyber Startup - Founding Product Lead  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8 Stealth Mode Startup-Marketing Lead  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8- Fintech Stealth Startup- Senior AI Researcher, Evaluation & Agent Performance  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8-Cyber Startup, Senior Software Engineer  [Tel Aviv, Israel]  -> senior / lead / manager
+      Team8-Cybersecurity Marketing Manager  [Tel Aviv, Israel]  -> senior / lead / manager
+      US CPA – Financial Intelligence Architect (Service SMB Focus)  [Tel Aviv, Israel]  -> senior / lead / manager
+
 ## Transmit Security
       Security Research  [Tel Aviv-Yafo, Gush Dan, Israel]  -> not student/junior (no track)
       Engineering Team Lead (Data Platform)  [Tel Aviv-Yafo, Gush Dan, Israel]  -> senior / lead / manager
@@ -240,6 +541,64 @@ In-area jobs and the filter's verdict:
       Senior Product Manager  [Tel Aviv-Yafo, Gush Dan, Israel]  -> senior / lead / manager
       Senior Software Engineer (Scala)  [Tel Aviv-Yafo, Gush Dan, Israel]  -> senior / lead / manager
 
+## Upwind
+MATCH Technical Support Engineer – Student Position  [Tel Aviv]  -> match
+MATCH Technical Support Specialist  [Tel Aviv]  -> match
+      Backend Software Engineer  [Tel Aviv]  -> not student/junior (dev)
+      Frontend Software Engineer  [Tel Aviv]  -> not student/junior (dev)
+      Research Software Engineer  [Tel Aviv]  -> not student/junior (dev)
+      AI Engineer  [Tel Aviv]  -> not student/junior (no track)
+      Cloud Security Researcher  [Tel Aviv]  -> not student/junior (no track)
+      Devops  [Tel Aviv]  -> not student/junior (no track)
+      Pre-Sales Engineer- TLV  [Tel Aviv]  -> not student/junior (no track)
+      Talent Acquisition Associate  [Tel Aviv]  -> not student/junior (no track)
+      Talent Acquisition Partner  [Tel Aviv]  -> not student/junior (no track)
+      Talent Sourcing Partner  [Tel Aviv]  -> not student/junior (no track)
+      Technical Product Marketing  [Tel Aviv]  -> not student/junior (no track)
+      Threat Security Researcher  [Tel Aviv]  -> not student/junior (no track)
+      AI Engineering Lead  [Tel Aviv]  -> senior / lead / manager
+      Backend Team Lead  [Tel Aviv]  -> senior / lead / manager
+      Backend Team Lead, Infrastructure  [Tel Aviv]  -> senior / lead / manager
+      Customer Success Manager  [Tel Aviv]  -> senior / lead / manager
+      Growth Marketing Manager  [Tel Aviv]  -> senior / lead / manager
+      Marketing Operations Lead  [Tel Aviv]  -> senior / lead / manager
+      Product Manager  [Tel Aviv]  -> senior / lead / manager
+      Product Marketing Manager  [Tel Aviv]  -> senior / lead / manager
+      Senior Vulnerability Researcher  [Tel Aviv]  -> senior / lead / manager
+      Technical Account Manager  [Tel Aviv]  -> senior / lead / manager
+      Cloud Monitoring Engineer (Student Position)  [Tel Aviv]  -> student, but not a tech track
+      Security Analyst (Student Position)  [Tel Aviv]  -> student, but not a tech track
+
+## VAST Data
+MATCH Customer Support Engineer  [Israel - Tel Aviv]  -> match
+MATCH QA Automation Engineer  [Israel - Tel Aviv]  -> match
+MATCH QA Performance Engineer  [Israel - Tel Aviv]  -> match
+      Linux Kernel Developer  [Israel - Tel Aviv]  -> not student/junior (dev)
+      Software Engineer -New College Grad  [Israel - Tel Aviv]  -> not student/junior (dev)
+      Big Data & Data Infrastructure Engineer  [Israel - Tel Aviv]  -> not student/junior (no track)
+      Cloud FinOps Engineer  [Israel - Tel Aviv]  -> not student/junior (no track)
+      Hardware System Engineer  [Israel - Tel Aviv]  -> not student/junior (no track)
+      Network Engineer - AI Infrastructure, RDMA & Storage  [Israel - Tel Aviv]  -> not student/junior (no track)
+      Product Owner & Engineer  [Israel - Tel Aviv]  -> not student/junior (no track)
+      Services Operations Center - Tel Aviv  [Israel - Tel Aviv]  -> not student/junior (no track)
+      UI/UX Designer  [Israel - Tel Aviv]  -> not student/junior (no track)
+      VAST On Cloud - Customer Success Engineer  [Israel - Tel Aviv]  -> not student/junior (no track)
+      Cloud Senior software Engineer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Data Path Senior Software Engineer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Infrastructure Team Leader  [Israel - Tel Aviv]  -> senior / lead / manager
+      Platform Senior Software Engineer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Python Expert developer  [Israel - Tel Aviv]  -> senior / lead / manager
+      SW Development Team Leader  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior AI Engineer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior Architect  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior C/C++ Core Developer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior Infrastructure Developer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior Security Engineer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior Software Engineer -Kafka / Event Streaming  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior Software Engineer in Test – AI & Quality Infrastructure  [Israel - Tel Aviv]  -> senior / lead / manager
+      Senior Solutions Engineer  [Israel - Tel Aviv]  -> senior / lead / manager
+      Sr HW Technical Program Manager  [Israel - Tel Aviv]  -> senior / lead / manager
+
 ## Via
       Front-End Engineer  [Tel Aviv]  -> not student/junior (dev)
       Software & Data Engineer  [Tel Aviv]  -> not student/junior (dev)
@@ -253,10 +612,7 @@ In-area jobs and the filter's verdict:
 
 ## Wiz
       Backend Engineer  [Tel Aviv]  -> not student/junior (dev)
-      Expert Backend Engineer  [Tel Aviv]  -> not student/junior (dev)
-      Expert Frontend Engineer  [Tel Aviv]  -> not student/junior (dev)
       Software Engineer – CTO Office  [Tel Aviv]  -> not student/junior (dev)
-      Applied Data Scientist Expert  [Tel Aviv]  -> not student/junior (no track)
       Applied Security Researcher  [Tel Aviv]  -> not student/junior (no track)
       Brand Designer  [Tel Aviv]  -> not student/junior (no track)
       CTO Operations Engineer  [Tel Aviv]  -> not student/junior (no track)
@@ -271,6 +627,9 @@ In-area jobs and the filter's verdict:
       Threat Detection Researcher (Cloud)  [Tel Aviv]  -> not student/junior (no track)
       Threat Detection Researcher (Windows/Linux/MacOS)  [Tel Aviv]  -> not student/junior (no track)
       Threat Researcher  [Tel Aviv]  -> not student/junior (no track)
+      Applied Data Scientist Expert  [Tel Aviv]  -> senior / lead / manager
+      Expert Backend Engineer  [Tel Aviv]  -> senior / lead / manager
+      Expert Frontend Engineer  [Tel Aviv]  -> senior / lead / manager
       Principal Solutions Engineer  [Tel Aviv]  -> senior / lead / manager
       Product Manager, AI  [Tel Aviv]  -> senior / lead / manager
       Product Marketing Manager  [Tel Aviv]  -> senior / lead / manager
