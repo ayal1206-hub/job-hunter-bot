@@ -152,6 +152,12 @@ def run_check(cfg: dict) -> None:
     REPORT_PATH.parent.mkdir(exist_ok=True)
     REPORT_PATH.write_text(report, encoding="utf-8")
 
+    from . import probe  # one-off look at candidate sources (e.g. municipal tenders)
+    try:
+        probe.run(REPORT_PATH.parent)
+    except Exception as exc:
+        print(f"probe failed: {exc}")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Job Hunter Bot")
