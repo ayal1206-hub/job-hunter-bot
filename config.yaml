@@ -32,7 +32,7 @@ accept_country_only: true
 tracks:
   qa:
     label: "QA / Testing"
-    keywords: [qa, quality assurance, tester, testing, test engineer, test automation, verification, validation, בודק, בדיקות]
+    keywords: [qa, quality assurance, tester, testing, test engineer, test automation, verification, validation, בודק תוכנה, בודקת תוכנה, בודק/ת תוכנה, בדיקות תוכנה, בדיקות QA]
   support:
     label: "Tech Support / IT"
     keywords: [support, helpdesk, help desk, service desk, it technician, it specialist, it administrator, noc, system administrator, sysadmin, technical operations, תמיכה, תומך, תומכ, טכנאי, הלפדסק, מחשבים]
