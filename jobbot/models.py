@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 LEVEL_LABELS = {
     "student": "🎓 Student",
@@ -17,6 +17,8 @@ class Job:
     title: str
     location: str
     url: str
+    # Full description text when the source provides it (not part of identity).
+    description: str = field(default="", compare=False, repr=False)
 
     @property
     def key(self) -> str:

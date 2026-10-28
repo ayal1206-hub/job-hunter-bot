@@ -7,12 +7,14 @@ on:
   workflow_dispatch:
     inputs:
       check:
-        description: "Only check which job boards work (no alerts)"
+        description: "Only report boards and scores (no alerts, no app update)"
         type: boolean
         default: false
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: scan
@@ -21,6 +23,9 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
+    env:
+      GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
     steps:
       - uses: actions/checkout@v5
 
@@ -44,20 +49,36 @@ jobs:
           git diff --cached --quiet || git commit -m "Update check report [skip ci]"
           git push
 
-      - name: Scan and send alerts
+      - name: Scan, score and alert on 🔥 jobs
         if: ${{ !inputs.check }}
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: python -m jobbot.main
 
-      - name: Remember sent jobs
+      - name: Save state
         if: ${{ !inputs.check }}
         run: |
           git config user.name "job-hunter-bot"
           git config user.email "job-hunter-bot@users.noreply.github.com"
-          git add seen.json
-          git diff --cached --quiet || git commit -m "Update seen jobs [skip ci]"
+          git add seen.json docs/jobs.json data/facts.json
+          git diff --cached --quiet || git commit -m "Update jobs [skip ci]"
           git push
+
+      - name: Package the app
+        if: ${{ !inputs.check }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    # Publishes docs/ (the Telegram mini app + jobs.json) to GitHub Pages.
+    needs: scan
+    if: ${{ !inputs.check }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

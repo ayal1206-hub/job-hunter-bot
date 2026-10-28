@@ -1,7 +1,12 @@
 """Entry point: python -m jobbot.main [--check]
 
-Scans every company in config.yaml, filters the openings, and sends new
-matches to Telegram. Jobs already sent are remembered in seen.json.
+Every run:
+  1. fetch jobs from the company boards (Greenhouse, Lever, Comeet)
+  2. read job-alert emails (AllJobs, Drushim...) from Gmail, if configured
+  3. keep student / junior / possible-fit roles in Israel, read each
+     description and score it (see scoring.py)
+  4. write docs/jobs.json - the list the Telegram mini app shows
+  5. send an immediate Telegram alert only for new 🔥 jobs
 """
 
 import argparse
@@ -13,19 +18,19 @@ from pathlib import Path
 
 import yaml
 
-from .email_alerts import fetch_alert_emails, format_alert
-from .filters import classify, evaluate, location_ok
+from .email_alerts import fetch_alert_emails
+from .pipeline import board_entries, email_entries, merge, state
+from .scoring import tier_emoji
 from .sources import FETCHERS, SourceError
-from .telegram import Telegram, format_job
+from .telegram import Telegram, format_hot
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config.yaml"
-SEEN_PATH = ROOT / "seen.json"
+SEEN_PATH = ROOT / "seen.json"              # jobs already notified
+JOBS_PATH = ROOT / "docs" / "jobs.json"     # what the mini app shows
+FACTS_PATH = ROOT / "data" / "facts.json"   # cached description facts
 REPORT_PATH = ROOT / "reports" / "check.txt"
 SEEN_TTL_DAYS = 180
-
-TRACK_ORDER = {"qa": 0, "support": 1, "dev": 2}
-LEVEL_ORDER = {"student": 0, "junior": 1, "possible": 2}
 
 
 def load_config() -> dict:
@@ -33,19 +38,27 @@ def load_config() -> dict:
         return yaml.safe_load(f)
 
 
-def load_seen() -> dict[str, str]:
-    if not SEEN_PATH.exists():
-        return {}
-    with open(SEEN_PATH, encoding="utf-8") as f:
+def _load_json(path: Path, default):
+    if not path.exists():
+        return default
+    with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def _save_json(path: Path, data) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=1, ensure_ascii=False)
+        f.write("\n")
+
+
+def load_seen() -> dict[str, str]:
+    return _load_json(SEEN_PATH, {})
 
 
 def save_seen(seen: dict[str, str]) -> None:
     cutoff = (date.today() - timedelta(days=SEEN_TTL_DAYS)).isoformat()
-    kept = {k: v for k, v in seen.items() if v >= cutoff}
-    with open(SEEN_PATH, "w", encoding="utf-8") as f:
-        json.dump(dict(sorted(kept.items())), f, indent=1, ensure_ascii=False)
-        f.write("\n")
+    _save_json(SEEN_PATH, dict(sorted((k, v) for k, v in seen.items() if v >= cutoff)))
 
 
 def fetch_all(cfg: dict):
@@ -63,105 +76,86 @@ def fetch_all(cfg: dict):
     return jobs, failures
 
 
-def run_check(cfg: dict) -> None:
-    """Report which boards work, and why each in-area job matched or not.
+def fetch_emails(cfg: dict):
+    ecfg = cfg.get("email_alerts") or {}
+    address, password = os.environ.get("GMAIL_ADDRESS"), os.environ.get("GMAIL_APP_PASSWORD")
+    if not ecfg.get("enabled") or not (address and password):
+        print("Email alerts: skipped (not configured)")
+        return []
+    try:
+        alerts = fetch_alert_emails(address, password.replace(" ", ""), ecfg["senders"],
+                                    ecfg.get("lookback_days", 3), ecfg.get("max_jobs_per_email", 10))
+    except Exception as exc:  # IMAP problems must never break the run
+        print(f"Email alerts: failed ({type(exc).__name__}: {exc})")
+        return []
+    print(f"Email alerts: {len(alerts)} emails, {sum(len(a.jobs) for a in alerts)} job links")
+    return alerts
 
-    The full report is written to reports/check.txt so it can be reviewed
-    from the repo instead of the Actions log.
-    """
+
+def build(cfg: dict, today: str) -> tuple[list[dict], list[str], int]:
+    jobs, failures = fetch_all(cfg)
+    facts_cache = _load_json(FACTS_PATH, {})
+    fresh = board_entries(jobs, cfg, facts_cache, today) + email_entries(fetch_emails(cfg), cfg, today)
+    live = {j.key for j in jobs}
+    _save_json(FACTS_PATH, {k: v for k, v in facts_cache.items() if k in live})
+    previous = _load_json(JOBS_PATH, {"jobs": []})["jobs"]
+    return merge(previous, fresh, today), failures, len(jobs)
+
+
+def run(cfg: dict) -> int:
+    today = date.today().isoformat()
+    entries, failures, scanned = build(cfg, today)
+    _save_json(JOBS_PATH, state(entries))
+
+    telegram = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
+    seen = load_seen()
+    hot = [e for e in entries if e["tier"] == "hot" and e["key"] not in seen]
+    for e in hot:
+        telegram.send(format_hot(e, cfg.get("app_url")))
+        seen[e["key"]] = today
+        save_seen(seen)  # save after each send so a crash never re-sends
+    # Everything else is shown in the app; mark it so it never triggers an alert later.
+    for e in entries:
+        seen.setdefault(e["key"], today)
+    save_seen(seen)
+
+    tiers = {t: sum(1 for e in entries if e["tier"] == t) for t in ("hot", "good", "long")}
+    print(f"\nScanned {scanned} jobs -> {len(entries)} in the app "
+          f"({tiers['hot']} hot, {tiers['good']} good, {tiers['long']} long shot); alerted {len(hot)}.")
+    if failures:
+        print(f"{len(failures)} board(s) failed:\n  " + "\n  ".join(failures))
+    total_boards = sum(len(v or []) for v in (cfg.get("companies") or {}).values())
+    return 1 if total_boards and len(failures) == total_boards else 0
+
+
+def run_check(cfg: dict) -> None:
+    """Report boards, in-area verdicts and scores; saved to reports/check.txt."""
     from . import sources
     sources.DEBUG_DIR = REPORT_PATH.parent / "debug"
-    jobs, failures = fetch_all(cfg)
-    by_company: dict[str, list] = {}
-    for job in jobs:
-        by_company.setdefault(job.company, []).append(job)
+    today = date.today().isoformat()
+    entries, failures, _ = build(cfg, today)
+    jobs_by_company: dict[str, list] = {}
+    for e in entries:
+        jobs_by_company.setdefault(e["company"], []).append(e)
 
-    lines = [f"Check run {date.today().isoformat()}", "",
-             f"{'company':<20} {'total':>5} {'in area':>8} {'matches':>8}"]
-    details = []
-    for company, items in sorted(by_company.items()):
-        local = [j for j in items if location_ok(j.location, cfg)]
-        verdicts = [(j, evaluate(j, cfg)[1]) for j in local]
-        n_match = sum(1 for _, r in verdicts if r == "match")
-        lines.append(f"{company:<20} {len(items):>5} {len(local):>8} {n_match:>8}")
-        if verdicts:
-            details.append(f"\n## {company}")
-            for j, reason in sorted(verdicts, key=lambda v: (v[1] != "match", v[1], v[0].title)):
-                mark = "MATCH" if reason == "match" else "     "
-                details.append(f"{mark} {j.title}  [{j.location}]  -> {reason}")
+    lines = [f"Check run {today}", ""]
     if failures:
-        lines += ["", f"{len(failures)} board(s) failed:"] + [f"  {f}" for f in failures]
-    lines += ["", "In-area jobs and the filter's verdict:"] + details
-
+        lines += [f"{len(failures)} board(s) failed:"] + [f"  {f}" for f in failures] + [""]
+    lines.append("Jobs in the app, by company (score, tier, reasons):")
+    for company, items in sorted(jobs_by_company.items()):
+        lines.append(f"\n## {company}")
+        for e in items:
+            lines.append(f"{tier_emoji(e['tier'])} {e['score']:>3}  {e['title']}  [{e['location'] or e['region']}]"
+                         f"  {e['employment']}, years={e['years']}  -> {' · '.join(e['reasons'])}")
     report = "\n".join(lines) + "\n"
     print(report)
     REPORT_PATH.parent.mkdir(exist_ok=True)
     REPORT_PATH.write_text(report, encoding="utf-8")
 
 
-def relay_email_alerts(cfg: dict, telegram: Telegram, seen: dict, today: str) -> None:
-    """Forward new AllJobs/Drushim alert emails from Gmail to Telegram."""
-    ecfg = cfg.get("email_alerts") or {}
-    address, password = os.environ.get("GMAIL_ADDRESS"), os.environ.get("GMAIL_APP_PASSWORD")
-    if not ecfg.get("enabled") or not (address and password):
-        print("Email alerts: skipped (not configured)")
-        return
-    try:
-        alerts = fetch_alert_emails(
-            address, password.replace(" ", ""), ecfg["senders"],
-            ecfg.get("lookback_days", 3), ecfg.get("max_jobs_per_email", 10),
-        )
-    except Exception as exc:  # IMAP problems must never break the job-board alerts
-        print(f"Email alerts: failed ({type(exc).__name__}: {exc})")
-        return
-    new = [a for a in alerts if f"email:{a.message_id}" not in seen]
-    for alert in new:
-        telegram.send(format_alert(alert, cfg))
-        seen[f"email:{alert.message_id}"] = today
-        save_seen(seen)
-    print(f"Email alerts: {len(alerts)} found, {len(new)} new forwarded")
-
-
-def run(cfg: dict) -> int:
-    telegram = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
-    seen = load_seen()
-    jobs, failures = fetch_all(cfg)
-
-    new_matches = []
-    for job in jobs:
-        if job.key in seen:
-            continue
-        match = classify(job, cfg)
-        if match:
-            new_matches.append((job, match))
-
-    new_matches.sort(key=lambda jm: (LEVEL_ORDER[jm[1].level], TRACK_ORDER.get(jm[1].track, 9), jm[0].company))
-    limit = cfg.get("max_alerts_per_run", 15)
-    to_send, deferred = new_matches[:limit], new_matches[limit:]
-
-    today = date.today().isoformat()
-    for job, match in to_send:
-        telegram.send(format_job(job, match))
-        seen[job.key] = today
-        save_seen(seen)  # save after each send so a crash never re-sends
-
-    if deferred:
-        telegram.send(f"➕ {len(deferred)} more matching jobs - they'll arrive in the next run.")
-
-    relay_email_alerts(cfg, telegram, seen, today)
-
-    save_seen(seen)
-    print(f"\nScanned {len(jobs)} jobs, {len(new_matches)} new matches, sent {len(to_send)}.")
-    if failures:
-        print(f"{len(failures)} board(s) failed:\n  " + "\n  ".join(failures))
-    # Fail the run only if every single board failed - that means something is broken.
-    total_boards = sum(len(v or []) for v in (cfg.get("companies") or {}).values())
-    return 1 if total_boards and len(failures) == total_boards else 0
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="Job Hunter Bot")
-    parser.add_argument("--check", action="store_true", help="only report which boards work")
+    parser.add_argument("--check", action="store_true", help="report boards and scores, no alerts")
     args = parser.parse_args()
     cfg = load_config()
     if args.check:

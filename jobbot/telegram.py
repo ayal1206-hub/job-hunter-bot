@@ -5,22 +5,23 @@ import time
 
 import requests
 
-from .filters import Match
-from .models import LEVEL_LABELS, Job
-
 API = "https://api.telegram.org/bot{token}/sendMessage"
+EMPLOYMENT = {"student": "משרת סטודנט", "part": "משרה חלקית", "full": "משרה מלאה"}
 
 
-def format_job(job: Job, match: Match) -> str:
-    level = LEVEL_LABELS[match.level]
-    return (
-        f"<b>{html.escape(job.title)}</b>\n"
-        f"🏢 {html.escape(job.company)}\n"
-        f"📍 {html.escape(job.location or 'Not specified')}\n"
-        f"{level} · {html.escape(match.track_label)}\n"
-        f"📄 CV: Tech (English)\n"
-        f'<a href="{html.escape(job.url, quote=True)}">View and apply</a>'
-    )
+def format_hot(entry: dict, app_url: str | None = None) -> str:
+    """Immediate alert for a 🔥 job."""
+    where = entry["location"] or {"south": "דרום", "center": "מרכז", "north": "צפון"}.get(entry["region"], "")
+    lines = [
+        f"🔥 <b>{html.escape(entry['title'])}</b>",
+        f"🏢 {html.escape(entry['company'])}" + (f"  ·  📍 {html.escape(where)}" if where else ""),
+        "✅ " + html.escape(" · ".join(entry["reasons"])),
+        "📄 CV: " + ("Tech (English)" if entry["cv"] == "tech" else "General (Hebrew)"),
+        f'<a href="{html.escape(entry["url"], quote=True)}">View and apply</a>',
+    ]
+    if app_url:
+        lines.append(f'<a href="{html.escape(app_url, quote=True)}">All jobs</a>')
+    return "\n".join(lines)
 
 
 class Telegram:

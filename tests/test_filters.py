@@ -3,9 +3,8 @@ from pathlib import Path
 import pytest
 import yaml
 
-from jobbot.filters import classify, location_ok
+from jobbot.filters import classify, location_ok, region_of
 from jobbot.models import Job
-from jobbot.telegram import format_job
 
 CFG = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
 
@@ -14,18 +13,19 @@ def job(title, location="Tel Aviv, Israel"):
     return Job("greenhouse", "Acme", "1", title, location, "https://example.com/job?a=1&b=2")
 
 
-@pytest.mark.parametrize("location", [
-    "Tel Aviv, Israel", "Tel-Aviv", "Ramat Gan", "Beer Sheva, Israel", "Ashkelon",
-    "Israel", "Remote, Israel", "Hybrid - Israel", "תל אביב", "באר שבע", "Tel Aviv / New York",
+@pytest.mark.parametrize("location, region", [
+    ("Tel Aviv, Israel", "center"), ("Tel-Aviv", "center"), ("Ramat Gan", "center"),
+    ("Beer Sheva, Israel", "south"), ("Ashkelon", "south"), ("באר שבע", "south"),
+    ("Haifa, Israel", "north"), ("Yokneam, Israel", "north"), ("Jerusalem, Israel", "center"),
+    ("Israel", "any"), ("Remote, Israel", "any"), ("Hybrid - Israel", "any"),
+    ("Tel Aviv / New York", "center"), ("Kiryat Gat", "south"),
 ])
-def test_locations_in_area(location):
-    assert location_ok(location, CFG)
+def test_regions(location, region):
+    assert region_of(location, CFG) == region
 
 
-@pytest.mark.parametrize("location", [
-    "Haifa, Israel", "Jerusalem, Israel", "New York, NY", "London", "Yokneam, Israel", "",
-])
-def test_locations_outside_area(location):
+@pytest.mark.parametrize("location", ["New York, NY", "London", "Berlin, Germany", ""])
+def test_locations_outside_israel(location):
     assert not location_ok(location, CFG)
 
 
@@ -68,8 +68,8 @@ def test_rejects(title):
     assert classify(job(title), CFG) is None
 
 
-def test_rejects_student_job_outside_area():
-    assert classify(job("QA Student", "Haifa, Israel"), CFG) is None
+def test_rejects_student_job_outside_israel():
+    assert classify(job("QA Student", "London, UK"), CFG) is None
 
 
 def test_whole_word_matching_avoids_false_hits():
@@ -79,9 +79,12 @@ def test_whole_word_matching_avoids_false_hits():
     assert classify(job("Security Officer"), CFG) is None
 
 
-def test_message_escapes_html():
-    j = Job("lever", "A&B <Co>", "9", "QA <Student>", "Tel Aviv", "https://x.com/?a=1&b=2")
-    text = format_job(j, classify(j, CFG))
+def test_hot_message_escapes_html():
+    from jobbot.telegram import format_hot
+    e = {"title": "QA <Student>", "company": "A&B <Co>", "location": "Tel Aviv", "region": "center",
+         "reasons": ["משרת סטודנט"], "cv": "tech", "url": "https://x.com/?a=1&b=2"}
+    text = format_hot(e, "https://app/")
     assert "A&amp;B &lt;Co&gt;" in text
     assert "QA &lt;Student&gt;" in text
     assert 'href="https://x.com/?a=1&amp;b=2"' in text
+    assert "Tech (English)" in text and 'href="https://app/"' in text

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>משרות</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root {
+    --bg: var(--tg-theme-bg-color, #ffffff);
+    --bg2: var(--tg-theme-secondary-bg-color, #f2f3f5);
+    --text: var(--tg-theme-text-color, #16181c);
+    --hint: var(--tg-theme-hint-color, #6b7280);
+    --link: var(--tg-theme-link-color, #2b6cb0);
+    --accent: var(--tg-theme-button-color, #2b6cb0);
+    --accent-text: var(--tg-theme-button-text-color, #ffffff);
+    --line: color-mix(in srgb, var(--hint) 22%, transparent);
+    --hot: #c2410c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not(.tg) {
+      --bg: #17191d; --bg2: #212429; --text: #eceef1; --hint: #9aa1ab;
+      --link: #7fb3ff; --accent: #4f8ff7; --hot: #fb923c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg2); color: var(--text);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  header { background: var(--bg); border-bottom: 1px solid var(--line); padding: 12px 16px 10px; }
+  .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  h1 { margin: 0; font-size: 20px; }
+  .meta { color: var(--hint); font-size: 12px; }
+  .group { margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+  .group-label { flex: 0 0 52px; font-size: 12px; color: var(--hint); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0; scrollbar-width: none; min-width: 0; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: 0 0 auto; border: 1px solid var(--line); background: var(--bg2); color: var(--text);
+    border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 14px; cursor: pointer;
+    min-height: 36px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  }
+  .chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  .chip .n { opacity: .7; font-size: 12px; }
+  main { padding: 12px 16px 32px; display: flex; flex-direction: column; gap: 10px; }
+  .count { color: var(--hint); font-size: 13px; }
+  .card { background: var(--bg); border-radius: 14px; padding: 14px; border: 1px solid var(--line); }
+  .card.applied { opacity: .55; }
+  .title { font-weight: 650; font-size: 16px; margin: 0; }
+  .title .tier { margin-inline-end: 6px; }
+  .sub { color: var(--hint); font-size: 13px; margin-top: 2px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag { background: var(--bg2); border-radius: 6px; padding: 2px 8px; font-size: 12px; }
+  .tag.new { background: var(--accent); color: var(--accent-text); }
+  .tag.warn { color: var(--hot); }
+  .why { font-size: 13px; margin-top: 8px; color: var(--hint); }
+  .actions { display: flex; gap: 8px; margin-top: 12px; }
+  .btn {
+    flex: 1; border: 0; border-radius: 10px; padding: 10px; font: inherit; font-size: 14px;
+    cursor: pointer; min-height: 44px;
+  }
+  .btn.primary { background: var(--accent); color: var(--accent-text); }
+  .btn.ghost { background: var(--bg2); color: var(--text); }
+  .empty { text-align: center; color: var(--hint); padding: 40px 0; }
+  [dir="auto"] { unicode-bidi: plaintext; }
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>משרות בשבילך</h1>
+    <span class="meta" id="updated"></span>
+  </div>
+  <div class="group"><div class="group-label">סוג משרה</div><div class="chips" id="f-employment"></div></div>
+  <div class="group"><div class="group-label">אזור</div><div class="chips" id="f-region"></div></div>
+  <div class="group"><div class="group-label">תחום</div><div class="chips" id="f-field"></div></div>
+  <div class="group"><div class="group-label">עוד</div><div class="chips" id="f-extra"></div></div>
+</header>
+<main id="list" aria-live="polite"><div class="empty">טוען משרות…</div></main>
+
+<script>
+const tg = window.Telegram && window.Telegram.WebApp;
+if (tg && tg.initData !== undefined) {
+  document.documentElement.classList.add("tg");
+  tg.ready(); tg.expand();
+}
+
+const EMPLOYMENT = [["student", "סטודנט"], ["part", "חלקית"], ["full", "מלאה"]];
+const REGIONS = [["south", "דרום"], ["center", "מרכז"], ["north", "צפון"]];
+const EXTRA = [["hot", "🔥 רק הכי מתאימות"], ["hideApplied", "הסתר שהגשתי"]];
+const TIER = { hot: "🔥", good: "👍", long: "🤔" };
+
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+let jobs = [];
+let filters = store.get("filters") || { employment: [], region: [], field: [], hot: false, hideApplied: false };
+let applied = new Set(store.get("applied") || []);
+
+// Applied jobs follow the user across devices through Telegram CloudStorage when available.
+function cloudLoadApplied() {
+  if (!tg || !tg.CloudStorage || !tg.isVersionAtLeast || !tg.isVersionAtLeast("6.9")) return;
+  try {
+    tg.CloudStorage.getItem("applied", (err, val) => {
+      if (!err && val) { try { JSON.parse(val).forEach(k => applied.add(k)); render(); } catch {} }
+    });
+  } catch {}
+}
+function saveApplied() {
+  const arr = [...applied].slice(-300);
+  store.set("applied", arr);
+  try { if (tg && tg.CloudStorage && tg.isVersionAtLeast("6.9")) tg.CloudStorage.setItem("applied", JSON.stringify(arr)); } catch {}
+}
+
+function el(tag, attrs = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v);
+  }
+  for (const kid of kids) if (kid != null) n.append(kid);
+  return n;
+}
+
+function matches(j, skip) {
+  if (skip !== "employment" && filters.employment.length && !filters.employment.includes(j.employment)) return false;
+  if (skip !== "region" && filters.region.length && j.region !== "any" && !filters.region.includes(j.region)) return false;
+  if (skip !== "field" && filters.field.length && !filters.field.includes(j.field)) return false;
+  if (filters.hot && j.tier !== "hot") return false;
+  if (filters.hideApplied && applied.has(j.key)) return false;
+  return true;
+}
+
+function chipRow(id, key, options) {
+  const row = document.getElementById(id);
+  row.replaceChildren(...options.map(([value, label]) => {
+    const n = jobs.filter(j => matches(j, key) && (key === "region" ? (j.region === value || j.region === "any") : j[key] === value)).length;
+    const on = filters[key].includes(value);
+    return el("button", {
+      class: "chip", type: "button", "aria-pressed": String(on),
+      onclick: () => {
+        filters[key] = on ? filters[key].filter(v => v !== value) : [...filters[key], value];
+        store.set("filters", filters); render();
+      },
+    }, el("bdi", {}, label), el("span", { class: "n" }, String(n)));
+  }));
+}
+
+function extraRow() {
+  const row = document.getElementById("f-extra");
+  row.replaceChildren(...EXTRA.map(([key, label]) => el("button", {
+    class: "chip", type: "button", "aria-pressed": String(!!filters[key]),
+    onclick: () => { filters[key] = !filters[key]; store.set("filters", filters); render(); },
+  }, label)));
+}
+
+function yearsTag(y) {
+  if (y === 0) return el("span", { class: "tag" }, "ללא ניסיון");
+  if (y === 1) return el("span", { class: "tag" }, "שנת ניסיון");
+  if (y != null) return el("span", { class: "tag warn" }, `${y}+ שנות ניסיון`);
+  return null;
+}
+
+function isNew(j) {
+  return (Date.now() - new Date(j.first_seen + "T00:00:00").getTime()) < 2 * 86400000;
+}
+
+function card(j) {
+  const done = applied.has(j.key);
+  const where = j.location || (REGIONS.find(r => r[0] === j.region) || [, "כל הארץ"])[1];
+  const empl = (EMPLOYMENT.find(e => e[0] === j.employment) || [, ""])[1];
+  return el("article", { class: "card" + (done ? " applied" : "") },
+    el("h2", { class: "title" }, el("span", { class: "tier" }, TIER[j.tier] || ""), el("span", { dir: "auto" }, j.title)),
+    el("div", { class: "sub" }, el("span", { dir: "auto" }, j.company), " · ", el("span", { dir: "auto" }, where)),
+    el("div", { class: "tags" },
+      isNew(j) ? el("span", { class: "tag new" }, "חדש") : null,
+      el("span", { class: "tag" }, el("bdi", {}, j.field_label)),
+      empl ? el("span", { class: "tag" }, "משרה " + empl) : null,
+      yearsTag(j.years),
+      j.hybrid ? el("span", { class: "tag" }, "היברידי") : null,
+      el("span", { class: "tag" }, "קו\"ח: ", el("bdi", {}, j.cv === "tech" ? "Tech EN" : "כללי")),
+    ),
+    j.reasons && j.reasons.length ? el("div", { class: "why" }, j.reasons.join(" · ")) : null,
+    el("div", { class: "actions" },
+      el("button", { class: "btn primary", type: "button", onclick: () => open(j.url) }, "לפרטים והגשה"),
+      el("button", {
+        class: "btn ghost", type: "button", "aria-pressed": String(done),
+        onclick: () => { done ? applied.delete(j.key) : applied.add(j.key); saveApplied(); render(); },
+      }, done ? "✓ הגשתי" : "סמן שהגשתי"),
+    ),
+  );
+}
+
+function open(url) {
+  if (tg && tg.openLink) tg.openLink(url); else window.open(url, "_blank", "noopener");
+}
+
+function render() {
+  chipRow("f-employment", "employment", EMPLOYMENT);
+  chipRow("f-region", "region", REGIONS);
+  const fields = [...new Map(jobs.map(j => [j.field, j.field_label])).entries()];
+  chipRow("f-field", "field", fields);
+  extraRow();
+  const shown = jobs.filter(j => matches(j));
+  const list = document.getElementById("list");
+  list.replaceChildren(
+    el("div", { class: "count" }, `${shown.length} משרות`),
+    ...(shown.length ? shown.map(card) : [el("div", { class: "empty" }, "אין משרות שמתאימות לסינון הזה")]),
+  );
+}
+
+fetch("jobs.json?t=" + Date.now())
+  .then(r => r.json())
+  .then(data => {
+    jobs = data.jobs || [];
+    const d = new Date(data.generated_at);
+    document.getElementById("updated").textContent =
+      "עודכן " + d.toLocaleString("he-IL", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" });
+    render(); cloudLoadApplied();
+  })
+  .catch(() => {
+    document.getElementById("list").replaceChildren(el("div", { class: "empty" }, "לא הצלחתי לטעון את המשרות. נסה שוב בעוד רגע."));
+  });
+</script>
+</body>
+</html>

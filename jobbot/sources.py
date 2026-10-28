@@ -33,7 +33,8 @@ def _get_json(url: str, params: dict | None = None):
 
 
 def fetch_greenhouse(company: dict) -> list[Job]:
-    data = _get_json(f"https://boards-api.greenhouse.io/v1/boards/{company['token']}/jobs")
+    data = _get_json(f"https://boards-api.greenhouse.io/v1/boards/{company['token']}/jobs",
+                     params={"content": "true"})
     jobs = []
     for item in data.get("jobs", []):
         jobs.append(Job(
@@ -43,6 +44,7 @@ def fetch_greenhouse(company: dict) -> list[Job]:
             title=item.get("title", "").strip(),
             location=(item.get("location") or {}).get("name", "").strip(),
             url=item.get("absolute_url", ""),
+            description=item.get("content", ""),  # HTML-escaped HTML; cleaned by details.page_to_text
         ))
     return jobs
 
@@ -62,6 +64,10 @@ def fetch_lever(company: dict) -> list[Job]:
             title=item.get("text", "").strip(),
             location=" / ".join(loc for loc in locations if loc),
             url=item.get("hostedUrl", ""),
+            description=item.get("descriptionPlain", "") + " " + " ".join(
+                " ".join(li.get("content", "") for li in lst.get("content", []) if isinstance(li, dict))
+                if isinstance(lst.get("content"), list) else str(lst.get("content", ""))
+                for lst in item.get("lists", []) if isinstance(lst, dict)),
         ))
     return jobs
 
@@ -86,6 +92,8 @@ def _comeet_jobs(company: dict, items: list) -> list[Job]:
             title=(item.get("name") or "").strip(),
             location=location or "",
             url=item.get("url_active_page") or item.get("url_comeet_hosted_page") or "",
+            description=" ".join(
+                str(d.get("value", "")) for d in (item.get("details") or []) if isinstance(d, dict)),
         ))
     return jobs
 
@@ -105,7 +113,7 @@ def fetch_comeet(company: dict) -> list[Job]:
     the open positions as JSON."""
     if company.get("token"):
         url = f"https://www.comeet.co/careers-api/2.0/company/{company['uid']}/positions"
-        data = _get_json(url, params={"token": company["token"], "details": "false"})
+        data = _get_json(url, params={"token": company["token"], "details": "true"})
         if not isinstance(data, list):
             raise SourceError("unexpected response shape")
         return _comeet_jobs(company, data)

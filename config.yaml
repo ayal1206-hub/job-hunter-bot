@@ -1,43 +1,31 @@
 # Job Hunter Bot configuration.
 # Edit this file to change what the bot looks for. No code changes needed.
 
-# Locations that count as a match (case-insensitive substring of the job's location).
-# South up to Ashkelon, plus the Tel Aviv metro area.
-locations:
-  - tel aviv
-  - tel-aviv
-  - ramat gan
-  - givatayim
-  - herzliya
-  - petah tikva
-  - petach tikva
-  - holon
-  - bnei brak
-  - bat yam
-  - rishon
-  - rehovot
-  - ness ziona
-  - ashdod
-  - ashkelon
-  - beer sheva
-  - be'er sheva
-  - beersheba
-  - sderot
-  - netivot
-  - kiryat gat
-  - ofakim
-  - תל אביב
-  - רמת גן
-  - הרצליה
-  - פתח תקווה
-  - ראשון לציון
-  - רחובות
-  - אשדוד
-  - אשקלון
-  - באר שבע
-  - שדרות
+# Regions. A job's location is matched (case-insensitive substring) against
+# these lists; the first region that matches wins. Jobs anywhere in Israel are
+# kept, and the region is used for filtering in the app and for scoring.
+regions:
+  south:
+    label: "דרום"
+    places: [beer sheva, be'er sheva, beersheba, beer-sheva, ashkelon, ashdod, sderot, netivot, kiryat gat,
+             ofakim, dimona, arad, eilat, yeruham, kiryat malachi, gan yavne, yavne,
+             באר שבע, אשקלון, אשדוד, שדרות, נתיבות, קרית גת, קריית גת, אופקים, דימונה, ערד, אילת, ירוחם, יבנה]
+  center:
+    label: "מרכז"
+    places: [tel aviv, tel-aviv, gush dan, ramat gan, givatayim, herzliya, petah tikva, petach tikva, holon,
+             bnei brak, bat yam, rishon, rehovot, ness ziona, nes ziona, raanana, ra'anana, kfar saba,
+             hod hasharon, netanya, modiin, modi'in, lod, ramla, rosh haayin, rosh ha'ayin, yehud, airport,
+             or yehuda, kiryat ono, jerusalem, beit shemesh, shoham, be'er ya'akov,
+             תל אביב, רמת גן, גבעתיים, הרצליה, פתח תקווה, פתח תקוה, חולון, בני ברק, בת ים, ראשון לציון,
+             רחובות, נס ציונה, רעננה, כפר סבא, הוד השרון, נתניה, מודיעין, לוד, רמלה, ראש העין, יהוד,
+             קרית אונו, ירושלים, בית שמש, שוהם, באר יעקב]
+  north:
+    label: "צפון"
+    places: [haifa, yokneam, yoqneam, nazareth, karmiel, tiberias, afula, nahariya, akko, acre, caesarea,
+             hadera, migdal haemek, kiryat shmona, zichron, matam,
+             חיפה, יקנעם, נצרת, כרמיאל, טבריה, עפולה, נהריה, עכו, קיסריה, חדרה, מגדל העמק, קרית שמונה, זכרון]
 
-# A location that only says "Israel" (no city) is usually hybrid/flexible - keep it.
+# A location that only says "Israel" (no city) or remote is kept, with region "any".
 accept_country_only: true
 
 # Role tracks. A job is tagged with the first track whose keywords appear in its title.
@@ -55,6 +43,18 @@ tracks:
     label: "Tech (other)"
     # Broad tech words. Not in junior_tracks/possible_tracks, so only student positions use it.
     keywords: [engineer, engineering, security, cyber, cloud, devops, monitoring, network, it, algorithm, research, ai, ml, sre, סייבר, הנדסה]
+
+# Fields used only to label jobs that arrive via alert emails (no seniority filter).
+general_fields:
+  security:
+    label: "אבטחה"
+    keywords: [מאבטח, מאבטחת, אבטחה, שמירה, שומר, שומרת, סייר, סיירת, קב"ט, security guard, guard]
+  lifeguard:
+    label: "הצלה"
+    keywords: [מציל, מצילה, הצלה, lifeguard]
+  office:
+    label: "משרדי"
+    keywords: [מזכיר, מזכירה, אדמיניסטרציה, אדמיניסטרטיבי, משרד, פקיד, פקידה, office, admin, back office]
 
 # Title words that mark a job as student / entry level.
 student_keywords: [student, intern, internship, סטודנט, סטודנטית, משרת סטודנט]
@@ -81,8 +81,8 @@ email_alerts:
   lookback_days: 3
   max_jobs_per_email: 10
 
-# Max alerts per run. Anything beyond this is summarised in one message.
-max_alerts_per_run: 15
+# The mini app (GitHub Pages). Linked from every 🔥 alert.
+app_url: https://ayal1206-hub.github.io/job-hunter-bot/
 
 # Companies to scan. Unreachable boards are skipped and reported in the run log.
 # greenhouse: the board token from boards.greenhouse.io/<token>

@@ -23,14 +23,21 @@ def _any(text: str, keywords) -> bool:
     return any(_matches(text, k) for k in keywords)
 
 
-def location_ok(location: str, cfg: dict) -> bool:
+def region_of(location: str, cfg: dict) -> str | None:
+    """'south' | 'center' | 'north' | 'any' (Israel / remote, no city) | None (not in Israel)."""
     loc = location.lower()
-    if any(city.lower() in loc for city in cfg["locations"]):
-        return True
+    for name, region in cfg["regions"].items():
+        if any(place.lower() in loc for place in region["places"]):
+            return name
     if cfg.get("accept_country_only") and ("israel" in loc or "ישראל" in loc):
         words = set(re.findall(r"[a-z֐-׿]+", loc))
-        return bool(words) and words <= _COUNTRY_ONLY_WORDS
-    return False
+        if words and words <= _COUNTRY_ONLY_WORDS:
+            return "any"
+    return None
+
+
+def location_ok(location: str, cfg: dict) -> bool:
+    return region_of(location, cfg) is not None
 
 
 @dataclass(frozen=True)
