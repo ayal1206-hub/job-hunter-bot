@@ -29,6 +29,18 @@ _SKIP_TEXT = (
 )
 
 
+# Account emails from the same senders (welcome, verification...) are not job alerts.
+_NOT_ALERT_SUBJECT = (
+    "ברוך הבא", "ברוכה הבאה", "ברוכים הבאים", "welcome", "קוד אימות", "אימות כתובת", "אימות המייל", "אימות חשבון", "אמת את", "verify", "confirm",
+    "סיסמה", "password", "הרשמה", "נרשמת", "פרופיל", "profile", "קורות החיים שלך", "תודה",
+)
+
+
+def is_job_alert(subject: str) -> bool:
+    s = subject.lower()
+    return not any(word in s for word in _NOT_ALERT_SUBJECT)
+
+
 @dataclass
 class AlertEmail:
     message_id: str
@@ -109,6 +121,8 @@ def fetch_alert_emails(address: str, app_password: str, senders: list[str],
                 if status != "OK" or not msg_data or not isinstance(msg_data[0], tuple):
                     continue
                 msg = email.message_from_bytes(msg_data[0][1])
+                if not is_job_alert(_decode(msg.get("Subject"))):
+                    continue
                 results.append(AlertEmail(
                     message_id=(msg.get("Message-ID") or f"{domain}-{num.decode()}").strip(),
                     sender=domain,

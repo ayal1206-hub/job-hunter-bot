@@ -95,3 +95,11 @@ def test_cv_label_follows_job_type():
     assert "CV: General (Hebrew)" in ea.format_alert(mk(["מאבטח/ת לובי", "מציל/ה לבריכה"]), cfg)
     mixed = ea.format_alert(mk(["סטודנט פיתוח תוכנה", "מאבטח/ת"]), cfg)
     assert "💻 = Tech (English)" in mixed and "💻 <a" in mixed and "• <a" in mixed
+
+
+def test_account_emails_are_not_job_alerts():
+    assert not ea.is_job_alert("ברוכים הבאים לדרושים!")
+    assert not ea.is_job_alert("Please verify your email")
+    assert not ea.is_job_alert("אימות כתובת המייל שלך")
+    assert ea.is_job_alert("5 משרות חדשות שמתאימות לך")
+    assert ea.is_job_alert("2 משרות חדשות עבורך")
