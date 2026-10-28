@@ -106,6 +106,8 @@ def test_government_jobs_from_emails_get_their_own_field():
     e = email_entries([alert], CFG, "2026-10-28")[0]
     assert e["field"] == "government" and e["field_label"] == "שירות המדינה"
     assert e["region"] == "south" and e["tier"] == "good"
+    dog = email_entries([AlertEmail("<k>", "drushim.co.il", "s", [("כלבן/ית - רשות המסים", "https://d/2")])], CFG, "2026-10-28")[0]
+    assert dog["field"] == "government"
 
 
 def test_state_lists_every_field_for_the_app():
