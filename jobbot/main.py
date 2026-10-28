@@ -105,7 +105,7 @@ def build(cfg: dict, today: str) -> tuple[list[dict], list[str], int]:
 def run(cfg: dict) -> int:
     today = date.today().isoformat()
     entries, failures, scanned = build(cfg, today)
-    _save_json(JOBS_PATH, state(entries))
+    _save_json(JOBS_PATH, state(entries, cfg))
 
     telegram = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
     seen = load_seen()

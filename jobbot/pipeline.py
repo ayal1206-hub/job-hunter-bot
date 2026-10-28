@@ -87,5 +87,15 @@ def merge(previous: list[dict], fresh: list[dict], today: str) -> list[dict]:
     return sorted(by_key.values(), key=lambda e: (e["score"], e["first_seen"]), reverse=True)
 
 
-def state(jobs: list[dict]) -> dict:
-    return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "jobs": jobs}
+def all_fields(cfg: dict) -> list[list[str]]:
+    """Every field the app can filter by, in display order - shown even with 0 jobs."""
+    fields = [[k, FIELD_LABELS.get(k, t["label"])] for k, t in cfg["tracks"].items()]
+    fields += [[k, f["label"]] for k, f in cfg.get("general_fields", {}).items()]
+    return fields + [["other", "אחר"]]
+
+
+def state(jobs: list[dict], cfg: dict | None = None) -> dict:
+    data = {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "jobs": jobs}
+    if cfg:
+        data["fields"] = all_fields(cfg)
+    return data

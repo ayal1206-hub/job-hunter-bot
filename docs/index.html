@@ -98,6 +98,7 @@ const store = {
 };
 
 let jobs = [];
+let knownFields = [];
 let filters = store.get("filters") || { employment: [], region: [], field: [], hot: false, hideApplied: false };
 let applied = new Set(store.get("applied") || []);
 
@@ -203,7 +204,10 @@ function open(url) {
 function render() {
   chipRow("f-employment", "employment", EMPLOYMENT);
   chipRow("f-region", "region", REGIONS);
-  const fields = [...new Map(jobs.map(j => [j.field, j.field_label])).entries()];
+  // All configured fields (so a field shows even before its first job), plus any extra seen in the data.
+  const fieldMap = new Map(knownFields);
+  for (const j of jobs) if (!fieldMap.has(j.field)) fieldMap.set(j.field, j.field_label);
+  const fields = [...fieldMap.entries()].filter(([k]) => k !== "other" || jobs.some(j => j.field === "other"));
   chipRow("f-field", "field", fields);
   extraRow();
   const shown = jobs.filter(j => matches(j));
@@ -218,6 +222,7 @@ fetch("jobs.json?t=" + Date.now())
   .then(r => r.json())
   .then(data => {
     jobs = data.jobs || [];
+    knownFields = data.fields || [];
     const d = new Date(data.generated_at);
     document.getElementById("updated").textContent =
       "עודכן " + d.toLocaleString("he-IL", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" });
