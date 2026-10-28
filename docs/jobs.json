@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-28T18:52:13+00:00",
+ "generated_at": "2026-10-28T19:33:26+00:00",
  "jobs": [
   {
    "key": "comeet:Exodigo:29.37D",
@@ -33,7 +33,7 @@
    "title": "Technical Support Engineer – Student Position",
    "location": "Tel Aviv",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/78.E65/technical-support-engineer-student-position/all#jobs",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/78.E65/technical-support-engineer-student-position/all",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -632,5 +632,43 @@
    "cv": "tech",
    "first_seen": "2026-10-28"
   }
+ ],
+ "fields": [
+  [
+   "qa",
+   "QA"
+  ],
+  [
+   "support",
+   "תמיכה / IT"
+  ],
+  [
+   "dev",
+   "פיתוח"
+  ],
+  [
+   "tech",
+   "טכנולוגיה"
+  ],
+  [
+   "security",
+   "אבטחה"
+  ],
+  [
+   "lifeguard",
+   "הצלה"
+  ],
+  [
+   "government",
+   "שירות המדינה"
+  ],
+  [
+   "office",
+   "משרדי"
+  ],
+  [
+   "other",
+   "אחר"
+  ]
  ]
 }
