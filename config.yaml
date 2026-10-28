@@ -52,6 +52,9 @@ general_fields:
   lifeguard:
     label: "הצלה"
     keywords: [מציל, מצילה, הצלה, lifeguard]
+  government:
+    label: "שירות המדינה"
+    keywords: [מכרז, שירות המדינה, נציבות, רשות המסים, מכס, בודק מכס, בודקת מכס, משרד ה, ממשלתי, ממשלתית, משרד הביטחון]
   office:
     label: "משרדי"
     keywords: [מזכיר, מזכירה, אדמיניסטרציה, אדמיניסטרטיבי, משרד, פקיד, פקידה, office, admin, back office]

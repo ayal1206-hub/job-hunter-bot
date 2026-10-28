@@ -67,7 +67,7 @@ def extract_facts(title: str, description: str, level: str) -> Facts:
     return Facts(years=required_years(text), employment=employment, hybrid=bool(_HYBRID.search(text)))
 
 
-GENERAL_FIELDS = ("security", "lifeguard", "office")
+GENERAL_FIELDS = ("security", "lifeguard", "office", "government")
 TIERS = (("hot", 6, "🔥"), ("good", 3, "👍"), ("long", -99, "🤔"))
 
 

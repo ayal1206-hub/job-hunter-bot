@@ -99,3 +99,10 @@ def test_merge_keeps_first_seen_and_expires_email_jobs():
 def test_chosen_general_field_in_south_is_worth_a_look():
     s, tier, reasons = score(Match("lifeguard", "הצלה", "possible"), Facts(None, "full", False), "south")
     assert tier == "good" and "תחום שבחרת" in reasons
+
+
+def test_government_jobs_from_emails_get_their_own_field():
+    alert = AlertEmail("<g>", "drushim.co.il", "s", [("בודק/ת מכס - רשות המסים, אשדוד", "https://d/1")])
+    e = email_entries([alert], CFG, "2026-10-28")[0]
+    assert e["field"] == "government" and e["field_label"] == "שירות המדינה"
+    assert e["region"] == "south" and e["tier"] == "good"
