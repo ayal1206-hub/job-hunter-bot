@@ -1,0 +1,132 @@
+{
+ "greenhouse:Cato Networks:4951235101": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4832252101": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4961284101": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:VAST Data:96.61C": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:8F.946": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:A6.31F": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:96.619": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:99.A1F": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:99.A1F-17.10C": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Global-e:F6.477": {
+  "years": null,
+  "employment": "part",
+  "hybrid": true
+ },
+ "comeet:Global-e:BC.84D": {
+  "years": null,
+  "employment": "student",
+  "hybrid": false
+ },
+ "comeet:Claroty:3C.374": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Exodigo:29.37D": {
+  "years": null,
+  "employment": "student",
+  "hybrid": true
+ },
+ "comeet:DRS RADA:0B.374": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Upwind:63.053": {
+  "years": null,
+  "employment": "student",
+  "hybrid": true
+ },
+ "comeet:Upwind:A1.543": {
+  "years": null,
+  "employment": "student",
+  "hybrid": true
+ },
+ "comeet:Upwind:68.47E": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Upwind:78.E65": {
+  "years": null,
+  "employment": "student",
+  "hybrid": true
+ },
+ "comeet:Kela:CF.E6B": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Kela:81.A6C": {
+  "years": 1,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Fetcherr:40.F62": {
+  "years": 1,
+  "employment": "part",
+  "hybrid": false
+ },
+ "comeet:CommIT:2D.375": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:KPMG Israel:B6.477": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Deloitte Israel:73.856": {
+  "years": null,
+  "employment": "student",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:75.475": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Alma Lasers:60.378": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ }
+}
