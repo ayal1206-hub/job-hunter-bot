@@ -114,3 +114,10 @@ def test_state_lists_every_field_for_the_app():
     from jobbot.pipeline import state
     keys = [k for k, _ in state([], CFG)["fields"]]
     assert {"qa", "support", "dev", "security", "lifeguard", "government"} <= set(keys)
+
+
+def test_email_jobs_are_owner_only_and_board_jobs_are_shared():
+    alert = AlertEmail("<o>", "alljobs.co.il", "s", [("מאבטח/ת - אשקלון", "https://aj/9")])
+    assert email_entries([alert], CFG, "2026-10-30")[0]["owner_only"] is True
+    jobs = [Job("comeet", "Acme", "1", "QA Student", "Tel Aviv", "https://a/1", description="x")]
+    assert board_entries(jobs, CFG, {}, "2026-10-30", fetch=lambda u: "")[0]["owner_only"] is False

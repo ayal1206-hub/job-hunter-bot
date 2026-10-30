@@ -28,7 +28,8 @@ regions:
 # A location that only says "Israel" (no city) or remote is kept, with region "any".
 accept_country_only: true
 
-# Role tracks. A job is tagged with the first track whose keywords appear in its title.
+# Role tracks. A job is tagged with the first track whose keywords appear in its title,
+# so specific tracks come before broad ones. Each user picks the tracks they want.
 tracks:
   qa:
     label: "QA / Testing"
@@ -36,13 +37,22 @@ tracks:
   support:
     label: "Tech Support / IT"
     keywords: [support, helpdesk, help desk, service desk, it technician, it specialist, it administrator, noc, system administrator, sysadmin, technical operations, תמיכה, תומך, תומכ, טכנאי, הלפדסק, מחשבים]
+  cyber:
+    label: "Cyber Security"
+    keywords: [cyber, security analyst, security engineer, security researcher, application security, appsec, soc, pentest, penetration, threat, incident response, malware, vulnerability, grc, סייבר, אבטחת מידע]
+  data:
+    label: "Data / BI / ML"
+    keywords: [data, bi, business intelligence, analytics, machine learning, ml engineer, data scientist, ai engineer, דאטה, אנליסט, ניתוח נתונים]
+  devops:
+    label: "DevOps / Cloud"
+    keywords: [devops, sre, site reliability, cloud engineer, cloud, infrastructure, platform engineer, network engineer, finops, ענן, תשתיות]
   dev:
     label: "Development"
-    keywords: [developer, software engineer, software developer, programmer, full stack, fullstack, backend, back-end, frontend, front-end, data engineer, data analyst, python, java, c++, מפתח, פיתוח, תוכנה, תוכניתן]
+    keywords: [developer, software engineer, software developer, programmer, full stack, fullstack, backend, back-end, frontend, front-end, mobile, android, ios, embedded, firmware, algorithm, python, java, c++, מפתח, פיתוח, תוכנה, תוכניתן]
   tech:
     label: "Tech (other)"
     # Broad tech words. Not in junior_tracks/possible_tracks, so only student positions use it.
-    keywords: [engineer, engineering, security, cyber, cloud, devops, monitoring, network, it, algorithm, research, ai, ml, sre, סייבר, הנדסה]
+    keywords: [engineer, engineering, security, monitoring, network, it, research, ai, ml, הנדסה]
 
 # Fields used only to label jobs that arrive via alert emails (no seniority filter).
 general_fields:
@@ -66,14 +76,17 @@ junior_keywords: [junior, entry level, entry-level, graduate, ג'וניור, ג�
 # Title words that disqualify a job.
 exclude_keywords: [senior, sr, expert, experienced, lead, principal, staff, manager, head of, director, architect, vp, team leader, בכיר, ראש צוות, מנהל]
 
-# Rule: student jobs in any track always match.
-#
-# Junior jobs match only when they are in qa or support (dev junior roles usually want experience).
-junior_tracks: [qa, support]
+# The shared job pool (used by every user of the bot):
+#  - student jobs in any track
+#  - junior jobs in these tracks
+#  - jobs with no seniority marker in these tracks ("possible fit"); the
+#    description (years of experience) then decides how high they score.
+junior_tracks: [qa, support, cyber, data, devops, dev]
+possible_tracks: [qa, support, cyber, data, devops, dev]
 
-# "Possible fit": QA / support titles with no seniority marker at all
-# (e.g. "IT Support Specialist"). Often open to students; sent with a separate label.
-possible_tracks: [qa, support]
+# Send the owner's 🔥 alerts from GitHub Actions. Turn off once the Cloudflare
+# worker sends personal alerts to every user (including the owner).
+python_alerts: true
 
 # Relay the official "smart agent" alert emails from job sites that don't allow
 # scraping (security, lifeguard and other general jobs). Read-only Gmail access

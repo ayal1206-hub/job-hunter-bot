@@ -36,11 +36,18 @@ def test_locations_outside_israel(location):
     ("Junior QA Engineer", "qa", "junior"),
     ("Junior IT Technician", "support", "junior"),
     ("סטודנט/ית לבדיקות תוכנה", "qa", "student"),
-    ("Data Analyst Student", "dev", "student"),
+    ("Data Analyst Student", "data", "student"),
     ("IT Support Specialist", "support", "possible"),
     ("QA Engineer", "qa", "possible"),
-    ("Security Analyst (Student Position)", "tech", "student"),
-    ("Cloud Monitoring Engineer (Student Position)", "tech", "student"),
+    ("Security Analyst (Student Position)", "cyber", "student"),
+    ("Cloud Monitoring Engineer (Student Position)", "devops", "student"),
+    ("Junior Backend Developer", "dev", "junior"),
+    ("Data Engineer", "data", "possible"),
+    ("Security Engineer", "cyber", "possible"),
+    ("SOC Analyst", "cyber", "possible"),
+    ("DevOps Engineer", "devops", "possible"),
+    ("Hardware Validation Student", "qa", "student"),
+    ("Research Student - Computer Vision", "tech", "student"),
     ("Service Desk Specialist", "support", "possible"),
     ("תומכ.ת טכני.ת", "support", "possible"),
 ])
@@ -54,15 +61,14 @@ def test_matches(title, track, level):
     "Senior QA Engineer",          # senior
     "Sr. Software Engineer",       # sr abbreviation
     "QA Team Lead",                # lead
-    "Junior Backend Developer",    # junior dev is not in junior_tracks
-    "Data Engineer",               # dev with no level is not a possible fit
+    "Research Engineer",           # broad 'tech' track is student-only
     "Network Automation Engineer", # 'automation' alone is not QA
     "Expert Backend Engineer",     # expert
     "Experienced Software Engineer",
     "Finance Student",             # student but no tech track
     "Marketing Intern",            # student but no tech track
     "FP&A Analyst - Student Position",  # analyst alone is not tech
-    "Security Engineer",           # broad tech track is student-only
+    "Security Officer",            # guard work, not a tech track
 ])
 def test_rejects(title):
     assert classify(job(title), CFG) is None

@@ -109,7 +109,7 @@ def run(cfg: dict) -> int:
 
     telegram = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
     seen = load_seen()
-    hot = [e for e in entries if e["tier"] == "hot" and e["key"] not in seen]
+    hot = [e for e in entries if e["tier"] == "hot" and e["key"] not in seen] if cfg.get("python_alerts", True) else []
     for e in hot:
         telegram.send(format_hot(e, cfg.get("app_url")))
         seen[e["key"]] = today

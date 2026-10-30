@@ -9,7 +9,8 @@ from .models import Job
 from .scoring import extract_facts, facts_from_dict, facts_to_dict, score
 
 EMAIL_JOB_TTL_DAYS = 14
-FIELD_LABELS = {"qa": "QA", "support": "תמיכה / IT", "dev": "פיתוח", "tech": "טכנולוגיה"}
+FIELD_LABELS = {"qa": "QA", "support": "תמיכה / IT", "cyber": "סייבר", "data": "דאטה / BI",
+                "devops": "DevOps / ענן", "dev": "פיתוח", "tech": "טכנולוגיה"}
 
 
 def _field_of_title(title: str, cfg: dict) -> tuple[str, str]:
@@ -27,7 +28,7 @@ def _field_of_title(title: str, cfg: dict) -> tuple[str, str]:
 def _entry(key, source, company, title, location, region, url, field, field_label,
            match, facts, today, origin) -> dict:
     s, tier, reasons = score(match, facts, region)
-    is_tech = field in ("qa", "support", "dev", "tech")
+    is_tech = field in FIELD_LABELS
     return {
         "key": key, "source": source, "origin": origin, "company": company,
         "title": title, "location": location, "region": region, "url": url,
@@ -35,6 +36,8 @@ def _entry(key, source, company, title, location, region, url, field, field_labe
         "employment": facts.employment, "years": facts.years, "hybrid": facts.hybrid,
         "score": s, "tier": tier, "reasons": reasons,
         "cv": "tech" if is_tech else "general", "first_seen": today,
+        # Jobs from the owner's personal alert emails are shown only to the owner.
+        "owner_only": origin == "email",
     }
 
 
