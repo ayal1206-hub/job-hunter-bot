@@ -128,5 +128,595 @@
   "years": null,
   "employment": "full",
   "hybrid": true
+ },
+ "greenhouse:Cato Networks:4252047101": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4853323101": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4352164101": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4839355101": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4812341101": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4895403101": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Cato Networks:4845229101": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Similarweb:6897277": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Similarweb:7972320": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Similarweb:8284137": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Similarweb:8239378": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Similarweb:6829705": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Similarweb:7938197": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Similarweb:8124606": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Similarweb:8239121": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Payoneer:8261034": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Payoneer:8211074": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Payoneer:8208199": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Taboola:8081260": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Taboola:8200807": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Riskified:8653104002": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Riskified:8805509002": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:AppsFlyer:8394076002": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:AppsFlyer:8897823002": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:AppsFlyer:8695882002": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4692874006": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4615162006": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4615172006": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4645081006": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4422889006": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4681239006": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4650548006": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4566780006": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4670481006": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Wiz:4707600006": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "greenhouse:Via:8875777002": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Via:8627735002": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true
+ },
+ "greenhouse:Via:8557879002": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:BF.546": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:5A.66C": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:F8.921": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:F8.921-17.10C": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:91.475": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:A8.D05": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:A8.D05-17.10C": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:VAST Data:E3.E68": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Global-e:10.379": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Claroty:66.271": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Claroty:58.479": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Claroty:0A.374": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Claroty:C2.47E": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Exodigo:EF.273": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Exodigo:75.478": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:AllCloud:08.470": {
+  "years": 1,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:AllCloud:92.476": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:AllCloud:09.E62": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:AllCloud:45.273": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:DRS RADA:1E.864": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:DRS RADA:50.463": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:DRS RADA:C6.472": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:DRS RADA:A2.478": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:DRS RADA:0B.37F": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Upwind:5C.375": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Upwind:BA.04A": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Upwind:14.078": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Upwind:93.273": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Upwind:CA.042": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Upwind:5C.D67": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Upwind:C6.E69": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Kela:53.764": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Kela:2D.37A": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Kela:A0.866": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Dream:37.640": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Dream:F6.476": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Dream:72.96B": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Fetcherr:A5.D67": {
+  "years": 2,
+  "employment": "part",
+  "hybrid": false
+ },
+ "comeet:Fetcherr:B5.079": {
+  "years": null,
+  "employment": "part",
+  "hybrid": false
+ },
+ "comeet:Fetcherr:DB.D6C": {
+  "years": 5,
+  "employment": "part",
+  "hybrid": false
+ },
+ "comeet:Fetcherr:DB.D6C-9D.50A": {
+  "years": 5,
+  "employment": "part",
+  "hybrid": false
+ },
+ "comeet:Fetcherr:F6.47E": {
+  "years": 5,
+  "employment": "part",
+  "hybrid": false
+ },
+ "comeet:CommIT:B6.272": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:CommIT:72.279": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:CommIT:97.76F": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:CommIT:DE.27A": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:CommIT:A4.47B": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:CommIT:D9.E51": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:C4.471": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:13.B63": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:13.B66": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:63.73F": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:5B.E57": {
+  "years": 8,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:F9.27C": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:A4.271": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:42.365": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:42.367": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:B8.E6E": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:BE.959": {
+  "years": 8,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Team8:FB.D63": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:FB.D65": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Team8:F6.376": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:DF.367": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:94.27F": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Team8:60.37B": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:KPMG Israel:CB.272": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:KPMG Israel:9D.64F": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:KPMG Israel:8C.A46": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false
+ },
+ "comeet:Deloitte Israel:10.F6C": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:10.F6C-92.301": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:10.F6C-92.303": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:10.F6C-E8.408": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:10.F6C-92.309": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:10.F6C-92.30A": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:05.F6E": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:81.551": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:63.D63": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:4D.378": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:FE.B50": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true
+ },
+ "comeet:Deloitte Israel:33.762": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true
  }
 }
