@@ -7,12 +7,27 @@
 
 import { verifyInitData } from "./auth.js";
 import { analyzeCv, CvError } from "./gemini.js";
-import { DEFAULT_PROFILE, REGIONS, cleanProfile, scoreAll } from "./score.js";
+import { ALERT_MODES, DEFAULT_PROFILE, REGIONS, alertMode, alertTiers, cleanProfile, scoreAll } from "./score.js";
 import { Telegram, appButton, esc } from "./telegram.js";
 
 const CV_LIMIT_PER_DAY = 3;
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
 const MAX_ALERTS_PER_MESSAGE = 5;
+const MAX_DIGEST_JOBS = 10;
+const DIGEST_HOUR = 18;          // Israel time; the hourly cron runs at :50, so the digest lands around 18:50
+
+export const ALERT_LABELS = {
+  hot: "🔥 מיד, רק משרות מעולות",
+  all: "📬 על כל משרה חדשה שמתאימה לי",
+  daily: "🗓 סיכום אחד ביום, בערב",
+  off: "🔕 בלי התראות",
+};
+
+const alertKeyboard = (current) => ({ reply_markup: { inline_keyboard: ALERT_MODES.map((m) => [{
+  text: (m === current ? "✓ " : "") + ALERT_LABELS[m], callback_data: `alert:${m}`,
+}]) } });
+
+const israelHour = (now) => Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Jerusalem", hour: "2-digit", hourCycle: "h23" }).format(now));
 const SENT_KEEP = 400;
 
 const FIELD_HE = {
@@ -46,7 +61,7 @@ export function describeProfile(p) {
     `📍 <b>אזור:</b> ${esc(regions)}`,
     `🕒 <b>סוג משרה:</b> ${esc(p.employment.map((e) => EMPLOYMENT_HE[e]).join(", "))}`,
     `📈 <b>ניסיון שאפשר לדרוש ממך:</b> עד ${p.max_years} ${p.max_years === 1 ? "שנה" : "שנים"}`,
-    `🔔 <b>התראות על משרות 🔥:</b> ${p.alerts ? "פועלות" : "כבויות"}`,
+    `🔔 <b>התראות:</b> ${ALERT_LABELS[alertMode(p)]}`,
   ];
   if (p.skills && p.skills.length) lines.push(`🛠 <b>כישורים מהקו"ח:</b> ${esc(p.skills.join(", "))}`);
   return lines.join("\n");
@@ -62,10 +77,11 @@ const WELCOME = `👋 <b>היי! אני בוט שמחפש משרות סטודנ�
 
 🔒 <b>פרטיות:</b> קורות החיים נשלחים לניתוח ב־Google Gemini (גרסה חינמית; גוגל עשויה להשתמש בתוכן לשיפור השירותים שלה) ולא נשמרים אצלנו. נשמרות רק ההעדפות שחולצו מהם: תחומים, אזור ורמת ניסיון. מומלץ לשלוח גרסה בלי טלפון, כתובת ות"ז. /delete מוחק את כל המידע שלך.
 
-פקודות: /profile הפרופיל שלך · /alerts הפעלה או כיבוי של התראות · /delete מחיקת המידע`;
+פקודות: /profile הפרופיל שלך · /alerts מתי לקבל התראות · /delete מחיקת המידע`;
 
 /** Telegram webhook update. Runs after the 200 response has been sent (waitUntil). */
 export async function handleUpdate(update, env, { origin, fetchImpl = fetch, now = Date.now() } = {}) {
+  if (update.callback_query) return handleCallback(update.callback_query, env, { fetchImpl, now });
   const msg = update.message;
   if (!msg || !msg.from || msg.chat?.type !== "private") return;
   const tg = new Telegram(env.TELEGRAM_BOT_TOKEN, fetchImpl);
@@ -83,9 +99,7 @@ export async function handleUpdate(update, env, { origin, fetchImpl = fetch, now
   }
   if (cmd === "/alerts") {
     const p = (await loadProfile(env, id)) || newProfile(id, now);
-    p.alerts = !p.alerts;
-    await saveProfile(env, p);
-    return tg.send(id, p.alerts ? "🔔 התראות הופעלו. תקבל הודעה על כל משרת 🔥 חדשה שמתאימה לך." : "🔕 התראות כובו. המשרות ממשיכות להתעדכן במסך.");
+    return tg.send(id, "<b>מתי לשלוח לך משרות חדשות?</b>\nבכל מקרה, כל המשרות מחכות לך במסך \"משרות\".", alertKeyboard(alertMode(p)));
   }
   if (cmd === "/delete") {
     await deleteUser(env, id);
@@ -149,6 +163,25 @@ async function readCv(env, tg, id, from, input, { origin, fetchImpl, now }) {
   }
 }
 
+async function handleCallback(cq, env, { fetchImpl, now }) {
+  const tg = new Telegram(env.TELEGRAM_BOT_TOKEN, fetchImpl);
+  const [kind, mode] = String(cq.data || "").split(":");
+  if (kind !== "alert" || !ALERT_MODES.includes(mode) || !cq.from) {
+    return tg.call("answerCallbackQuery", { callback_query_id: cq.id });
+  }
+  const p = (await loadProfile(env, cq.from.id)) || newProfile(cq.from.id, now);
+  p.alert_mode = mode;
+  delete p.alerts;
+  await saveProfile(env, p);
+  await tg.call("answerCallbackQuery", { callback_query_id: cq.id, text: "נשמר ✓" });
+  if (cq.message) {
+    await tg.call("editMessageText", {
+      chat_id: cq.message.chat.id, message_id: cq.message.message_id, parse_mode: "HTML",
+      text: `🔔 <b>התראות:</b> ${ALERT_LABELS[mode]}\nאפשר לשנות בכל רגע עם /alerts.`,
+    });
+  }
+}
+
 export async function deleteUser(env, id) {
   await env.USERS.delete(`user:${id}`);
   await env.USERS.delete(`sent:${id}`);
@@ -205,16 +238,25 @@ export async function handleApi(request, env, { fetchImpl = fetch, now = Date.no
 
 // ---------- Hourly alerts ----------
 
-function alertMessage(jobs) {
+const TIER_ICON = { hot: "🔥", good: "👍", long: "🤔" };
+
+function alertMessage(jobs, { digest = false, more = 0 } = {}) {
   const blocks = jobs.map((j) => {
     const where = j.location || REGIONS[j.region] || "כל הארץ";
-    return `🔥 <b>${esc(j.title)}</b>\n🏢 ${esc(j.company)} · 📍 ${esc(where)}\n✅ ${esc(j.reasons.join(" · "))}\n<a href="${esc(j.url)}">לפרטים והגשה</a>`;
+    return `${TIER_ICON[j.tier]} <b>${esc(j.title)}</b>\n🏢 ${esc(j.company)} · 📍 ${esc(where)}\n✅ ${esc(j.reasons.join(" · "))}\n<a href="${esc(j.url)}">לפרטים והגשה</a>`;
   });
-  return `<b>${jobs.length === 1 ? "משרה חדשה" : `${jobs.length} משרות חדשות`} שמתאימות לך</b>\n\n${blocks.join("\n\n")}`;
+  const count = jobs.length + more;
+  const head = digest
+    ? `🗓 <b>הסיכום היומי: ${count === 1 ? "משרה חדשה אחת" : `${count} משרות חדשות`} בשבילך</b>`
+    : `<b>${count === 1 ? "משרה חדשה" : `${count} משרות חדשות`} שמתאימות לך</b>`;
+  const tail = more ? `\n\n➕ ועוד ${more} במסך המשרות.` : "";
+  return `${head}\n\n${blocks.join("\n\n")}${tail}`;
 }
 
 export async function runAlerts(env, { fetchImpl = fetch, now = Date.now() } = {}) {
   const data = await loadJobs(env, fetchImpl);
+  const digestTime = israelHour(now) === DIGEST_HOUR;
+  const day = today(now);
   const origin = (await env.USERS.get("meta:origin")) || "";
   const tg = new Telegram(env.TELEGRAM_BOT_TOKEN, fetchImpl);
   let cursor, sentTotal = 0;
@@ -222,18 +264,28 @@ export async function runAlerts(env, { fetchImpl = fetch, now = Date.now() } = {
     const page = await env.USERS.list({ prefix: "user:", cursor });
     for (const { name } of page.keys) {
       const profile = JSON.parse((await env.USERS.get(name)) || "null");
-      if (!profile || !profile.alerts) continue;
+      if (!profile) continue;
+      const mode = alertMode(profile);
+      if (mode === "off") continue;
+      const digest = mode === "daily";
+      if (digest && (!digestTime || profile.last_digest === day)) continue;
+      const tiers = alertTiers(mode);
       const sent = new Set(JSON.parse((await env.USERS.get(`sent:${profile.id}`)) || "[]"));
       // Only jobs that appeared after the user joined, so a new user isn't flooded.
       const fresh = scoreAll(data.jobs || [], profile, { isOwner: isOwner(env, profile.id) })
-        .filter((j) => j.tier === "hot" && j.match && !sent.has(j.key) && (j.first_seen || "") >= (profile.created || ""));
+        .filter((j) => tiers.includes(j.tier) && j.match && !sent.has(j.key) && (j.first_seen || "") >= (profile.created || ""));
       if (!fresh.length) continue;
-      const batch = fresh.slice(0, MAX_ALERTS_PER_MESSAGE);
-      const res = await tg.send(profile.id, alertMessage(batch), origin ? appButton(origin, "📋 כל המשרות שלי") : {});
+      // Hourly modes send a few at a time (the rest come next hour); the digest lists more and
+      // counts the remainder, and everything it covered is marked as seen.
+      const batch = fresh.slice(0, digest ? MAX_DIGEST_JOBS : MAX_ALERTS_PER_MESSAGE);
+      const covered = digest ? fresh : batch;
+      const res = await tg.send(profile.id, alertMessage(batch, { digest, more: digest ? fresh.length - batch.length : 0 }),
+        origin ? appButton(origin, "📋 כל המשרות שלי") : {});
       if (res && res.error_code === 403) { await deleteUser(env, profile.id); continue; }  // user blocked the bot
-      batch.forEach((j) => sent.add(j.key));
+      if (digest) { profile.last_digest = day; await saveProfile(env, profile); }
+      covered.forEach((j) => sent.add(j.key));
       await env.USERS.put(`sent:${profile.id}`, JSON.stringify([...sent].slice(-SENT_KEEP)));
-      sentTotal += batch.length;
+      sentTotal += covered.length;
     }
     cursor = page.list_complete ? undefined : page.cursor;
   } while (cursor);
@@ -248,7 +300,7 @@ export async function setup(env, origin, fetchImpl = fetch) {
   const results = {};
   results.webhook = await tg.call("setWebhook", {
     url: `${origin}/webhook`, secret_token: env.WEBHOOK_SECRET,
-    allowed_updates: ["message"], drop_pending_updates: false,
+    allowed_updates: ["message", "callback_query"], drop_pending_updates: false,
   });
   results.menu = await tg.call("setChatMenuButton", {
     menu_button: { type: "web_app", text: "משרות", web_app: { url: `${origin}/app` } },
@@ -257,7 +309,7 @@ export async function setup(env, origin, fetchImpl = fetch) {
     commands: [
       { command: "start", description: "התחלה והסבר" },
       { command: "profile", description: "הפרופיל שלי" },
-      { command: "alerts", description: "הפעלה / כיבוי התראות" },
+      { command: "alerts", description: "מתי לקבל התראות" },
       { command: "delete", description: "מחיקת כל המידע שלי" },
     ],
   });

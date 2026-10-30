@@ -11,8 +11,20 @@ export const DEFAULT_PROFILE = Object.freeze({
   regions: [],                      // empty = anywhere in Israel
   employment: ["student", "part"],  // what the user is open to
   max_years: 1,                     // experience the user can show
-  alerts: true,
+  alert_mode: "hot",                // hot | all | daily | off
 });
+
+// How each user wants to be notified about new jobs.
+export const ALERT_MODES = ["hot", "all", "daily", "off"];
+
+export function alertMode(p) {
+  if (ALERT_MODES.includes(p.alert_mode)) return p.alert_mode;
+  if ("alerts" in p) return p.alerts ? "hot" : "off";   // profiles saved before alert modes existed
+  return DEFAULT_PROFILE.alert_mode;
+}
+
+// Which new jobs a mode reports: 🔥 only, or 🔥 + 👍 (long shots are never pushed).
+export const alertTiers = (mode) => (mode === "hot" ? ["hot"] : ["hot", "good"]);
 
 const HOT = 7;
 const GOOD = 3;
@@ -86,6 +98,7 @@ export function cleanProfile(input, { isOwner = false } = {}) {
     const n = Number(input.max_years);
     out.max_years = Number.isFinite(n) ? Math.max(0, Math.min(10, Math.round(n))) : DEFAULT_PROFILE.max_years;
   }
-  if ("alerts" in input) out.alerts = Boolean(input.alerts);
+  if (ALERT_MODES.includes(input.alert_mode)) out.alert_mode = input.alert_mode;
+  else if ("alerts" in input) out.alert_mode = input.alerts ? "hot" : "off";
   return out;
 }

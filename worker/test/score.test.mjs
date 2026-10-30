@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { cleanProfile, scoreAll, scoreJob } from "../src/score.js";
+import { alertMode, cleanProfile, scoreAll, scoreJob } from "../src/score.js";
 import { job } from "./helpers.mjs";
 
 const student = { fields: ["qa", "support"], regions: ["south"], employment: ["student", "part"], max_years: 1 };
@@ -55,11 +55,19 @@ test("cleanProfile drops unknown values and general fields for non-owners", () =
   assert.deepEqual(p.regions, ["south"]);
   assert.deepEqual(p.employment, ["student", "part"]);
   assert.equal(p.max_years, 10);
-  assert.equal(p.alerts, false);
+  assert.equal(p.alert_mode, "off");
   assert.deepEqual(cleanProfile({ fields: ["security"] }, { isOwner: true }).fields, ["security"]);
 });
 
 test("a full-time support job in my region with a year of experience is worth a look", () => {
   const r = scoreJob(job({ field: "support", level: "possible", employment: "full", years: 1, region: "south" }), student);
   assert.equal(r.tier, "good");
+});
+
+test("alert modes: validated, and old on/off profiles still work", () => {
+  assert.equal(cleanProfile({ alert_mode: "daily" }).alert_mode, "daily");
+  assert.equal(cleanProfile({ alert_mode: "spam" }).alert_mode, undefined);
+  assert.equal(alertMode({ alerts: true }), "hot");
+  assert.equal(alertMode({ alerts: false }), "off");
+  assert.equal(alertMode({}), "hot");
 });

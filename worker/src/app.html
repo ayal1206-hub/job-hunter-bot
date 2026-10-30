@@ -91,10 +91,7 @@
   <div class="card section"><h2>אזור</h2><p class="hint">בלי בחירה = כל הארץ</p><div class="chips wrap" id="p-regions"></div></div>
   <div class="card section"><h2>סוג משרה</h2><div class="chips wrap" id="p-employment"></div></div>
   <div class="card section"><h2>ניסיון שאפשר לדרוש ממני</h2><p class="hint">משרות שדורשות יותר יורדות בדירוג</p><div class="chips wrap" id="p-years"></div></div>
-  <div class="card section switch">
-    <div><h2>התראות על משרות 🔥</h2><p class="hint" style="margin:0">הודעה בבוט כשנפתחת משרה שמתאימה לך במיוחד</p></div>
-    <input type="checkbox" id="p-alerts" aria-label="התראות על משרות מתאימות">
-  </div>
+  <div class="card section"><h2>התראות בבוט</h2><p class="hint">כל המשרות מחכות כאן בכל מקרה</p><div class="chips wrap" id="p-alerts"></div></div>
   <button class="btn primary" id="save" type="button">שמור</button>
   <button class="btn danger" id="delete" type="button">מחק את כל המידע שלי</button>
 </main>
@@ -108,6 +105,7 @@ const TIERS = [["hot", "🔥 להגיש"], ["good", "👍 שווה לבדוק"],
 const TIER_ICON = { hot: "🔥", good: "👍", long: "🤔" };
 const REGIONS = [["south", "דרום"], ["center", "מרכז"], ["north", "צפון"]];
 const EMPLOYMENT = [["student", "משרת סטודנט"], ["part", "חלקית"], ["full", "מלאה"]];
+const ALERTS = [["hot", "🔥 מיד, רק מעולות"], ["all", "📬 כל משרה חדשה"], ["daily", "🗓 סיכום יומי"], ["off", "🔕 בלי"]];
 const YEARS = [[0, "ללא ניסיון"], [1, "עד שנה"], [2, "עד שנתיים"], [3, "עד 3"], [5, "עד 5"]];
 
 const store = {
@@ -259,18 +257,20 @@ function renderProfile() {
     class: "chip", type: "button", "aria-pressed": String(draft.max_years === n),
     onclick: () => { draft.max_years = n; renderProfile(); },
   }, label)));
-  document.getElementById("p-alerts").checked = !!draft.alerts;
+  document.getElementById("p-alerts").replaceChildren(...ALERTS.map(([m, label]) => el("button", {
+    class: "chip", type: "button", "aria-pressed": String(draft.alert_mode === m),
+    onclick: () => { draft.alert_mode = m; renderProfile(); },
+  }, label)));
   const s = document.getElementById("cv-summary");
   const bits = [draft.summary, draft.skills && draft.skills.length ? "כישורים: " + draft.skills.join(", ") : ""].filter(Boolean);
   s.hidden = !bits.length; s.textContent = bits.join(" · ");
 }
-document.getElementById("p-alerts").addEventListener("change", (e) => { draft.alerts = e.target.checked; });
 
 document.getElementById("save").addEventListener("click", async (e) => {
   const btn = e.currentTarget; btn.disabled = true;
   try {
     await api("/api/profile", { method: "POST", body: JSON.stringify({
-      fields: draft.fields, regions: draft.regions, employment: draft.employment, max_years: draft.max_years, alerts: draft.alerts,
+      fields: draft.fields, regions: draft.regions, employment: draft.employment, max_years: draft.max_years, alert_mode: draft.alert_mode,
     }) });
     await load(); toast("נשמר ✓ המשרות דורגו מחדש"); showTab("jobs");
   } catch { toast("השמירה נכשלה, נסה שוב"); }
@@ -291,6 +291,7 @@ document.getElementById("delete").addEventListener("click", () => {
 async function load() {
   data = await api("/api/me");
   draft = JSON.parse(JSON.stringify(data.profile));
+  if (!draft.alert_mode) draft.alert_mode = "alerts" in draft ? (draft.alerts ? "hot" : "off") : "hot";
   const d = new Date(data.generated_at);
   document.getElementById("updated").textContent = "המשרות עודכנו " + d.toLocaleString("he-IL", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" });
   renderJobs();
