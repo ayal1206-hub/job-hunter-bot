@@ -32,6 +32,29 @@ GitHub Actions (every 4 hours)
 
 Applications are always sent by me. The bot only finds, sorts and reports.
 
+## Multi-user bot (for friends)
+
+Anyone can open the bot, send their CV, and get the same job pool ranked for *them*.
+
+```
+docs/jobs.json (shared job pool, every 4 hours)
+        │
+        ▼
+Cloudflare Worker (worker/)
+  ├─ Telegram webhook: /start, CV upload → Gemini → preferences, /profile, /alerts, /delete
+  ├─ Mini app + API: jobs scored per user (Telegram initData auth, no login)
+  └─ hourly cron: personal 🔥 alerts
+        │
+        ▼
+Cloudflare KV: preferences only (fields, regions, employment, years). CVs are never stored.
+```
+
+- **CV reading:** the PDF/image (or pasted text, with contact details redacted first) goes to Gemini with a fixed JSON schema; only the extracted preferences are saved. 3 CVs per user per day.
+- **Scoring:** `worker/src/score.js`, the same idea as `scoring.py` but driven by each user's profile.
+- **Privacy:** users are told what is sent where before uploading, and `/delete` (or the button in the app) wipes their data.
+- **Deploy:** `.github/workflows/worker.yml` tests, creates the KV namespace, deploys with wrangler, uploads secrets and registers the webhook + menu button. Needs repository secrets `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `GEMINI_API_KEY` (plus the Telegram ones).
+- **Tests:** `cd worker && node --test` (no dependencies).
+
 ## Configuration
 
 Everything lives in [`config.yaml`](config.yaml): locations, keywords per track, and the list of companies. Adding a company is one line.
@@ -77,4 +100,4 @@ config.yaml     # what to search for
 
 ## Tech
 
-Python 3.12 · requests · PyYAML · pytest · GitHub Actions · GitHub Pages · Telegram Bot API · Telegram Mini Apps · vanilla JS
+Python 3.12 · JavaScript (Cloudflare Workers, KV, cron) · Gemini API · requests · PyYAML · pytest · GitHub Actions · GitHub Pages · Telegram Bot API · Telegram Mini Apps · vanilla JS

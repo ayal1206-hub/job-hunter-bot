@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>המשרות שלי</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root {
+    --bg: var(--tg-theme-bg-color, #ffffff);
+    --bg2: var(--tg-theme-secondary-bg-color, #f2f3f5);
+    --text: var(--tg-theme-text-color, #16181c);
+    --hint: var(--tg-theme-hint-color, #6b7280);
+    --accent: var(--tg-theme-button-color, #2b6cb0);
+    --accent-text: var(--tg-theme-button-text-color, #ffffff);
+    --danger: var(--tg-theme-destructive-text-color, #c0392b);
+    --line: color-mix(in srgb, var(--hint) 22%, transparent);
+    --warn: #b45309;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not(.tg) { --bg: #17191d; --bg2: #212429; --text: #eceef1; --hint: #9aa1ab; --accent: #4f8ff7; --warn: #f59e0b; --danger: #f87171; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg2); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  header { background: var(--bg); border-bottom: 1px solid var(--line); padding: 10px 16px 10px; }
+  .tabs { display: flex; gap: 4px; background: var(--bg2); border-radius: 10px; padding: 3px; }
+  .tab { flex: 1; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 14px; padding: 8px; border-radius: 8px; cursor: pointer; min-height: 38px; }
+  .tab[aria-selected="true"] { background: var(--bg); font-weight: 650; box-shadow: 0 1px 2px rgb(0 0 0 / .08); }
+  .meta { color: var(--hint); font-size: 12px; margin-top: 6px; }
+  .group { margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+  .group-label { flex: 0 0 44px; font-size: 12px; color: var(--hint); }
+  .chips { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0; scrollbar-width: none; min-width: 0; }
+  .chips.wrap { flex-wrap: wrap; overflow: visible; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: 0 0 auto; border: 1px solid var(--line); background: var(--bg2); color: var(--text); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 14px; cursor: pointer; min-height: 36px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  .chip .n { opacity: .7; font-size: 12px; }
+  main { padding: 12px 16px 32px; display: flex; flex-direction: column; gap: 10px; }
+  .count { color: var(--hint); font-size: 13px; }
+  .card { background: var(--bg); border-radius: 14px; padding: 14px; border: 1px solid var(--line); }
+  .card.applied { opacity: .55; }
+  .banner { background: var(--bg); border: 1px solid var(--accent); border-radius: 14px; padding: 14px; }
+  .banner p { margin: 0 0 10px; }
+  .title { font-weight: 650; font-size: 16px; margin: 0; }
+  .title .tier { margin-inline-end: 6px; }
+  .sub { color: var(--hint); font-size: 13px; margin-top: 2px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag { background: var(--bg2); border-radius: 6px; padding: 2px 8px; font-size: 12px; }
+  .tag.new { background: var(--accent); color: var(--accent-text); }
+  .tag.warn { color: var(--warn); }
+  .why { font-size: 13px; margin-top: 8px; color: var(--hint); }
+  .actions { display: flex; gap: 8px; margin-top: 12px; }
+  .btn { flex: 1; border: 0; border-radius: 10px; padding: 10px; font: inherit; font-size: 14px; cursor: pointer; min-height: 44px; }
+  .btn.primary { background: var(--accent); color: var(--accent-text); }
+  .btn.ghost { background: var(--bg2); color: var(--text); }
+  .btn.danger { background: transparent; color: var(--danger); border: 1px solid var(--line); }
+  .btn:disabled { opacity: .6; cursor: default; }
+  .section h2 { font-size: 15px; margin: 0 0 4px; }
+  .section .hint { font-size: 13px; color: var(--hint); margin: 0 0 10px; }
+  .switch { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .switch input { width: 46px; height: 26px; accent-color: var(--accent); }
+  .empty { text-align: center; color: var(--hint); padding: 40px 0; }
+  .toast { position: fixed; inset-inline: 16px; bottom: 16px; background: var(--text); color: var(--bg); padding: 10px 14px; border-radius: 10px; font-size: 14px; text-align: center; }
+  [hidden] { display: none !important; }
+  bdi, [dir="auto"] { unicode-bidi: plaintext; }
+</style>
+</head>
+<body>
+<header>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-jobs" aria-selected="true" aria-controls="view-jobs">משרות</button>
+    <button class="tab" role="tab" id="tab-profile" aria-selected="false" aria-controls="view-profile">הפרופיל שלי</button>
+  </div>
+  <div id="jobs-filters">
+    <div class="group"><div class="group-label">דירוג</div><div class="chips" id="f-tier"></div></div>
+    <div class="group"><div class="group-label">תחום</div><div class="chips" id="f-field"></div></div>
+    <div class="group"><div class="group-label">עוד</div><div class="chips" id="f-extra"></div></div>
+  </div>
+  <div class="meta" id="updated"></div>
+</header>
+
+<main id="view-jobs" role="tabpanel" aria-labelledby="tab-jobs"><div class="empty">טוען משרות…</div></main>
+
+<main id="view-profile" role="tabpanel" aria-labelledby="tab-profile" hidden>
+  <div class="card section" id="cv-card">
+    <h2>📄 מילוי אוטומטי מקורות חיים</h2>
+    <p class="hint">שלח לבוט את קורות החיים כקובץ PDF, והוא ימלא את הפרופיל לבד. קורות החיים לא נשמרים.</p>
+    <p class="hint" id="cv-summary" hidden></p>
+  </div>
+  <div class="card section"><h2>תחומים</h2><p class="hint">בלי בחירה = כל תחומי ההייטק</p><div class="chips wrap" id="p-fields"></div></div>
+  <div class="card section"><h2>אזור</h2><p class="hint">בלי בחירה = כל הארץ</p><div class="chips wrap" id="p-regions"></div></div>
+  <div class="card section"><h2>סוג משרה</h2><div class="chips wrap" id="p-employment"></div></div>
+  <div class="card section"><h2>ניסיון שאפשר לדרוש ממני</h2><p class="hint">משרות שדורשות יותר יורדות בדירוג</p><div class="chips wrap" id="p-years"></div></div>
+  <div class="card section switch">
+    <div><h2>התראות על משרות 🔥</h2><p class="hint" style="margin:0">הודעה בבוט כשנפתחת משרה שמתאימה לך במיוחד</p></div>
+    <input type="checkbox" id="p-alerts" aria-label="התראות על משרות מתאימות">
+  </div>
+  <button class="btn primary" id="save" type="button">שמור</button>
+  <button class="btn danger" id="delete" type="button">מחק את כל המידע שלי</button>
+</main>
+
+<script>
+const tg = window.Telegram && window.Telegram.WebApp;
+const initData = tg && tg.initData;
+if (tg && initData) { document.documentElement.classList.add("tg"); tg.ready(); tg.expand(); }
+
+const TIERS = [["hot", "🔥 להגיש"], ["good", "👍 שווה לבדוק"], ["long", "🤔 סיכוי נמוך"]];
+const TIER_ICON = { hot: "🔥", good: "👍", long: "🤔" };
+const REGIONS = [["south", "דרום"], ["center", "מרכז"], ["north", "צפון"]];
+const EMPLOYMENT = [["student", "משרת סטודנט"], ["part", "חלקית"], ["full", "מלאה"]];
+const YEARS = [[0, "ללא ניסיון"], [1, "עד שנה"], [2, "עד שנתיים"], [3, "עד 3"], [5, "עד 5"]];
+
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+let data = null;            // response of /api/me
+let draft = null;           // profile being edited
+let filters = Object.assign({ tier: [], field: [], mine: true, hideApplied: false }, store.get("filters2") || {});
+let applied = new Set(store.get("applied") || []);
+
+function el(tag, attrs = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids) if (kid != null) n.append(kid);
+  return n;
+}
+
+function toast(text) {
+  const t = el("div", { class: "toast", role: "status" }, text);
+  document.body.append(t); setTimeout(() => t.remove(), 2200);
+}
+
+async function api(path, opts = {}) {
+  const resp = await fetch(path, { ...opts, headers: { "x-init-data": initData, "content-type": "application/json" } });
+  if (!resp.ok) throw new Error(resp.status);
+  return resp.json();
+}
+
+// ---- applied jobs, synced across devices via Telegram CloudStorage ----
+function cloudOk() { return tg && tg.CloudStorage && tg.isVersionAtLeast && tg.isVersionAtLeast("6.9"); }
+function loadAppliedCloud() {
+  if (!cloudOk()) return;
+  try { tg.CloudStorage.getItem("applied", (err, val) => { if (!err && val) { try { JSON.parse(val).forEach((k) => applied.add(k)); renderJobs(); } catch {} } }); } catch {}
+}
+function saveApplied() {
+  const arr = [...applied].slice(-300);
+  store.set("applied", arr);
+  try { if (cloudOk()) tg.CloudStorage.setItem("applied", JSON.stringify(arr)); } catch {}
+}
+
+// ---- tabs ----
+function showTab(name) {
+  for (const t of ["jobs", "profile"]) {
+    document.getElementById("tab-" + t).setAttribute("aria-selected", String(t === name));
+    document.getElementById("view-" + t).hidden = t !== name;
+  }
+  document.getElementById("jobs-filters").hidden = name !== "jobs";
+  if (name === "profile") renderProfile();
+  window.scrollTo(0, 0);
+}
+document.getElementById("tab-jobs").addEventListener("click", () => showTab("jobs"));
+document.getElementById("tab-profile").addEventListener("click", () => showTab("profile"));
+
+// ---- jobs view ----
+function visible(j, skip) {
+  if (filters.mine && !j.match) return false;
+  if (skip !== "tier" && filters.tier.length && !filters.tier.includes(j.tier)) return false;
+  if (skip !== "field" && filters.field.length && !filters.field.includes(j.field)) return false;
+  if (filters.hideApplied && applied.has(j.key)) return false;
+  return true;
+}
+
+function chipRow(id, key, options) {
+  document.getElementById(id).replaceChildren(...options.map(([value, label]) => {
+    const n = data.jobs.filter((j) => visible(j, key) && j[key] === value).length;
+    const on = filters[key].includes(value);
+    return el("button", { class: "chip", type: "button", "aria-pressed": String(on), onclick: () => {
+      filters[key] = on ? filters[key].filter((v) => v !== value) : [...filters[key], value];
+      store.set("filters2", filters); renderJobs();
+    } }, el("bdi", {}, label), el("span", { class: "n" }, String(n)));
+  }));
+}
+
+function toggleRow() {
+  const opts = [["mine", "רק בתחומים שלי"], ["hideApplied", "הסתר שהגשתי"]];
+  document.getElementById("f-extra").replaceChildren(...opts.map(([k, label]) => el("button", {
+    class: "chip", type: "button", "aria-pressed": String(!!filters[k]),
+    onclick: () => { filters[k] = !filters[k]; store.set("filters2", filters); renderJobs(); },
+  }, label)));
+}
+
+function yearsTag(y) {
+  if (y === 0) return el("span", { class: "tag" }, "ללא ניסיון");
+  if (y === 1) return el("span", { class: "tag" }, "שנת ניסיון");
+  if (y != null) return el("span", { class: "tag warn" }, `${y}+ שנות ניסיון`);
+  return null;
+}
+
+const isNew = (j) => (Date.now() - new Date(j.first_seen + "T00:00:00").getTime()) < 2 * 86400000;
+const openLink = (url) => (tg && tg.openLink ? tg.openLink(url) : window.open(url, "_blank", "noopener"));
+
+function card(j) {
+  const done = applied.has(j.key);
+  const where = j.location || (REGIONS.find((r) => r[0] === j.region) || [, "כל הארץ"])[1];
+  const empl = (EMPLOYMENT.find((e) => e[0] === j.employment) || [, ""])[1];
+  return el("article", { class: "card" + (done ? " applied" : "") },
+    el("h2", { class: "title" }, el("span", { class: "tier" }, TIER_ICON[j.tier]), el("span", { dir: "auto" }, j.title)),
+    el("div", { class: "sub" }, el("bdi", {}, j.company), " · ", el("bdi", {}, where)),
+    el("div", { class: "tags" },
+      isNew(j) ? el("span", { class: "tag new" }, "חדש") : null,
+      el("span", { class: "tag" }, el("bdi", {}, j.field_label)),
+      j.origin !== "email" && empl ? el("span", { class: "tag" }, empl === "משרת סטודנט" ? empl : "משרה " + empl) : null,
+      yearsTag(j.years),
+      j.hybrid ? el("span", { class: "tag" }, "היברידי") : null),
+    j.reasons.length ? el("div", { class: "why" }, j.reasons.join(" · ")) : null,
+    el("div", { class: "actions" },
+      el("button", { class: "btn primary", type: "button", onclick: () => openLink(j.url) }, "לפרטים והגשה"),
+      el("button", { class: "btn ghost", type: "button", "aria-pressed": String(done), onclick: () => {
+        done ? applied.delete(j.key) : applied.add(j.key); saveApplied(); renderJobs();
+      } }, done ? "✓ הגשתי" : "סמן שהגשתי")));
+}
+
+function renderJobs() {
+  if (!data) return;
+  chipRow("f-tier", "tier", TIERS);
+  chipRow("f-field", "field", data.fields.filter(([k]) => data.jobs.some((j) => j.field === k)));
+  toggleRow();
+  const shown = data.jobs.filter((j) => visible(j));
+  const view = document.getElementById("view-jobs");
+  const banner = !data.exists ? el("div", { class: "banner" },
+    el("p", {}, "👋 עוד אין לך פרופיל, אז המשרות מדורגות לפי ברירת מחדל: סטודנט, כל הארץ. שלח לבוט את קורות החיים כ־PDF, או הגדר תחומים ואזור."),
+    el("button", { class: "btn primary", type: "button", onclick: () => showTab("profile") }, "להגדרת הפרופיל")) : null;
+  view.replaceChildren(...[banner, el("div", { class: "count" }, `${shown.length} משרות`),
+    ...(shown.length ? shown.map(card) : [el("div", { class: "empty" }, "אין משרות שמתאימות לסינון הזה")])].filter(Boolean));
+}
+
+// ---- profile view ----
+function multiRow(id, key, options) {
+  document.getElementById(id).replaceChildren(...options.map(([value, label]) => {
+    const on = draft[key].includes(value);
+    return el("button", { class: "chip", type: "button", "aria-pressed": String(on), onclick: () => {
+      draft[key] = on ? draft[key].filter((v) => v !== value) : [...draft[key], value]; renderProfile();
+    } }, el("bdi", {}, label));
+  }));
+}
+
+function renderProfile() {
+  if (!draft) return;
+  multiRow("p-fields", "fields", data.fields.filter(([k]) => k !== "tech" && k !== "other"));
+  multiRow("p-regions", "regions", REGIONS);
+  multiRow("p-employment", "employment", EMPLOYMENT);
+  document.getElementById("p-years").replaceChildren(...YEARS.map(([n, label]) => el("button", {
+    class: "chip", type: "button", "aria-pressed": String(draft.max_years === n),
+    onclick: () => { draft.max_years = n; renderProfile(); },
+  }, label)));
+  document.getElementById("p-alerts").checked = !!draft.alerts;
+  const s = document.getElementById("cv-summary");
+  const bits = [draft.summary, draft.skills && draft.skills.length ? "כישורים: " + draft.skills.join(", ") : ""].filter(Boolean);
+  s.hidden = !bits.length; s.textContent = bits.join(" · ");
+}
+document.getElementById("p-alerts").addEventListener("change", (e) => { draft.alerts = e.target.checked; });
+
+document.getElementById("save").addEventListener("click", async (e) => {
+  const btn = e.currentTarget; btn.disabled = true;
+  try {
+    await api("/api/profile", { method: "POST", body: JSON.stringify({
+      fields: draft.fields, regions: draft.regions, employment: draft.employment, max_years: draft.max_years, alerts: draft.alerts,
+    }) });
+    await load(); toast("נשמר ✓ המשרות דורגו מחדש"); showTab("jobs");
+  } catch { toast("השמירה נכשלה, נסה שוב"); }
+  btn.disabled = false;
+});
+
+document.getElementById("delete").addEventListener("click", () => {
+  const doDelete = async () => {
+    try { await api("/api/delete", { method: "POST" }); await load(); toast("כל המידע שלך נמחק"); showTab("jobs"); }
+    catch { toast("המחיקה נכשלה, נסה שוב"); }
+  };
+  const q = "למחוק את הפרופיל וההעדפות שלך? אפשר להתחיל מחדש בכל רגע.";
+  if (tg && tg.showConfirm && tg.isVersionAtLeast && tg.isVersionAtLeast("6.2")) tg.showConfirm(q, (ok) => ok && doDelete());
+  else doDelete();
+});
+
+// ---- load ----
+async function load() {
+  data = await api("/api/me");
+  draft = JSON.parse(JSON.stringify(data.profile));
+  const d = new Date(data.generated_at);
+  document.getElementById("updated").textContent = "המשרות עודכנו " + d.toLocaleString("he-IL", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" });
+  renderJobs();
+}
+
+if (!initData) {
+  document.getElementById("view-jobs").replaceChildren(el("div", { class: "empty" }, "פתח את המסך מתוך הבוט בטלגרם, בכפתור \"משרות\"."));
+  document.getElementById("jobs-filters").hidden = true;
+} else {
+  load().then(loadAppliedCloud).catch(() => {
+    document.getElementById("view-jobs").replaceChildren(el("div", { class: "empty" }, "לא הצלחתי לטעון את המשרות. סגור ופתח שוב בעוד רגע."));
+  });
+}
+</script>
+</body>
+</html>

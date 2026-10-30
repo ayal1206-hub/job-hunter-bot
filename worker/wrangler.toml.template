@@ -1,0 +1,21 @@
+# Template: the deploy workflow fills in the KV namespace id and writes wrangler.toml.
+name = "jobbot"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+# Mini app page, bundled into the worker as text.
+rules = [{ type = "Text", globs = ["**/*.html"], fallthrough = true }]
+
+[[kv_namespaces]]
+binding = "USERS"
+id = "__KV_ID__"
+
+# Personal 🔥 alerts, every hour (the job list itself refreshes every 4 hours).
+[triggers]
+crons = ["50 * * * *"]
+
+[vars]
+JOBS_URL = "https://ayal1206-hub.github.io/job-hunter-bot/jobs.json"
+# Tried in order; a retired model falls through to the next one.
+GEMINI_MODELS = "gemini-flash-latest,gemini-3-flash-preview,gemini-3.1-flash-lite"

@@ -1,0 +1,72 @@
+name: Deploy bot server
+
+# Deploys worker/ to Cloudflare Workers and connects it to the Telegram bot.
+on:
+  push:
+    branches: [main]
+    paths: ["worker/**", ".github/workflows/worker.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worker
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Test
+        run: node --test
+
+      - name: Check secrets
+        run: |
+          missing=""
+          for s in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID TELEGRAM_BOT_TOKEN TELEGRAM_CHAT_ID GEMINI_API_KEY; do
+            [ -n "${!s}" ] || missing="$missing $s"
+          done
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secrets:$missing"
+            exit 1
+          fi
+
+      - name: Install wrangler
+        run: npm install --no-save --no-audit --no-fund wrangler@4
+
+      - name: Storage (KV)
+        run: node scripts/prepare.mjs kv
+
+      - name: Deploy
+        run: npx wrangler deploy 2>&1 | tee deploy.log
+
+      - name: Worker secrets
+        run: node scripts/prepare.mjs secrets | npx wrangler secret bulk
+
+      - name: Connect Telegram (webhook, menu button, commands)
+        run: |
+          URL=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1)
+          if [ -z "$URL" ]; then echo "::error::Could not find the workers.dev URL in the deploy output"; exit 1; fi
+          echo "Worker: $URL"
+          KEY=$(node scripts/prepare.mjs hook-secret)
+          echo "::add-mask::$KEY"
+          sleep 5
+          curl -fsS -X POST "$URL/setup" -H "x-setup-key: $KEY" | tee setup.json
+          grep -q '"ok":true' setup.json
+          echo "### Bot server is live: $URL/app" >> "$GITHUB_STEP_SUMMARY"
