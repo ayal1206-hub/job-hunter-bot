@@ -1,33 +1,6 @@
 {
- "generated_at": "2026-11-01T21:51:29+00:00",
+ "generated_at": "2026-11-01T21:55:00+00:00",
  "jobs": [
-  {
-   "key": "comeet:Exodigo:29.37D",
-   "source": "comeet",
-   "origin": "board",
-   "company": "Exodigo",
-   "title": "Student Tier 1 Support Specialist",
-   "location": "Tel Aviv, Israel (Remote)",
-   "region": "center",
-   "url": "https://www.comeet.com/jobs/exodigo/89.005/student-tier-1-support-specialist/29.37D",
-   "field": "support",
-   "field_label": "תמיכה / IT",
-   "level": "student",
-   "employment": "student",
-   "years": null,
-   "hybrid": true,
-   "degree": null,
-   "min_gpa": null,
-   "score": 7,
-   "tier": "hot",
-   "reasons": [
-    "משרת סטודנט",
-    "היברידי / מהבית"
-   ],
-   "cv": "tech",
-   "first_seen": "2026-10-28",
-   "owner_only": false
-  },
   {
    "key": "comeet:Global-e:BC.84D",
    "source": "comeet",
@@ -45,6 +18,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 6,
    "tier": "hot",
    "reasons": [
@@ -71,6 +46,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 6,
    "tier": "hot",
    "reasons": [
@@ -98,6 +75,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 6,
    "tier": "hot",
    "reasons": [
@@ -125,6 +104,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": 1,
+   "owner_hide": false,
    "score": 6,
    "tier": "hot",
    "reasons": [
@@ -151,6 +132,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 6,
    "tier": "hot",
    "reasons": [
@@ -162,29 +145,33 @@
    "owner_only": false
   },
   {
-   "key": "comeet:Samsung Israel:EF.07A",
+   "key": "comeet:Exodigo:29.37D",
    "source": "comeet",
    "origin": "board",
-   "company": "Samsung Israel",
-   "title": "Algorithm's Infrastructure Student",
-   "location": "Tel Aviv-Yafo, Samsung Israel R&D Center- SIRC",
+   "company": "Exodigo",
+   "title": "Student Tier 1 Support Specialist",
+   "location": "Tel Aviv, Israel (Remote)",
    "region": "center",
-   "url": "https://www.comeet.com/jobs/samsung/D4.005/algorithms-infrastructure-student/EF.07A",
-   "field": "devops",
-   "field_label": "DevOps / ענן",
+   "url": "https://www.comeet.com/jobs/exodigo/89.005/student-tier-1-support-specialist/29.37D",
+   "field": "support",
+   "field_label": "תמיכה / IT",
    "level": "student",
    "employment": "student",
    "years": null,
-   "hybrid": false,
+   "hybrid": true,
    "degree": null,
    "min_gpa": null,
-   "score": 5,
+   "years_left": 2,
+   "owner_hide": true,
+   "score": 3,
    "tier": "good",
    "reasons": [
-    "משרת סטודנט"
+    "משרת סטודנט",
+    "דורש עוד 2+ שנות לימוד",
+    "היברידי / מהבית"
    ],
    "cv": "tech",
-   "first_seen": "2026-11-01",
+   "first_seen": "2026-10-28",
    "owner_only": false
   },
   {
@@ -204,6 +191,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 2,
    "tier": "long",
    "reasons": [
@@ -232,6 +221,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 2,
    "tier": "long",
    "reasons": [
@@ -259,6 +250,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 2,
    "tier": "long",
    "reasons": [
@@ -267,6 +260,35 @@
    ],
    "cv": "tech",
    "first_seen": "2026-10-28",
+   "owner_only": false
+  },
+  {
+   "key": "comeet:Samsung Israel:EF.07A",
+   "source": "comeet",
+   "origin": "board",
+   "company": "Samsung Israel",
+   "title": "Algorithm's Infrastructure Student",
+   "location": "Tel Aviv-Yafo, Samsung Israel R&D Center- SIRC",
+   "region": "center",
+   "url": "https://www.comeet.com/jobs/samsung/D4.005/algorithms-infrastructure-student/EF.07A",
+   "field": "devops",
+   "field_label": "DevOps / ענן",
+   "level": "student",
+   "employment": "student",
+   "years": null,
+   "hybrid": false,
+   "degree": null,
+   "min_gpa": null,
+   "years_left": 2,
+   "owner_hide": true,
+   "score": 1,
+   "tier": "long",
+   "reasons": [
+    "משרת סטודנט",
+    "דורש עוד 2+ שנות לימוד"
+   ],
+   "cv": "tech",
+   "first_seen": "2026-11-01",
    "owner_only": false
   },
   {
@@ -286,6 +308,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -313,6 +337,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -340,6 +366,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -367,6 +395,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -394,6 +424,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -421,6 +453,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -448,6 +482,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -475,6 +511,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -502,6 +540,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -529,6 +569,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 1,
    "tier": "long",
    "reasons": [
@@ -555,6 +597,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -582,6 +626,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -608,6 +654,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -634,6 +682,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -660,6 +710,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -686,6 +738,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -712,6 +766,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -738,6 +794,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -764,6 +822,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -790,6 +850,8 @@
    "hybrid": true,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": 0,
    "tier": "long",
    "reasons": [
@@ -819,6 +881,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -847,6 +911,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -874,6 +940,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -902,6 +970,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -930,6 +1000,8 @@
    "hybrid": true,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -958,6 +1030,8 @@
    "hybrid": true,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -986,6 +1060,8 @@
    "hybrid": true,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -1014,6 +1090,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -1041,6 +1119,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -1068,6 +1148,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -1096,6 +1178,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -1123,6 +1207,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -2,
    "tier": "long",
    "reasons": [
@@ -1150,6 +1236,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1177,6 +1265,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1204,6 +1294,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1231,6 +1323,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1258,6 +1352,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1285,6 +1381,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1312,6 +1410,8 @@
    "hybrid": false,
    "degree": null,
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1339,6 +1439,8 @@
    "hybrid": true,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -3,
    "tier": "long",
    "reasons": [
@@ -1368,6 +1470,8 @@
    "hybrid": true,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -4,
    "tier": "long",
    "reasons": [
@@ -1397,6 +1501,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -4,
    "tier": "long",
    "reasons": [
@@ -1425,6 +1531,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -4,
    "tier": "long",
    "reasons": [
@@ -1453,6 +1561,8 @@
    "hybrid": true,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -5,
    "tier": "long",
    "reasons": [
@@ -1482,6 +1592,8 @@
    "hybrid": true,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -5,
    "tier": "long",
    "reasons": [
@@ -1511,6 +1623,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -5,
    "tier": "long",
    "reasons": [
@@ -1539,6 +1653,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -6,
    "tier": "long",
    "reasons": [
@@ -1567,6 +1683,8 @@
    "hybrid": false,
    "degree": "bsc_done",
    "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
    "score": -6,
    "tier": "long",
    "reasons": [

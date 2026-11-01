@@ -5,7 +5,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4832252101": {
   "years": 3,
@@ -13,7 +14,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4961284101": {
   "years": 2,
@@ -21,7 +23,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:96.61C": {
   "years": 3,
@@ -29,7 +32,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:8F.946": {
   "years": null,
@@ -37,7 +41,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:A6.31F": {
   "years": null,
@@ -45,7 +50,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:96.619": {
   "years": null,
@@ -53,7 +59,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:99.A1F": {
   "years": null,
@@ -61,7 +68,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:99.A1F-17.10C": {
   "years": null,
@@ -69,7 +77,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Global-e:F6.477": {
   "years": 5,
@@ -77,7 +86,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Global-e:BC.84D": {
   "years": null,
@@ -85,7 +95,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Claroty:3C.374": {
   "years": 4,
@@ -93,7 +104,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Exodigo:29.37D": {
   "years": null,
@@ -101,7 +113,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": 2,
+  "v": 5
  },
  "comeet:DRS RADA:0B.374": {
   "years": 3,
@@ -109,7 +122,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:63.053": {
   "years": null,
@@ -117,7 +131,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:A1.543": {
   "years": null,
@@ -125,7 +140,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:68.47E": {
   "years": 3,
@@ -133,7 +149,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:78.E65": {
   "years": null,
@@ -141,7 +158,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": 1,
+  "v": 5
  },
  "comeet:Kela:CF.E6B": {
   "years": 3,
@@ -149,7 +167,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Kela:81.A6C": {
   "years": 1,
@@ -157,7 +176,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Fetcherr:40.F62": {
   "years": 1,
@@ -165,7 +185,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:2D.375": {
   "years": 1,
@@ -173,7 +194,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:KPMG Israel:B6.477": {
   "years": null,
@@ -181,7 +203,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:73.856": {
   "years": null,
@@ -189,7 +212,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:75.475": {
   "years": 5,
@@ -197,7 +221,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Alma Lasers:60.378": {
   "years": null,
@@ -205,7 +230,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4252047101": {
   "years": 3,
@@ -213,7 +239,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4853323101": {
   "years": 4,
@@ -221,7 +248,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4352164101": {
   "years": 4,
@@ -229,7 +257,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4839355101": {
   "years": null,
@@ -237,7 +266,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4812341101": {
   "years": 2,
@@ -245,7 +275,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4895403101": {
   "years": 4,
@@ -253,7 +284,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Cato Networks:4845229101": {
   "years": 5,
@@ -261,7 +293,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:6897277": {
   "years": 2,
@@ -269,7 +302,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:7972320": {
   "years": null,
@@ -277,7 +311,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:8284137": {
   "years": 2,
@@ -285,7 +320,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:8239378": {
   "years": 4,
@@ -293,7 +329,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:6829705": {
   "years": 3,
@@ -301,7 +338,8 @@
   "hybrid": false,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:7938197": {
   "years": 5,
@@ -309,7 +347,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:8124606": {
   "years": 5,
@@ -317,7 +356,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Similarweb:8239121": {
   "years": 3,
@@ -325,7 +365,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Payoneer:8261034": {
   "years": 2,
@@ -333,7 +374,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Payoneer:8211074": {
   "years": 3,
@@ -341,7 +383,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Payoneer:8208199": {
   "years": 2,
@@ -349,7 +392,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Taboola:8081260": {
   "years": 4,
@@ -357,7 +401,8 @@
   "hybrid": true,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Taboola:8200807": {
   "years": null,
@@ -365,7 +410,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Riskified:8653104002": {
   "years": 2,
@@ -373,7 +419,8 @@
   "hybrid": true,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Riskified:8805509002": {
   "years": 4,
@@ -381,7 +428,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:AppsFlyer:8394076002": {
   "years": 3,
@@ -389,7 +437,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:AppsFlyer:8897823002": {
   "years": 3,
@@ -397,7 +446,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:AppsFlyer:8695882002": {
   "years": 3,
@@ -405,7 +455,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4692874006": {
   "years": 5,
@@ -413,7 +464,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4615162006": {
   "years": 4,
@@ -421,7 +473,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4615172006": {
   "years": 5,
@@ -429,7 +482,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4645081006": {
   "years": 2,
@@ -437,7 +491,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4422889006": {
   "years": 5,
@@ -445,7 +500,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4681239006": {
   "years": 5,
@@ -453,7 +509,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4650548006": {
   "years": 5,
@@ -461,7 +518,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4566780006": {
   "years": 6,
@@ -469,7 +527,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4670481006": {
   "years": 6,
@@ -477,7 +536,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Wiz:4707600006": {
   "years": 5,
@@ -485,7 +545,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Via:8875777002": {
   "years": 3,
@@ -493,7 +554,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Via:8627735002": {
   "years": 4,
@@ -501,7 +563,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "greenhouse:Via:8557879002": {
   "years": null,
@@ -509,7 +572,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:BF.546": {
   "years": null,
@@ -517,7 +581,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:5A.66C": {
   "years": 3,
@@ -525,7 +590,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:F8.921": {
   "years": null,
@@ -533,7 +599,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:F8.921-17.10C": {
   "years": null,
@@ -541,7 +608,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:91.475": {
   "years": null,
@@ -549,7 +617,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:A8.D05": {
   "years": null,
@@ -557,7 +626,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:A8.D05-17.10C": {
   "years": null,
@@ -565,7 +635,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:VAST Data:E3.E68": {
   "years": 5,
@@ -573,7 +644,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Global-e:10.379": {
   "years": 2,
@@ -581,7 +653,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Claroty:66.271": {
   "years": 5,
@@ -589,7 +662,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Claroty:58.479": {
   "years": 2,
@@ -597,7 +671,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Claroty:0A.374": {
   "years": 5,
@@ -605,7 +680,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Claroty:C2.47E": {
   "years": 6,
@@ -613,7 +689,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Exodigo:EF.273": {
   "years": 5,
@@ -621,7 +698,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Exodigo:75.478": {
   "years": 4,
@@ -629,7 +707,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:AllCloud:08.470": {
   "years": 1,
@@ -637,7 +716,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:AllCloud:92.476": {
   "years": 3,
@@ -645,7 +725,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:AllCloud:09.E62": {
   "years": null,
@@ -653,7 +734,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:AllCloud:45.273": {
   "years": null,
@@ -661,7 +743,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:DRS RADA:1E.864": {
   "years": 3,
@@ -669,7 +752,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:DRS RADA:50.463": {
   "years": 4,
@@ -677,7 +761,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:DRS RADA:C6.472": {
   "years": 3,
@@ -685,7 +770,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:DRS RADA:A2.478": {
   "years": null,
@@ -693,7 +779,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:DRS RADA:0B.37F": {
   "years": 5,
@@ -701,7 +788,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:5C.375": {
   "years": null,
@@ -709,7 +797,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:BA.04A": {
   "years": 3,
@@ -717,7 +806,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:14.078": {
   "years": null,
@@ -725,7 +815,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:93.273": {
   "years": 3,
@@ -733,7 +824,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:CA.042": {
   "years": 3,
@@ -741,7 +833,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:5C.D67": {
   "years": 3,
@@ -749,7 +842,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Upwind:C6.E69": {
   "years": 5,
@@ -757,7 +851,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Kela:53.764": {
   "years": null,
@@ -765,7 +860,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Kela:2D.37A": {
   "years": 3,
@@ -773,7 +869,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Kela:A0.866": {
   "years": null,
@@ -781,7 +878,8 @@
   "hybrid": true,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Dream:37.640": {
   "years": 5,
@@ -789,7 +887,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Dream:F6.476": {
   "years": 5,
@@ -797,7 +896,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Dream:72.96B": {
   "years": 5,
@@ -805,7 +905,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Fetcherr:A5.D67": {
   "years": 2,
@@ -813,7 +914,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Fetcherr:B5.079": {
   "years": null,
@@ -821,7 +923,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Fetcherr:DB.D6C": {
   "years": 5,
@@ -829,7 +932,8 @@
   "hybrid": true,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Fetcherr:DB.D6C-9D.50A": {
   "years": 5,
@@ -837,7 +941,8 @@
   "hybrid": true,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Fetcherr:F6.47E": {
   "years": 5,
@@ -845,7 +950,8 @@
   "hybrid": true,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:B6.272": {
   "years": null,
@@ -853,7 +959,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:72.279": {
   "years": null,
@@ -861,7 +968,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:97.76F": {
   "years": 5,
@@ -869,7 +977,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:DE.27A": {
   "years": 2,
@@ -877,7 +986,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:A4.47B": {
   "years": 3,
@@ -885,7 +995,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:D9.E51": {
   "years": null,
@@ -893,7 +1004,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:C4.471": {
   "years": 2,
@@ -901,7 +1013,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:13.B63": {
   "years": 5,
@@ -909,7 +1022,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:13.B66": {
   "years": 5,
@@ -917,7 +1031,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:63.73F": {
   "years": 5,
@@ -925,7 +1040,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:5B.E57": {
   "years": 8,
@@ -933,7 +1049,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:F9.27C": {
   "years": 6,
@@ -941,7 +1058,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:A4.271": {
   "years": 5,
@@ -949,7 +1067,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:42.365": {
   "years": 2,
@@ -957,7 +1076,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:42.367": {
   "years": 5,
@@ -965,7 +1085,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:B8.E6E": {
   "years": 5,
@@ -973,7 +1094,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:BE.959": {
   "years": 8,
@@ -981,7 +1103,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:FB.D63": {
   "years": null,
@@ -989,7 +1112,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:FB.D65": {
   "years": 4,
@@ -997,7 +1121,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:F6.376": {
   "years": 5,
@@ -1005,7 +1130,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:DF.367": {
   "years": null,
@@ -1013,7 +1139,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:94.27F": {
   "years": 5,
@@ -1021,7 +1148,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Team8:60.37B": {
   "years": null,
@@ -1029,7 +1157,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:KPMG Israel:9D.64F": {
   "years": 3,
@@ -1037,7 +1166,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:KPMG Israel:8C.A46": {
   "years": null,
@@ -1045,7 +1175,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:10.F6C": {
   "years": 5,
@@ -1053,7 +1184,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:10.F6C-92.301": {
   "years": 5,
@@ -1061,7 +1193,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:10.F6C-92.303": {
   "years": 5,
@@ -1069,7 +1202,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:10.F6C-E8.408": {
   "years": 5,
@@ -1077,7 +1211,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:10.F6C-92.309": {
   "years": 5,
@@ -1085,7 +1220,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:10.F6C-92.30A": {
   "years": 5,
@@ -1093,7 +1229,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:05.F6E": {
   "years": 5,
@@ -1101,7 +1238,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:81.551": {
   "years": 4,
@@ -1109,7 +1247,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:63.D63": {
   "years": 3,
@@ -1117,7 +1256,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:4D.378": {
   "years": 3,
@@ -1125,7 +1265,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Deloitte Israel:FE.B50": {
   "years": 3,
@@ -1133,7 +1274,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Dream:C9.E64": {
   "years": 3,
@@ -1141,7 +1283,8 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Dream:A9.66C": {
   "years": 5,
@@ -1149,7 +1292,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:1B.061": {
   "years": 3,
@@ -1157,7 +1301,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:CommIT:C5.F62": {
   "years": 3,
@@ -1165,7 +1310,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Samsung Israel:81.470": {
   "years": null,
@@ -1173,7 +1319,8 @@
   "hybrid": false,
   "degree": "msc",
   "min_gpa": 85,
-  "v": 4
+  "years_left": 1.5,
+  "v": 5
  },
  "comeet:Samsung Israel:EF.07A": {
   "years": null,
@@ -1181,7 +1328,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": 2,
+  "v": 5
  },
  "comeet:Samsung Israel:AB.D6B": {
   "years": 2,
@@ -1189,7 +1337,8 @@
   "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Samsung Israel:8D.272": {
   "years": 3,
@@ -1197,7 +1346,8 @@
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Samsung Israel:E2.372": {
   "years": null,
@@ -1205,7 +1355,8 @@
   "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Samsung Israel:A3.E6B": {
   "years": null,
@@ -1213,7 +1364,8 @@
   "hybrid": false,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  },
  "comeet:Samsung Israel:D0.479": {
   "years": 5,
@@ -1221,6 +1373,7 @@
   "hybrid": false,
   "degree": "msc",
   "min_gpa": null,
-  "v": 4
+  "years_left": null,
+  "v": 5
  }
 }
