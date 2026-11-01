@@ -19,8 +19,8 @@ SAMPLE_HTML = """
 def test_extract_jobs_keeps_only_job_links():
     jobs = ea.extract_jobs(SAMPLE_HTML, "alljobs.co.il", limit=10)
     assert jobs == [
-        ("מאבטח/ת לובי - באר שבע", "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=111"),
-        ("מציל/ה לבריכה - אשקלון", "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=222"),
+        ("מאבטח/ת לובי - באר שבע", "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=111", "", ""),
+        ("מציל/ה לבריכה - אשקלון", "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=222", "", ""),
     ]
 
 
@@ -103,3 +103,30 @@ def test_account_emails_are_not_job_alerts():
     assert not ea.is_job_alert("אימות כתובת המייל שלך")
     assert ea.is_job_alert("5 משרות חדשות שמתאימות לך")
     assert ea.is_job_alert("2 משרות חדשות עבורך")
+
+
+def test_linkedin_alert_digest_gives_title_company_location_and_clean_url():
+    from pathlib import Path
+    html_body = (Path(__file__).parent / "fixtures" / "linkedin_alert.html").read_text()
+    jobs = ea.extract_jobs(html_body, "jobalerts-noreply@linkedin.com", 10)
+    assert jobs == [
+        ("QA Automation Student", "https://www.linkedin.com/jobs/view/1001/", "Acme Ltd", "Be'er Sheva (On-site)"),
+        ("Senior Backend Engineer", "https://www.linkedin.com/jobs/view/1002/", "Big Co", "Tel Aviv-Yafo"),
+        ("Junior IT Support", "https://www.linkedin.com/jobs/view/1003/", "Help Inc", "South District, Israel (Hybrid)"),
+    ]
+
+
+def test_linkedin_jobs_enter_the_pool_with_region_and_level():
+    from pathlib import Path
+    import yaml
+    from jobbot.pipeline import email_entries
+    cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
+    html_body = (Path(__file__).parent / "fixtures" / "linkedin_alert.html").read_text()
+    alert = ea.AlertEmail("<l>", "jobalerts-noreply@linkedin.com", "s",
+                          ea.extract_jobs(html_body, "jobalerts-noreply@linkedin.com", 10))
+    entries = {e["title"]: e for e in email_entries([alert], cfg, "2026-11-01")}
+    assert "Senior Backend Engineer" not in entries          # seniority filter applies to emails too
+    qa = entries["QA Automation Student"]
+    assert (qa["company"], qa["region"], qa["level"], qa["field"], qa["source"]) == ("Acme Ltd", "south", "student", "qa", "linkedin")
+    it = entries["Junior IT Support"]
+    assert (it["region"], it["level"], it["field"]) == ("south", "junior", "support")

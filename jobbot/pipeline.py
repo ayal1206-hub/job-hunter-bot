@@ -64,14 +64,19 @@ def board_entries(jobs: list[Job], cfg: dict, facts_cache: dict, today: str,
 def email_entries(alerts: list[AlertEmail], cfg: dict, today: str) -> list[dict]:
     entries = []
     for alert in alerts:
-        for title, url in alert.jobs:
+        source = "linkedin" if "linkedin" in alert.sender else alert.sender.split(".")[0]
+        for job in alert.jobs:
+            title, url, company, location = (*job, "", "")[:4]
+            low = title.lower()
+            if _any(low, cfg["exclude_keywords"]):
+                continue   # senior / lead / manager roles from alert emails too
             field, label = _field_of_title(title, cfg)
-            level = "student" if _any(title.lower(), cfg["student_keywords"]) else "possible"
+            level = ("student" if _any(low, cfg["student_keywords"])
+                     else "junior" if _any(low, cfg["junior_keywords"]) else "possible")
             facts = extract_facts(title, "", level)
             match = Match(track=field, track_label=label, level=level)
-            region = region_of(title, cfg) or "any"
-            source = alert.sender.split(".")[0]
-            entries.append(_entry(f"email:{url}", source, source, title, "", region, url,
+            region = region_of(location, cfg) or region_of(title, cfg) or "any"
+            entries.append(_entry(f"email:{url}", source, company or source, title, location, region, url,
                                   field, label, match, facts, today, "email"))
     return entries
 

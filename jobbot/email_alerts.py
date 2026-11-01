@@ -12,6 +12,7 @@ import email
 import email.message
 import html
 import imaplib
+import re
 from dataclasses import dataclass, field
 from datetime import date, timedelta
 from email.header import decode_header, make_header
@@ -46,7 +47,8 @@ class AlertEmail:
     message_id: str
     sender: str
     subject: str
-    jobs: list[tuple[str, str]] = field(default_factory=list)  # (title, url)
+    # (title, url, company, location); company/location are "" when the email doesn't say.
+    jobs: list[tuple[str, str, str, str]] = field(default_factory=list)
 
 
 class _LinkCollector(HTMLParser):
@@ -72,7 +74,57 @@ class _LinkCollector(HTMLParser):
             self._href = None
 
 
-def extract_jobs(html_body: str, sender_domain: str, limit: int) -> list[tuple[str, str]]:
+class _LinkedInCollector(HTMLParser):
+    """LinkedIn job-alert digests: each job is a link to /jobs/view/<id>/ whose text is the
+    title, followed by a <p> with "Company · Location"."""
+
+    def __init__(self):
+        super().__init__()
+        self.jobs: dict[str, list[str]] = {}   # job id -> [title, company, location]
+        self._in_title: str | None = None
+        self._title_text: list[str] = []
+        self._await_meta: str | None = None
+        self._in_p = False
+        self._p_text: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            m = re.search(r"/jobs/view/(\d+)", dict(attrs).get("href") or "")
+            self._in_title = m.group(1) if m else None
+            self._title_text = []
+        elif tag == "p" and self._await_meta:
+            self._in_p, self._p_text = True, []
+
+    def handle_data(self, data):
+        if self._in_title:
+            self._title_text.append(data)
+        if self._in_p:
+            self._p_text.append(data)
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self._in_title:
+            title = " ".join(" ".join(self._title_text).split())
+            if title and self._in_title not in self.jobs:   # the image link before it has no text
+                self.jobs[self._in_title] = [title, "", ""]
+                self._await_meta = self._in_title
+            self._in_title = None
+        elif tag == "p" and self._in_p:
+            meta = " ".join(" ".join(self._p_text).split())
+            company, _, location = meta.partition(" · ")
+            self.jobs[self._await_meta][1:] = [company.strip(), location.strip()]
+            self._in_p, self._await_meta = False, None
+
+
+def extract_linkedin_jobs(html_body: str, limit: int) -> list[tuple[str, str, str, str]]:
+    parser = _LinkedInCollector()
+    parser.feed(html_body)
+    return [(title, f"https://www.linkedin.com/jobs/view/{job_id}/", company, location)
+            for job_id, (title, company, location) in list(parser.jobs.items())[:limit]]
+
+
+def extract_jobs(html_body: str, sender_domain: str, limit: int) -> list[tuple[str, str, str, str]]:
+    if "linkedin.com" in sender_domain:
+        return extract_linkedin_jobs(html_body, limit)
     """Return (title, url) for links that look like job postings."""
     parser = _LinkCollector()
     parser.feed(html_body)
@@ -87,7 +139,7 @@ def extract_jobs(html_body: str, sender_domain: str, limit: int) -> list[tuple[s
         if url in seen_urls:
             continue
         seen_urls.add(url)
-        jobs.append((text, url))
+        jobs.append((text, url, "", ""))
         if len(jobs) >= limit:
             break
     return jobs
@@ -143,7 +195,7 @@ def is_tech(title: str, cfg: dict | None) -> bool:
 def format_alert(alert: AlertEmail, cfg: dict | None = None) -> str:
     lines = [f"📬 <b>{html.escape(alert.sender)}</b>: {html.escape(alert.subject)}"]
     tech_flags = []
-    for title, url in alert.jobs:
+    for title, url, *_ in alert.jobs:
         tech = is_tech(title, cfg)
         tech_flags.append(tech)
         icon = "💻" if tech else "•"

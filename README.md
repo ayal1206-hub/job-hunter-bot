@@ -23,7 +23,7 @@ GitHub Actions (every 4 hours)
         └──► 🔥 new top matches only  ──►  instant Telegram alert
 ```
 
-- **Sources:** public JSON APIs of the applicant-tracking systems most Israeli tech companies use, plus the official alert emails of job sites that forbid scraping (AllJobs, Drushim), read from Gmail in read-only mode. That's how security, lifeguard and other non-tech jobs arrive.
+- **Sources:** public JSON APIs of the applicant-tracking systems most Israeli tech companies use, plus the official alert emails of job sites that forbid scraping (AllJobs, Drushim, LinkedIn Job Alerts — parsed for title, company and location), read from Gmail in read-only mode. That's how security, lifeguard and other non-tech jobs arrive.
 - **Filtering:** a job is kept when it's in Israel and its title is student-level, junior QA/support, or a QA/support role with no seniority stated. Senior/lead/expert titles are dropped. Keywords work in English and Hebrew, with whole-word matching.
 - **Scoring:** `scoring.py` reads the description and adds or removes points for level, required years of experience (English and Hebrew phrasing), part-time, hybrid, region (south is closest to me) and role. Every score comes with its reasons, shown in the app. Tiers: 🔥 apply now, 👍 worth a look, 🤔 long shot.
 - **App:** `docs/index.html` is a Telegram Mini App with no backend: it loads `jobs.json`, filters on the device, and remembers which jobs I applied to via Telegram CloudStorage.

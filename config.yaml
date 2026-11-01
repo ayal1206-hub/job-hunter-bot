@@ -7,12 +7,12 @@
 regions:
   south:
     label: "דרום"
-    places: [beer sheva, be'er sheva, beersheba, beer-sheva, ashkelon, ashdod, sderot, netivot, kiryat gat,
+    places: [south district, southern district, beer sheva, be'er sheva, beersheba, beer-sheva, ashkelon, ashdod, sderot, netivot, kiryat gat,
              ofakim, dimona, arad, eilat, yeruham, kiryat malachi, gan yavne, yavne,
              באר שבע, אשקלון, אשדוד, שדרות, נתיבות, קרית גת, קריית גת, אופקים, דימונה, ערד, אילת, ירוחם, יבנה]
   center:
     label: "מרכז"
-    places: [tel aviv, tel-aviv, gush dan, ramat gan, givatayim, herzliya, petah tikva, petach tikva, holon,
+    places: [central district, center district, jerusalem district, tel aviv, tel-aviv, gush dan, ramat gan, givatayim, herzliya, petah tikva, petach tikva, holon,
              bnei brak, bat yam, rishon, rehovot, ness ziona, nes ziona, raanana, ra'anana, kfar saba,
              hod hasharon, netanya, modiin, modi'in, lod, ramla, rosh haayin, rosh ha'ayin, yehud, airport,
              or yehuda, kiryat ono, jerusalem, beit shemesh, shoham, be'er ya'akov,
@@ -21,7 +21,7 @@ regions:
              קרית אונו, ירושלים, בית שמש, שוהם, באר יעקב]
   north:
     label: "צפון"
-    places: [haifa, yokneam, yoqneam, nazareth, karmiel, tiberias, afula, nahariya, akko, acre, caesarea,
+    places: [north district, northern district, haifa district, haifa, yokneam, yoqneam, nazareth, karmiel, tiberias, afula, nahariya, akko, acre, caesarea,
              hadera, migdal haemek, kiryat shmona, zichron, matam,
              חיפה, יקנעם, נצרת, כרמיאל, טבריה, עפולה, נהריה, עכו, קיסריה, חדרה, מגדל העמק, קרית שמונה, זכרון]
 
@@ -52,7 +52,7 @@ tracks:
   tech:
     label: "Tech (other)"
     # Broad tech words. Not in junior_tracks/possible_tracks, so only student positions use it.
-    keywords: [engineer, engineering, security, monitoring, network, it, research, ai, ml, הנדסה]
+    keywords: [engineer, engineering, hardware, chip, electrical, electronics, vlsi, asic, fpga, security, monitoring, network, it, research, ai, ml, הנדסה, חומרה]
 
 # Fields used only to label jobs that arrive via alert emails (no seniority filter).
 general_fields:
@@ -93,7 +93,8 @@ python_alerts: true
 # via the GMAIL_ADDRESS + GMAIL_APP_PASSWORD secrets; skipped when they're missing.
 email_alerts:
   enabled: true
-  senders: [alljobs.co.il, drushim.co.il, jobmaster.co.il]
+  # LinkedIn: create Job Alerts on linkedin.com/jobs (they arrive from jobalerts-noreply@linkedin.com).
+  senders: [alljobs.co.il, drushim.co.il, jobmaster.co.il, jobalerts-noreply@linkedin.com]
   lookback_days: 3
   max_jobs_per_email: 10
 
