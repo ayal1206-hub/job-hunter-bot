@@ -75,6 +75,25 @@ def fetch_lever(company: dict) -> list[Job]:
 DEBUG_DIR = None  # set by check mode to save pages that couldn't be parsed
 
 
+def _comeet_url(company: dict, item: dict) -> str:
+    """A link to this specific position.
+
+    Some companies set url_active_page to their general careers page (one link for every
+    job), so it is only used when it points at this position; otherwise Comeet's own page
+    for the position is used.
+    """
+    uid = str(item.get("uid", ""))
+    active = item.get("url_active_page") or ""
+    hosted = item.get("url_comeet_hosted_page") or ""
+    if active and uid and (uid in active or uid.replace(".", "-").lower() in active.lower()):
+        return active
+    if hosted:
+        return hosted
+    if company.get("slug") and company.get("uid") and uid:
+        return f"https://www.comeet.com/jobs/{company['slug']}/{company['uid']}/position/{uid}"
+    return active
+
+
 def _comeet_jobs(company: dict, items: list) -> list[Job]:
     jobs = []
     for item in items:
@@ -91,7 +110,7 @@ def _comeet_jobs(company: dict, items: list) -> list[Job]:
             job_id=str(item.get("uid", "")),
             title=(item.get("name") or "").strip(),
             location=location or "",
-            url=item.get("url_active_page") or item.get("url_comeet_hosted_page") or "",
+            url=_comeet_url(company, item),
             description=" ".join(
                 str(d.get("value", "")) for d in (item.get("details") or []) if isinstance(d, dict)),
         ))

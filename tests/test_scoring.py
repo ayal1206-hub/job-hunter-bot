@@ -121,3 +121,18 @@ def test_email_jobs_are_owner_only_and_board_jobs_are_shared():
     assert email_entries([alert], CFG, "2026-10-30")[0]["owner_only"] is True
     jobs = [Job("comeet", "Acme", "1", "QA Student", "Tel Aviv", "https://a/1", description="x")]
     assert board_entries(jobs, CFG, {}, "2026-10-30", fetch=lambda u: "")[0]["owner_only"] is False
+
+
+
+def test_comeet_links_point_to_the_position_not_the_careers_page():
+    from jobbot.sources import _comeet_url
+    co = {"name": "Exodigo", "slug": "exodigo", "uid": "89.005"}
+    generic = {"uid": "75.478", "url_active_page": "https://www.exodigo.com/careers",
+               "url_comeet_hosted_page": "https://www.comeet.com/jobs/exodigo/89.005/student/75.478"}
+    assert _comeet_url(co, generic) == "https://www.comeet.com/jobs/exodigo/89.005/student/75.478"
+    specific = {"uid": "78.E65", "url_active_page": "https://www.upwind.io/careers/co/tel-aviv/78.E65/x/all",
+                "url_comeet_hosted_page": "https://www.comeet.com/jobs/upwind/49.004/x/78.E65"}
+    assert _comeet_url(co, specific) == specific["url_active_page"]
+    deloitte = {"uid": "10.F6C", "url_active_page": "https://careers.deloitte.co.il/position/10-f6c-en/"}
+    assert _comeet_url(co, deloitte) == deloitte["url_active_page"]
+    assert _comeet_url(co, {"uid": "AB.1"}) == "https://www.comeet.com/jobs/exodigo/89.005/position/AB.1"
