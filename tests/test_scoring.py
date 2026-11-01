@@ -208,3 +208,13 @@ def test_jobs_nobody_can_apply_to_are_dropped_from_the_pool():
             mk("Algorithm's Infrastructure Student", "B.Sc. student in Computer Science with 2+ years left")]
     titles = [e["title"] for e in board_entries(jobs, cfg, {}, "2026-11-01", fetch=lambda u: "")]
     assert titles == ["Algorithm's Infrastructure Student"]
+
+
+def test_degree_holders_only():
+    from jobbot.scoring import required_degree
+    assert required_degree("What are we looking for? M.Sc. / Ph.D. in Electrical Engineering, Computer Science") == "msc"
+    assert required_degree("BSc in Electrical Engineering or Computer Engineering from leading university.") == "bsc_done"
+    assert required_degree("B.Sc. student in Computer Science with 2+ years left") is None
+    assert required_degree("B.Sc. in Computer Science. M.Sc. or Ph.D. in a relevant field - advantage") == "bsc_done"
+    assert required_degree("תואר ראשון במדעי המחשב - חובה") == "bsc_done"
+    assert required_degree("סטודנט/ית לתואר ראשון במדעי המחשב") is None

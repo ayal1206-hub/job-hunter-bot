@@ -96,3 +96,9 @@ test("scoreAll hides jobs the user can't apply to", () => {
   assert.deepEqual(scoreAll(jobs, { gpa: 78, max_years: 1 }).map((j) => j.key), ["ok"]);
   assert.deepEqual(scoreAll(jobs, { gpa: 90, max_years: 1 }).map((j) => j.key).sort(), ["gpa", "ok"]);
 });
+
+test("students don't see jobs that need a finished degree", () => {
+  const j = { key: "d", level: "junior", employment: "full", region: "center", field: "dev", years: null, degree: "bsc_done" };
+  assert.equal(scoreAll([j], { level: "student" }).length, 0);
+  assert.equal(scoreAll([j], { level: "junior" }).length, 1);
+});

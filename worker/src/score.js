@@ -59,6 +59,7 @@ export function scoreJob(job, profile = DEFAULT_PROFILE) {
   }
 
   if (job.degree === "msc" && p.degree !== "msc") { s -= 4; reasons.push("רק לסטודנטים לתואר שני"); }
+  if (job.degree === "bsc_done" && p.level === "student") { s -= 3; reasons.push("דורש תואר גמור"); }
   if (job.min_gpa) {
     if (!p.gpa) { s -= 1; reasons.push(`דורש ממוצע ${job.min_gpa}+`); }
     else if (p.gpa < job.min_gpa) { s -= 3; reasons.push(`דורש ממוצע ${job.min_gpa}+ (שלך ${p.gpa})`); }
@@ -87,6 +88,7 @@ export function scoreJob(job, profile = DEFAULT_PROFILE) {
 export function excluded(job, profile) {
   const p = { ...DEFAULT_PROFILE, ...profile };
   if (job.degree === "msc" && p.degree !== "msc") return "masters";
+  if (job.degree === "bsc_done" && p.level === "student") return "degree";
   if (job.years != null && job.years > p.max_years + 1) return "years";
   if (job.min_gpa && p.gpa && p.gpa < job.min_gpa) return "gpa";
   return null;

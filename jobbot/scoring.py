@@ -32,12 +32,20 @@ _HYBRID = re.compile(r"hybrid|remote|work from home|היברידי|מהבית|ע
 _MASTERS = re.compile(
     r"\b(?:m\.?\s?sc|m\.?\s?s|m\.?\s?a|master'?s?|ph\.?\s?d)\.?\s+(?:degree\s+)?(?:student|candidate)|"
     r"(?<!under)graduate students? only|תואר שני|סטודנט(?:ית|ים)? ל?מאסטר", re.I)
+# Holding a Master's/PhD (not only studying for one): "M.Sc. / Ph.D. in EE", "Master's degree in CS"
+_MASTERS_DEGREE = re.compile(
+    r"\b(?:m\.?\s?sc|ph\.?\s?d|master'?s?)\.?\s*(?:(?:/|or)\s*(?:m\.?\s?sc|ph\.?\s?d)\.?\s*)?(?:degree\s+)?in\b", re.I)
+# A finished bachelor's degree: "BSc in Electrical Engineering", "תואר ראשון במדעי המחשב"
+_BACHELOR_DONE = re.compile(
+    r"\b(?:b\.?\s?sc|b\.?\s?a|bachelor'?s?)\.?\s*(?:degree\s+)?(?:in|from)\b|"
+    r"(?<!סטודנט ל)(?<!סטודנטית ל)תואר ראשון ב", re.I)
+_STUDYING = re.compile(r"student|studying|undergrad|final year|סטודנט|לומד|לומדת|במהלך התואר", re.I)
 _BACHELORS = re.compile(r"\bb\.?\s?sc|\bb\.?\s?a\b|bachelor|undergraduate|תואר ראשון", re.I)
 _GPA = re.compile(
     r"(?:gpa|grade point average|average grade|grades? average|ממוצע(?: ציונים)?)\s*(?:of\s*|:\s*)?"
     r"(?:above\s*|over\s*|at least\s*|of at least\s*|מעל\s*|לפחות\s*|של\s*)?(\d{2})|"
     r"(\d{2})\s*\+?\s*(?:gpa|average)", re.I)
-FACTS_VERSION = 3   # bump when extract_facts learns something new, so cached facts are re-read
+FACTS_VERSION = 4   # bump when extract_facts learns something new, so cached facts are re-read
 
 
 @dataclass
@@ -68,7 +76,13 @@ def required_years(text: str) -> int | None:
 
 
 def required_degree(text: str) -> str | None:
-    return "msc" if _MASTERS.search(text) and not _BACHELORS.search(text) else None
+    """'msc': only for Master's/PhD students or holders. 'bsc_done': needs a finished
+    bachelor's (fine for graduates, not for students). None: open to students."""
+    if (_MASTERS.search(text) or _MASTERS_DEGREE.search(text)) and not _BACHELORS.search(text):
+        return "msc"
+    if _BACHELOR_DONE.search(text) and not _STUDYING.search(text):
+        return "bsc_done"
+    return None
 
 
 def required_gpa(text: str) -> int | None:
@@ -108,6 +122,8 @@ def score(match: Match, facts: Facts, region: str) -> tuple[int, str, list[str]]
 
     if facts.degree == "msc":
         s -= 4; reasons.append("רק לסטודנטים לתואר שני")
+    elif facts.degree == "bsc_done":
+        s -= 3; reasons.append("דורש תואר גמור")
     if facts.min_gpa:
         s -= 2; reasons.append(f"דורש ממוצע {facts.min_gpa}+")
 
