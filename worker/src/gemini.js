@@ -15,6 +15,8 @@ const SCHEMA = {
     regions: { type: "ARRAY", items: { type: "STRING", enum: ["south", "center", "north"] } },
     employment: { type: "ARRAY", items: { type: "STRING", enum: ["student", "part", "full"] } },
     skills: { type: "ARRAY", items: { type: "STRING" } },
+    degree: { type: "STRING", enum: ["bsc", "msc", "none"] },
+    gpa: { type: "NUMBER" },
     summary_he: { type: "STRING" },
   },
   required: ["fields", "level", "years_experience", "regions", "employment", "skills", "summary_he"],
@@ -29,6 +31,8 @@ Return JSON only, following the schema:
 - regions: where in Israel they can work, from the city they live or study in: south (Be'er Sheva, Ashkelon, Ashdod, Sderot...),
   center (Tel Aviv area, Jerusalem, Petah Tikva, Rishon...), north (Haifa, Yokneam, Galilee...). Include neighbouring regions only if obvious.
 - employment: if a student, ["student", "part"]; otherwise what fits.
+- degree: the degree they are studying for or hold: "bsc" (bachelor's / practical engineer), "msc" (master's or PhD), "none".
+- gpa: their grade average on a 0-100 scale if the CV states it (convert 4.0 scales x25), else 0.
 - skills: up to 8 technical skills (languages, tools).
 - summary_he: one short Hebrew sentence describing the profile, WITHOUT name, phone, email, address or ID number.
 Never copy personal identifiers into any field.`;
@@ -96,6 +100,8 @@ export function toPreferences(r) {
     // What the user can apply to: their own years, plus a year of stretch.
     max_years: Math.min(10, years + 1),
     level: ["student", "junior", "experienced"].includes(r.level) ? r.level : "student",
+    degree: ["bsc", "msc"].includes(r.degree) ? r.degree : null,
+    gpa: Number(r.gpa) >= 50 && Number(r.gpa) <= 100 ? Math.round(Number(r.gpa)) : null,
     skills: Array.isArray(r.skills) ? r.skills.slice(0, 8).map(String) : [],
     summary: typeof r.summary_he === "string" ? redact(r.summary_he).slice(0, 300) : "",
   };

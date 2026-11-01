@@ -71,3 +71,20 @@ test("alert modes: validated, and old on/off profiles still work", () => {
   assert.equal(alertMode({ alerts: false }), "off");
   assert.equal(alertMode({}), "hot");
 });
+
+test("Master's-only and GPA requirements lower the score", () => {
+  const job = { level: "student", years: null, employment: "student", hybrid: false, region: "center",
+                field: "dev", degree: "msc", min_gpa: 85 };
+  const low = scoreJob(job, { gpa: 78 });
+  assert.equal(low.tier, "long");
+  assert.ok(low.reasons.includes("רק לסטודנטים לתואר שני"));
+  assert.ok(low.reasons.includes("דורש ממוצע 85+ (שלך 78)"));
+  const ok = scoreJob({ ...job, degree: null }, { gpa: 90 });
+  assert.ok(ok.reasons.includes("ממוצע 85+ ✓"));
+  assert.ok(ok.score > low.score);
+});
+
+test("cleanProfile keeps a valid GPA and degree", () => {
+  assert.deepEqual(cleanProfile({ gpa: 78.4, degree: "bsc" }), { gpa: 78, degree: "bsc" });
+  assert.deepEqual(cleanProfile({ gpa: 4, degree: "x" }), { gpa: null, degree: null });
+});

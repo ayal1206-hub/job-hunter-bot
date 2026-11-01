@@ -63,6 +63,7 @@ export function describeProfile(p) {
     `📈 <b>ניסיון שאפשר לדרוש ממך:</b> עד ${p.max_years} ${p.max_years === 1 ? "שנה" : "שנים"}`,
     `🔔 <b>התראות:</b> ${ALERT_LABELS[alertMode(p)]}`,
   ];
+  if (p.gpa) lines.push(`🎓 <b>ממוצע:</b> ${p.gpa} (משרות שדורשות יותר יורדות בדירוג)`);
   if (p.skills && p.skills.length) lines.push(`🛠 <b>כישורים מהקו"ח:</b> ${esc(p.skills.join(", "))}`);
   return lines.join("\n");
 }

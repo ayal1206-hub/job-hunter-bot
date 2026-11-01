@@ -29,6 +29,15 @@ _PART_TIME = re.compile(r"part[\s-]?time|משרה חלקית|חלקית|\d{2}\s*
 _STUDENT_JOB = re.compile(r"student position|student job|for students|משרת סטודנט|לסטודנטים|סטודנט", re.I)
 _FULL_TIME = re.compile(r"full[\s-]?time|משרה מלאה", re.I)
 _HYBRID = re.compile(r"hybrid|remote|work from home|היברידי|מהבית|עבודה מרחוק", re.I)
+_MASTERS = re.compile(
+    r"\b(?:m\.?\s?sc|m\.?\s?s|m\.?\s?a|master'?s?|ph\.?\s?d)\.?\s+(?:degree\s+)?(?:student|candidate)|"
+    r"(?<!under)graduate students? only|תואר שני|סטודנט(?:ית|ים)? ל?מאסטר", re.I)
+_BACHELORS = re.compile(r"\bb\.?\s?sc|\bb\.?\s?a\b|bachelor|undergraduate|תואר ראשון", re.I)
+_GPA = re.compile(
+    r"(?:gpa|grade point average|average grade|grades? average|ממוצע(?: ציונים)?)\s*(?:of\s*|:\s*)?"
+    r"(?:above\s*|over\s*|at least\s*|of at least\s*|מעל\s*|לפחות\s*|של\s*)?(\d{2})|"
+    r"(\d{2})\s*\+?\s*(?:gpa|average)", re.I)
+FACTS_VERSION = 3   # bump when extract_facts learns something new, so cached facts are re-read
 
 
 @dataclass
@@ -36,11 +45,11 @@ class Facts:
     years: int | None      # minimum years of experience mentioned, None if not stated
     employment: str        # "student" | "part" | "full"
     hybrid: bool
+    degree: str | None = None    # "msc" when the job is only for Master's/PhD students
+    min_gpa: int | None = None   # minimum grade average the job asks for
 
 
 def required_years(text: str) -> int | None:
-    if _NO_EXPERIENCE.search(text):
-        return 0
     found = []
     for m in _YEARS_EN.finditer(text):
         v = m.group(1).lower()
@@ -53,6 +62,18 @@ def required_years(text: str) -> int | None:
     if _ONE_YEAR_HE.search(text):
         found.append(1)
     found = [y for y in found if y <= 15]  # ignore things like "20 years of company history"
+    if found:   # stated years win over "X experience is not required"
+        return min(found)
+    return 0 if _NO_EXPERIENCE.search(text) else None
+
+
+def required_degree(text: str) -> str | None:
+    return "msc" if _MASTERS.search(text) and not _BACHELORS.search(text) else None
+
+
+def required_gpa(text: str) -> int | None:
+    found = [int(m.group(1) or m.group(2)) for m in _GPA.finditer(text)]
+    found = [g for g in found if 60 <= g <= 100]
     return min(found) if found else None
 
 
@@ -64,7 +85,8 @@ def extract_facts(title: str, description: str, level: str) -> Facts:
         employment = "part"
     else:
         employment = "full"
-    return Facts(years=required_years(text), employment=employment, hybrid=bool(_HYBRID.search(text)))
+    return Facts(years=required_years(text), employment=employment, hybrid=bool(_HYBRID.search(text)),
+                 degree=required_degree(text), min_gpa=required_gpa(text))
 
 
 GENERAL_FIELDS = ("security", "lifeguard", "office", "government")
@@ -83,6 +105,11 @@ def score(match: Match, facts: Facts, region: str) -> tuple[int, str, list[str]]
         s += 1; reasons.append("שנת ניסיון")
     elif facts.years is not None:
         s -= 3; reasons.append(f"דורש {facts.years}+ שנות ניסיון")
+
+    if facts.degree == "msc":
+        s -= 4; reasons.append("רק לסטודנטים לתואר שני")
+    if facts.min_gpa:
+        s -= 2; reasons.append(f"דורש ממוצע {facts.min_gpa}+")
 
     if facts.employment in ("student", "part"):
         s += 1
@@ -110,8 +137,9 @@ def tier_emoji(tier: str) -> str:
 
 
 def facts_to_dict(f: Facts) -> dict:
-    return asdict(f)
+    return {**asdict(f), "v": FACTS_VERSION}
 
 
 def facts_from_dict(d: dict) -> Facts:
-    return Facts(years=d.get("years"), employment=d.get("employment", "full"), hybrid=bool(d.get("hybrid")))
+    return Facts(years=d.get("years"), employment=d.get("employment", "full"), hybrid=bool(d.get("hybrid")),
+                 degree=d.get("degree"), min_gpa=d.get("min_gpa"))

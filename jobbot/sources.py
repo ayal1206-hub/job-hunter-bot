@@ -119,7 +119,9 @@ def _comeet_jobs(company: dict, items: list) -> list[Job]:
             location=location or "",
             url=_comeet_url(company, item),
             description=" ".join(
-                str(d.get("value", "")) for d in (item.get("details") or []) if isinstance(d, dict)),
+                str(d.get("value") or "") for d in (item.get("details")
+                                                    or (item.get("custom_fields") or {}).get("details") or [])
+                if isinstance(d, dict)) + (f" Workplace: {item['workplace_type']}" if item.get("workplace_type") else ""),
         ))
     return jobs
 

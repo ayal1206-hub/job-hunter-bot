@@ -6,7 +6,7 @@ from .details import fetch_description, page_to_text
 from .email_alerts import AlertEmail
 from .filters import Match, _any, evaluate, region_of
 from .models import Job
-from .scoring import extract_facts, facts_from_dict, facts_to_dict, score
+from .scoring import FACTS_VERSION, extract_facts, facts_from_dict, facts_to_dict, score
 
 EMAIL_JOB_TTL_DAYS = 14
 FIELD_LABELS = {"qa": "QA", "support": "תמיכה / IT", "cyber": "סייבר", "data": "דאטה / BI",
@@ -34,6 +34,7 @@ def _entry(key, source, company, title, location, region, url, field, field_labe
         "title": title, "location": location, "region": region, "url": url,
         "field": field, "field_label": field_label, "level": match.level,
         "employment": facts.employment, "years": facts.years, "hybrid": facts.hybrid,
+        "degree": facts.degree, "min_gpa": facts.min_gpa,
         "score": s, "tier": tier, "reasons": reasons,
         "cv": "tech" if is_tech else "general", "first_seen": today,
         # Jobs from the owner's personal alert emails are shown only to the owner.
@@ -48,7 +49,7 @@ def board_entries(jobs: list[Job], cfg: dict, facts_cache: dict, today: str,
         match, _ = evaluate(job, cfg)
         if not match:
             continue
-        if job.key in facts_cache:
+        if facts_cache.get(job.key, {}).get("v") == FACTS_VERSION:
             facts = facts_from_dict(facts_cache[job.key])
         else:
             text = page_to_text(job.description) if job.description.strip() else fetch(job.url)

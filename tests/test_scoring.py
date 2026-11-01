@@ -152,3 +152,45 @@ def test_comeet_location_uses_the_city_not_just_the_country():
     item["location"] = {"name": "Beer Sheva", "city": "Beer Sheva"}
     item["workplace_type"] = "On-site"
     assert _comeet_jobs({"name": "X"}, [item])[0].location == "Beer Sheva"
+
+
+SAMSUNG_REQ = ("Requirements M.Sc. student in Electronic Engineering, Computer Engineering, Software Engineering, "
+               "Computer Science or equivalent with at least 3 semesters until graduation GPA 85 and above "
+               "Excellent coding skills in C/C++ and/or Python")
+
+
+def test_masters_only_and_gpa_requirements_are_read():
+    from jobbot.scoring import required_degree, required_gpa
+    assert required_degree(SAMSUNG_REQ) == "msc"
+    assert required_gpa(SAMSUNG_REQ) == 85
+    assert required_degree("B.Sc. or M.Sc. student in Computer Science") is None
+    assert required_degree("Second-year student in Computer Science") is None
+    assert required_degree("סטודנט/ית לתואר שני במדעי המחשב") == "msc"
+    assert required_gpa("ממוצע ציונים 80 ומעלה") == 80
+    assert required_gpa("GPA of at least 90") == 90
+    assert required_gpa("Excellent grades, 3 years of experience") is None
+
+
+def test_masters_only_student_job_is_no_longer_hot():
+    from jobbot.filters import Match
+    from jobbot.scoring import extract_facts, score
+    m = Match(track="dev", track_label="Development", level="student")
+    f = extract_facts("Algorithm Student", SAMSUNG_REQ + " Workplace: On-site", "student")
+    assert (f.degree, f.min_gpa, f.hybrid) == ("msc", 85, False)
+    s, tier, reasons = score(m, f, "center")
+    assert tier == "long" and "רק לסטודנטים לתואר שני" in reasons and "דורש ממוצע 85+" in reasons
+
+
+def test_comeet_reads_description_from_custom_fields():
+    from jobbot.sources import _comeet_jobs
+    item = {"uid": "81.470", "name": "Algorithm Student", "workplace_type": "On-site",
+            "custom_fields": {"details": [{"name": "Requirements", "value": SAMSUNG_REQ}, {"name": "x", "value": None}]}}
+    job = _comeet_jobs({"name": "Samsung"}, [item])[0]
+    assert "GPA 85" in job.description and "Workplace: On-site" in job.description
+
+
+def test_stated_years_beat_experience_not_required():
+    from jobbot.scoring import required_years
+    assert required_years("4+ years of hands-on experience building ML systems. "
+                          "Production experience is not required - a side project is enough") == 4
+    assert required_years("No experience required") == 0

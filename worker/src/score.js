@@ -58,6 +58,13 @@ export function scoreJob(job, profile = DEFAULT_PROFILE) {
     }
   }
 
+  if (job.degree === "msc" && p.degree !== "msc") { s -= 4; reasons.push("רק לסטודנטים לתואר שני"); }
+  if (job.min_gpa) {
+    if (!p.gpa) { s -= 1; reasons.push(`דורש ממוצע ${job.min_gpa}+`); }
+    else if (p.gpa < job.min_gpa) { s -= 3; reasons.push(`דורש ממוצע ${job.min_gpa}+ (שלך ${p.gpa})`); }
+    else reasons.push(`ממוצע ${job.min_gpa}+ ✓`);
+  }
+
   if (job.hybrid) { s += 1; reasons.push("היברידי / מהבית"); }
 
   if (job.region === "any") s += 1;
@@ -98,6 +105,11 @@ export function cleanProfile(input, { isOwner = false } = {}) {
     const n = Number(input.max_years);
     out.max_years = Number.isFinite(n) ? Math.max(0, Math.min(10, Math.round(n))) : DEFAULT_PROFILE.max_years;
   }
+  if ("gpa" in input) {
+    const g = Number(input.gpa);
+    out.gpa = Number.isFinite(g) && g >= 50 && g <= 100 ? Math.round(g) : null;
+  }
+  if ("degree" in input) out.degree = ["bsc", "msc"].includes(input.degree) ? input.degree : null;
   if (ALERT_MODES.includes(input.alert_mode)) out.alert_mode = input.alert_mode;
   else if ("alerts" in input) out.alert_mode = input.alerts ? "hot" : "off";
   return out;
