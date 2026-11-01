@@ -644,11 +644,6 @@
   "employment": "full",
   "hybrid": false
  },
- "comeet:KPMG Israel:CB.272": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": false
- },
  "comeet:KPMG Israel:9D.64F": {
   "years": 3,
   "employment": "full",
@@ -711,11 +706,6 @@
  },
  "comeet:Deloitte Israel:FE.B50": {
   "years": 3,
-  "employment": "full",
-  "hybrid": true
- },
- "comeet:Deloitte Israel:33.762": {
-  "years": null,
   "employment": "full",
   "hybrid": true
  }
