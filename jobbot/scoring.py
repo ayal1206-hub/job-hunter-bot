@@ -6,6 +6,7 @@ reasons that produced it (shown in the app), and is easy to tune.
 
 import re
 from dataclasses import asdict, dataclass
+from datetime import date
 
 from .filters import Match
 
@@ -45,7 +46,17 @@ _GPA = re.compile(
     r"(?:gpa|grade point average|average grade|grades? average|ממוצע(?: ציונים)?)\s*(?:of\s*|:\s*)?"
     r"(?:above\s*|over\s*|at least\s*|of at least\s*|מעל\s*|לפחות\s*|של\s*)?(\d{2})|"
     r"(\d{2})\s*\+?\s*(?:gpa|average)", re.I)
-FACTS_VERSION = 4   # bump when extract_facts learns something new, so cached facts are re-read
+_LEFT_NUM = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+             "שנה": 1, "שנתיים": 2, "שלוש": 3, "שלושה": 3, "ארבע": 4, "ארבעה": 4}
+# "with 2+ years left", "at least 3 semesters until graduation", "שנתיים לפחות לסיום התואר"
+_YEARS_LEFT_EN = re.compile(
+    r"(\d|one|two|three|four|five|six)\s*\+?\s*(?:more\s+|full\s+|academic\s+)?(years?|semesters?)\s*"
+    r"(?:of\s+(?:studies|study|your degree)\s+)?(?:left|remaining|until\s+graduation|until\s+(?:the\s+)?end|to\s+graduat|before\s+graduat)",
+    re.I)
+_YEARS_LEFT_HE = re.compile(
+    r"(\d|שנה|שנתיים|שלוש|שלושה|ארבע|ארבעה)\s*(?:שנים|שנות לימוד|סמסטרים)?\s*(?:נוספות|נוספים|לפחות)?\s*"
+    r"(?:לסיום|עד סיום|עד לסיום)\s*(?:ה)?(?:תואר|לימודים)")
+FACTS_VERSION = 5   # bump when extract_facts learns something new, so cached facts are re-read
 
 
 @dataclass
@@ -55,6 +66,7 @@ class Facts:
     hybrid: bool
     degree: str | None = None    # "msc" when the job is only for Master's/PhD students
     min_gpa: int | None = None   # minimum grade average the job asks for
+    years_left: float | None = None  # studies the student must still have ahead ("2+ years left")
 
 
 def required_years(text: str) -> int | None:
@@ -85,6 +97,30 @@ def required_degree(text: str) -> str | None:
     return None
 
 
+def required_years_left(text: str) -> float | None:
+    found = []
+    for m in _YEARS_LEFT_EN.finditer(text):
+        v = m.group(1).lower()
+        n = int(v) if v.isdigit() else _LEFT_NUM[v]
+        found.append(n / 2 if m.group(2).lower().startswith("semester") else n)
+    for m in _YEARS_LEFT_HE.finditer(text):
+        v = m.group(1)
+        n = int(v) if v.isdigit() else _LEFT_NUM[v]
+        found.append(n / 2 if "סמסטר" in m.group(0) else n)
+    found = [y for y in found if 0 < y <= 4]
+    return max(found) if found else None
+
+
+def years_until(graduation: str | None, today: date | None = None) -> float | None:
+    """Years from today until graduation ("2028-07" or "2028")."""
+    if not graduation:
+        return None
+    parts = str(graduation).split("-")
+    year, month = int(parts[0]), int(parts[1]) if len(parts) > 1 else 7
+    t = today or date.today()
+    return round((year - t.year) + (month - t.month) / 12, 2)
+
+
 def required_gpa(text: str) -> int | None:
     found = [int(m.group(1) or m.group(2)) for m in _GPA.finditer(text)]
     found = [g for g in found if 60 <= g <= 100]
@@ -100,15 +136,16 @@ def extract_facts(title: str, description: str, level: str) -> Facts:
     else:
         employment = "full"
     return Facts(years=required_years(text), employment=employment, hybrid=bool(_HYBRID.search(text)),
-                 degree=required_degree(text), min_gpa=required_gpa(text))
+                 degree=required_degree(text), min_gpa=required_gpa(text),
+                 years_left=required_years_left(text))
 
 
 GENERAL_FIELDS = ("security", "lifeguard", "office", "government")
 TIERS = (("hot", 6, "🔥"), ("good", 3, "👍"), ("long", -99, "🤔"))
 
 
-def score(match: Match, facts: Facts, region: str) -> tuple[int, str, list[str]]:
-    """Return (score, tier, reasons)."""
+def score(match: Match, facts: Facts, region: str, studies_left: float | None = None) -> tuple[int, str, list[str]]:
+    """Return (score, tier, reasons). studies_left: the owner's years until graduation."""
     s, reasons = 0, []
     s += {"student": 4, "junior": 2, "possible": 0}[match.level]
     reasons.append({"student": "משרת סטודנט", "junior": "ג'וניור", "possible": "בלי רמה מוגדרת"}[match.level])
@@ -124,6 +161,9 @@ def score(match: Match, facts: Facts, region: str) -> tuple[int, str, list[str]]
         s -= 4; reasons.append("רק לסטודנטים לתואר שני")
     elif facts.degree == "bsc_done":
         s -= 3; reasons.append("דורש תואר גמור")
+    if facts.years_left:
+        if studies_left is not None and studies_left < facts.years_left:
+            s -= 4; reasons.append(f"דורש עוד {facts.years_left:g}+ שנות לימוד")
     if facts.min_gpa:
         s -= 2; reasons.append(f"דורש ממוצע {facts.min_gpa}+")
 
@@ -158,4 +198,4 @@ def facts_to_dict(f: Facts) -> dict:
 
 def facts_from_dict(d: dict) -> Facts:
     return Facts(years=d.get("years"), employment=d.get("employment", "full"), hybrid=bool(d.get("hybrid")),
-                 degree=d.get("degree"), min_gpa=d.get("min_gpa"))
+                 degree=d.get("degree"), min_gpa=d.get("min_gpa"), years_left=d.get("years_left"))

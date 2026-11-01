@@ -6,7 +6,7 @@ from .details import fetch_description, page_to_text
 from .email_alerts import AlertEmail
 from .filters import Match, _any, evaluate, region_of
 from .models import Job
-from .scoring import FACTS_VERSION, extract_facts, facts_from_dict, facts_to_dict, score
+from .scoring import FACTS_VERSION, extract_facts, facts_from_dict, facts_to_dict, score, years_until
 
 EMAIL_JOB_TTL_DAYS = 14
 FIELD_LABELS = {"qa": "QA", "support": "תמיכה / IT", "cyber": "סייבר", "data": "דאטה / BI",
@@ -26,15 +26,17 @@ def _field_of_title(title: str, cfg: dict) -> tuple[str, str]:
 
 
 def _entry(key, source, company, title, location, region, url, field, field_label,
-           match, facts, today, origin) -> dict:
-    s, tier, reasons = score(match, facts, region)
+           match, facts, today, origin, studies_left=None) -> dict:
+    s, tier, reasons = score(match, facts, region, studies_left)
     is_tech = field in FIELD_LABELS
     return {
         "key": key, "source": source, "origin": origin, "company": company,
         "title": title, "location": location, "region": region, "url": url,
         "field": field, "field_label": field_label, "level": match.level,
         "employment": facts.employment, "years": facts.years, "hybrid": facts.hybrid,
-        "degree": facts.degree, "min_gpa": facts.min_gpa,
+        "degree": facts.degree, "min_gpa": facts.min_gpa, "years_left": facts.years_left,
+        # The owner can't apply: needs more years of studies than the owner has left.
+        "owner_hide": bool(facts.years_left and studies_left is not None and studies_left < facts.years_left),
         "score": s, "tier": tier, "reasons": reasons,
         "cv": "tech" if is_tech else "general", "first_seen": today,
         # Jobs from the owner's personal alert emails are shown only to the owner.
@@ -70,7 +72,8 @@ def board_entries(jobs: list[Job], cfg: dict, facts_cache: dict, today: str,
         region = region_of(job.location, cfg) or "any"
         entries.append(_entry(job.key, job.source, job.company, job.title, job.location, region,
                               job.url, match.track, FIELD_LABELS.get(match.track, match.track_label),
-                              match, facts, today, "board"))
+                              match, facts, today, "board",
+                              years_until((cfg.get("owner") or {}).get("graduation"))))
     return entries
 
 

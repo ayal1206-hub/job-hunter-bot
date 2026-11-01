@@ -89,6 +89,10 @@ drop:
   masters_only: true     # "M.Sc./PhD student" only
   min_years: 3           # asks for 3+ years of experience
 
+# The owner (whose alerts this repo sends). Used for "N+ years of studies left" requirements.
+owner:
+  graduation: "2028-07"
+
 # Send the owner's 🔥 alerts from GitHub Actions. Turn off once the Cloudflare
 # worker sends personal alerts to every user (including the owner).
 python_alerts: true

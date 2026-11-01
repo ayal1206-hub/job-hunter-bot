@@ -84,6 +84,14 @@ export function scoreJob(job, profile = DEFAULT_PROFILE) {
   return { score: s, tier, reasons, match };
 }
 
+// Years until graduation ("2028-07" or 2028), or null when unknown.
+export function studiesLeft(graduation, now = new Date()) {
+  if (!graduation) return null;
+  const [y, m = 7] = String(graduation).split("-").map(Number);
+  if (!y) return null;
+  return (y - now.getUTCFullYear()) + (m - (now.getUTCMonth() + 1)) / 12;
+}
+
 // Jobs this user can't apply to at all, once the description is known.
 export function excluded(job, profile) {
   const p = { ...DEFAULT_PROFILE, ...profile };
@@ -91,6 +99,8 @@ export function excluded(job, profile) {
   if (job.degree === "bsc_done" && p.level === "student") return "degree";
   if (job.years != null && job.years > p.max_years + 1) return "years";
   if (job.min_gpa && p.gpa && p.gpa < job.min_gpa) return "gpa";
+  const left = studiesLeft(p.graduation);
+  if (job.years_left && left != null && left < job.years_left) return "studies";
   return null;
 }
 
@@ -119,6 +129,10 @@ export function cleanProfile(input, { isOwner = false } = {}) {
   if ("gpa" in input) {
     const g = Number(input.gpa);
     out.gpa = Number.isFinite(g) && g >= 50 && g <= 100 ? Math.round(g) : null;
+  }
+  if ("graduation" in input) {
+    const g = String(input.graduation || "");
+    out.graduation = /^20\d\d(-(0[1-9]|1[0-2]))?$/.test(g) ? g : null;
   }
   if ("degree" in input) out.degree = ["bsc", "msc"].includes(input.degree) ? input.degree : null;
   if (ALERT_MODES.includes(input.alert_mode)) out.alert_mode = input.alert_mode;

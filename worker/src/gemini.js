@@ -17,6 +17,7 @@ const SCHEMA = {
     skills: { type: "ARRAY", items: { type: "STRING" } },
     degree: { type: "STRING", enum: ["bsc", "msc", "none"] },
     gpa: { type: "NUMBER" },
+    graduation_year: { type: "INTEGER" },
     summary_he: { type: "STRING" },
   },
   required: ["fields", "level", "years_experience", "regions", "employment", "skills", "summary_he"],
@@ -33,6 +34,7 @@ Return JSON only, following the schema:
 - employment: if a student, ["student", "part"]; otherwise what fits.
 - degree: the degree they are studying for or hold: "bsc" (bachelor's / practical engineer), "msc" (master's or PhD), "none".
 - gpa: their grade average on a 0-100 scale if the CV states it (convert 4.0 scales x25), else 0.
+- graduation_year: the year they expect to finish (or finished) their degree; estimate from start year and degree length if needed; 0 if unknown.
 - skills: up to 8 technical skills (languages, tools).
 - summary_he: one short Hebrew sentence describing the profile, WITHOUT name, phone, email, address or ID number.
 Never copy personal identifiers into any field.`;
@@ -101,6 +103,7 @@ export function toPreferences(r) {
     max_years: Math.min(10, years + 1),
     level: ["student", "junior", "experienced"].includes(r.level) ? r.level : "student",
     degree: ["bsc", "msc"].includes(r.degree) ? r.degree : null,
+    graduation: Number(r.graduation_year) >= 2000 && Number(r.graduation_year) <= 2040 ? String(r.graduation_year) : null,
     gpa: Number(r.gpa) >= 50 && Number(r.gpa) <= 100 ? Math.round(Number(r.gpa)) : null,
     skills: Array.isArray(r.skills) ? r.skills.slice(0, 8).map(String) : [],
     summary: typeof r.summary_he === "string" ? redact(r.summary_he).slice(0, 300) : "",

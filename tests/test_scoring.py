@@ -218,3 +218,29 @@ def test_degree_holders_only():
     assert required_degree("B.Sc. in Computer Science. M.Sc. or Ph.D. in a relevant field - advantage") == "bsc_done"
     assert required_degree("תואר ראשון במדעי המחשב - חובה") == "bsc_done"
     assert required_degree("סטודנט/ית לתואר ראשון במדעי המחשב") is None
+
+
+def test_years_of_studies_left():
+    from datetime import date
+    from jobbot.scoring import required_years_left, years_until
+    assert required_years_left("B.Sc. student in Computer Science, or a related field with 2+ years left.") == 2
+    assert required_years_left("M.Sc. student with at least 3 semesters until graduation") == 1.5
+    assert required_years_left("Second-year student with at least two years left in your degree") == 2
+    assert required_years_left("סטודנט/ית עם שנתיים לפחות לסיום התואר") == 2
+    assert required_years_left("3+ years of experience") is None
+    assert years_until("2028-07", date(2026, 11, 1)) == 1.67
+
+
+def test_owner_hidden_when_studies_end_too_soon():
+    import yaml
+    from pathlib import Path
+    from jobbot.models import Job
+    from jobbot.pipeline import board_entries
+    cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
+    cfg["owner"] = {"graduation": "2028-07"}
+    mk = lambda t, d: Job("comeet", "S", t, t, "Tel Aviv", "https://x/" + t, d)
+    e = {x["title"]: x for x in board_entries(
+        [mk("Infrastructure Student", "B.Sc. student in CS with 2+ years left"), mk("QA Student", "Student in CS")],
+        cfg, {}, "2026-11-01", fetch=lambda u: "")}
+    assert e["Infrastructure Student"]["owner_hide"] and "דורש עוד 2+ שנות לימוד" in e["Infrastructure Student"]["reasons"]
+    assert not e["QA Student"]["owner_hide"]

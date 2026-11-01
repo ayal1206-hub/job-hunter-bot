@@ -102,3 +102,14 @@ test("students don't see jobs that need a finished degree", () => {
   assert.equal(scoreAll([j], { level: "student" }).length, 0);
   assert.equal(scoreAll([j], { level: "junior" }).length, 1);
 });
+
+test("jobs that need more years of studies than the user has left are hidden", () => {
+  const j = { key: "s", level: "student", employment: "student", region: "center", field: "dev", years: null, years_left: 2 };
+  const far = String(new Date().getUTCFullYear() + 3);
+  const near = String(new Date().getUTCFullYear() + 1);
+  assert.equal(scoreAll([j], { graduation: far }).length, 1);
+  assert.equal(scoreAll([j], { graduation: near }).length, 0);
+  assert.equal(scoreAll([j], {}).length, 1);   // unknown graduation: shown
+  assert.deepEqual(cleanProfile({ graduation: "2028-07" }), { graduation: "2028-07" });
+  assert.deepEqual(cleanProfile({ graduation: "soon" }), { graduation: null });
+});

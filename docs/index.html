@@ -135,6 +135,7 @@ function matches(j, skip) {
   if (filters.hot && j.tier !== "hot") return false;
   if (j.min_gpa) return false;   // jobs with a minimum grade average aren't for me
   if (j.degree === "bsc_done") return false;   // needs a finished degree; I'm still studying
+  if (j.owner_hide) return false;               // needs more years of studies than I have left
 
   if (filters.hideApplied && applied.has(j.key)) return false;
   return true;
