@@ -157,13 +157,30 @@ def _html_part(msg: email.message.Message) -> str:
     return ""
 
 
+def _all_mail(imap) -> str:
+    """Gmail's "All Mail" folder (its name depends on the account language), so alerts are
+    found even when they were read, archived or sorted into a tab. Falls back to INBOX."""
+    try:
+        status, folders = imap.list()
+    except Exception:
+        return "INBOX"
+    if status != "OK":
+        return "INBOX"
+    for line in folders or []:
+        text = line.decode("utf-8", "replace") if isinstance(line, bytes) else str(line)
+        if "\\All" in text:
+            name = text.rsplit(' "/" ', 1)[-1].strip()
+            return name if name.startswith('"') else f'"{name}"'
+    return "INBOX"
+
+
 def fetch_alert_emails(address: str, app_password: str, senders: list[str],
                        lookback_days: int, max_jobs: int) -> list[AlertEmail]:
     since = (date.today() - timedelta(days=lookback_days)).strftime("%d-%b-%Y")
     results = []
     with imaplib.IMAP4_SSL(IMAP_HOST) as imap:
         imap.login(address, app_password)
-        imap.select("INBOX", readonly=True)  # never changes the mailbox
+        imap.select(_all_mail(imap), readonly=True)  # never changes the mailbox
         for domain in senders:
             status, data = imap.search(None, "SINCE", since, "FROM", domain)
             if status != "OK":

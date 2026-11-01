@@ -54,8 +54,13 @@ class FakeIMAP:
     def login(self, user, pw):
         assert pw == "apppassword"
 
+    def list(self):
+        return "OK", [b'(\\HasNoChildren) "/" "INBOX"',
+                      b'(\\All \\HasNoChildren) "/" "[Gmail]/&BdsF3A-"']
+
     def select(self, box, readonly=False):
         FakeIMAP.selected_readonly = readonly
+        FakeIMAP.selected_box = box
         return "OK", [b"1"]
 
     def search(self, charset, *criteria):
@@ -76,6 +81,7 @@ def test_fetch_alert_emails_reads_mailbox_readonly():
     finally:
         monkeypatch_target.IMAP4_SSL = original
     assert FakeIMAP.selected_readonly is True
+    assert FakeIMAP.selected_box == '"[Gmail]/&BdsF3A-"'   # All Mail: read and archived emails too
     assert len(alerts) == 1
     a = alerts[0]
     assert a.message_id == "<abc@alljobs>"
