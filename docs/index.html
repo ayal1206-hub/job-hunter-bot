@@ -133,6 +133,8 @@ function matches(j, skip) {
   if (skip !== "region" && filters.region.length && j.region !== "any" && !filters.region.includes(j.region)) return false;
   if (skip !== "field" && filters.field.length && !filters.field.includes(j.field)) return false;
   if (filters.hot && j.tier !== "hot") return false;
+  if (j.min_gpa) return false;   // jobs with a minimum grade average aren't for me
+
   if (filters.hideApplied && applied.has(j.key)) return false;
   return true;
 }

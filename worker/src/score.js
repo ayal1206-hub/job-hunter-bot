@@ -83,9 +83,18 @@ export function scoreJob(job, profile = DEFAULT_PROFILE) {
   return { score: s, tier, reasons, match };
 }
 
+// Jobs this user can't apply to at all, once the description is known.
+export function excluded(job, profile) {
+  const p = { ...DEFAULT_PROFILE, ...profile };
+  if (job.degree === "msc" && p.degree !== "msc") return "masters";
+  if (job.years != null && job.years > p.max_years + 1) return "years";
+  if (job.min_gpa && p.gpa && p.gpa < job.min_gpa) return "gpa";
+  return null;
+}
+
 export function scoreAll(jobs, profile, { isOwner = false } = {}) {
   return jobs
-    .filter((j) => isOwner || !j.owner_only)
+    .filter((j) => (isOwner || !j.owner_only) && !excluded(j, profile))
     .map((j) => ({ ...j, ...scoreJob(j, profile) }))
     .sort((a, b) => b.score - a.score || (b.first_seen || "").localeCompare(a.first_seen || ""));
 }

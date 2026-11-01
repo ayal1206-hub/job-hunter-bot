@@ -84,6 +84,11 @@ exclude_keywords: [senior, sr, expert, experienced, lead, principal, staff, mana
 junior_tracks: [qa, support, cyber, data, devops, dev]
 possible_tracks: [qa, support, cyber, data, devops, dev]
 
+# Jobs dropped from the pool after reading the description (nobody using the bot can apply):
+drop:
+  masters_only: true     # "M.Sc./PhD student" only
+  min_years: 3           # asks for 3+ years of experience
+
 # Send the owner's 🔥 alerts from GitHub Actions. Turn off once the Cloudflare
 # worker sends personal alerts to every user (including the owner).
 python_alerts: true

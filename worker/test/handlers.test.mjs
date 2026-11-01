@@ -103,11 +103,12 @@ test("/api/me returns jobs scored for the caller and hides the owner's jobs", as
   const env = makeEnv(); const f = makeFetch({ jobs });
   const { data } = await api(env, f, { id: 5 }, "/api/me");
   assert.equal(data.exists, false);
-  assert.deepEqual(data.jobs.map((j) => j.key), ["a", "b"]);
+  // "b" asks for 4 years: hidden for a new user (can show up to 1 year + 1 of stretch)
+  assert.deepEqual(data.jobs.map((j) => j.key), ["a"]);
   assert.equal(data.jobs[0].tier, "hot");
   assert.ok(!data.fields.some(([k]) => k === "security"));
   const owner = await api(env, f, { id: OWNER }, "/api/me");
-  assert.equal(owner.data.jobs.length, 3);
+  assert.equal(owner.data.jobs.length, 2);   // "a" + the owner's email job
   assert.ok(owner.data.fields.some(([k]) => k === "security"));
 });
 

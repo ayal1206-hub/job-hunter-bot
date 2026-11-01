@@ -42,6 +42,16 @@ def _entry(key, source, company, title, location, region, url, field, field_labe
     }
 
 
+def drop_reason(facts, cfg: dict) -> str | None:
+    """Why a job that passed the title filter is still not for us, once its description is read."""
+    rules = cfg.get("drop", {})
+    if rules.get("masters_only") and facts.degree == "msc":
+        return "masters only"
+    if rules.get("min_years") and facts.years is not None and facts.years >= rules["min_years"]:
+        return f"{facts.years}+ years"
+    return None
+
+
 def board_entries(jobs: list[Job], cfg: dict, facts_cache: dict, today: str,
                   fetch=fetch_description) -> list[dict]:
     entries = []
@@ -55,6 +65,8 @@ def board_entries(jobs: list[Job], cfg: dict, facts_cache: dict, today: str,
             text = page_to_text(job.description) if job.description.strip() else fetch(job.url)
             facts = extract_facts(job.title, text, match.level)
             facts_cache[job.key] = facts_to_dict(facts)
+        if drop_reason(facts, cfg):
+            continue
         region = region_of(job.location, cfg) or "any"
         entries.append(_entry(job.key, job.source, job.company, job.title, job.location, region,
                               job.url, match.track, FIELD_LABELS.get(match.track, match.track_label),

@@ -88,3 +88,11 @@ test("cleanProfile keeps a valid GPA and degree", () => {
   assert.deepEqual(cleanProfile({ gpa: 78.4, degree: "bsc" }), { gpa: 78, degree: "bsc" });
   assert.deepEqual(cleanProfile({ gpa: 4, degree: "x" }), { gpa: null, degree: null });
 });
+
+test("scoreAll hides jobs the user can't apply to", () => {
+  const base = { level: "student", employment: "student", region: "center", field: "dev", years: null };
+  const jobs = [{ ...base, key: "ok" }, { ...base, key: "msc", degree: "msc" },
+                { ...base, key: "gpa", min_gpa: 85 }, { ...base, key: "years", years: 4 }];
+  assert.deepEqual(scoreAll(jobs, { gpa: 78, max_years: 1 }).map((j) => j.key), ["ok"]);
+  assert.deepEqual(scoreAll(jobs, { gpa: 90, max_years: 1 }).map((j) => j.key).sort(), ["gpa", "ok"]);
+});

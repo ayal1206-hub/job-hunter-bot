@@ -194,3 +194,17 @@ def test_stated_years_beat_experience_not_required():
     assert required_years("4+ years of hands-on experience building ML systems. "
                           "Production experience is not required - a side project is enough") == 4
     assert required_years("No experience required") == 0
+
+
+def test_jobs_nobody_can_apply_to_are_dropped_from_the_pool():
+    import yaml
+    from pathlib import Path
+    from jobbot.models import Job
+    from jobbot.pipeline import board_entries
+    cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
+    mk = lambda t, d: Job("comeet", "Samsung", t, t, "Tel Aviv", "https://x/" + t, d)
+    jobs = [mk("Algorithm Student", SAMSUNG_REQ),
+            mk("QA Engineer", "3+ years of experience in testing"),
+            mk("Algorithm's Infrastructure Student", "B.Sc. student in Computer Science with 2+ years left")]
+    titles = [e["title"] for e in board_entries(jobs, cfg, {}, "2026-11-01", fetch=lambda u: "")]
+    assert titles == ["Algorithm's Infrastructure Student"]
