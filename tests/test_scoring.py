@@ -136,3 +136,19 @@ def test_comeet_links_point_to_the_position_not_the_careers_page():
     deloitte = {"uid": "10.F6C", "url_active_page": "https://careers.deloitte.co.il/position/10-f6c-en/"}
     assert _comeet_url(co, deloitte) == deloitte["url_active_page"]
     assert _comeet_url(co, {"uid": "AB.1"}) == "https://www.comeet.com/jobs/exodigo/89.005/position/AB.1"
+
+
+def test_comeet_location_uses_the_city_not_just_the_country():
+    from jobbot.sources import _comeet_jobs
+    from jobbot.filters import region_of
+    import yaml
+    from pathlib import Path
+    cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
+    item = {"uid": "29.37D", "name": "Student Tier 1 Support Specialist", "workplace_type": "Hybrid",
+            "location": {"name": "Israel", "city": "Tel Aviv", "country": "IL", "is_remote": True}}
+    job = _comeet_jobs({"name": "Exodigo", "slug": "exodigo", "uid": "89.005"}, [item])[0]
+    assert job.location == "Tel Aviv, Israel (Remote)"
+    assert region_of(job.location, cfg) == "center"
+    item["location"] = {"name": "Beer Sheva", "city": "Beer Sheva"}
+    item["workplace_type"] = "On-site"
+    assert _comeet_jobs({"name": "X"}, [item])[0].location == "Beer Sheva"

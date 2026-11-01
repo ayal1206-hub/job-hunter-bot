@@ -205,7 +205,7 @@ const openLink = (url) => (tg && tg.openLink ? tg.openLink(url) : window.open(ur
 
 function card(j) {
   const done = applied.has(j.key);
-  const where = j.location || (REGIONS.find((r) => r[0] === j.region) || [, "כל הארץ"])[1];
+  const where = j.region === "any" && j.location ? j.location + " · עיר לא צוינה" : j.location || (REGIONS.find((r) => r[0] === j.region) || [, "כל הארץ"])[1];
   const empl = (EMPLOYMENT.find((e) => e[0] === j.employment) || [, ""])[1];
   return el("article", { class: "card" + (done ? " applied" : "") },
     el("h2", { class: "title" }, el("span", { class: "tier" }, TIER_ICON[j.tier]), el("span", { dir: "auto" }, j.title)),

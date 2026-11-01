@@ -101,7 +101,14 @@ def _comeet_jobs(company: dict, items: list) -> list[Job]:
             continue
         loc = item.get("location") or {}
         if isinstance(loc, dict):
-            location = loc.get("name") or ", ".join(p for p in (loc.get("city"), loc.get("country")) if p)
+            # "name" is often just the country ("Israel"); the city says where the office is.
+            name, city = (loc.get("name") or "").strip(), (loc.get("city") or "").strip()
+            location = name if not city or city.lower() in name.lower() else (
+                f"{city}, {name}" if name else city)
+            if loc.get("is_remote") or item.get("workplace_type") == "Remote":
+                location += " (Remote)"
+            elif item.get("workplace_type") == "Hybrid":
+                location += " (Hybrid)"
         else:
             location = str(loc)
         jobs.append(Job(
