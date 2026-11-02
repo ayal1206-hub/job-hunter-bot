@@ -737,15 +737,6 @@
   "years_left": null,
   "v": 5
  },
- "comeet:AllCloud:45.273": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "v": 5
- },
  "comeet:DRS RADA:1E.864": {
   "years": 3,
   "employment": "full",
@@ -982,15 +973,6 @@
  },
  "comeet:CommIT:DE.27A": {
   "years": 2,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "v": 5
- },
- "comeet:CommIT:A4.47B": {
-  "years": 3,
   "employment": "full",
   "hybrid": false,
   "degree": null,
@@ -1295,15 +1277,6 @@
   "years_left": null,
   "v": 5
  },
- "comeet:CommIT:1B.061": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "v": 5
- },
  "comeet:CommIT:C5.F62": {
   "years": 3,
   "employment": "full",
@@ -1349,15 +1322,6 @@
   "years_left": null,
   "v": 5
  },
- "comeet:Samsung Israel:E2.372": {
-  "years": null,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "v": 5
- },
  "comeet:Samsung Israel:A3.E6B": {
   "years": null,
   "employment": "full",
@@ -1372,6 +1336,51 @@
   "employment": "full",
   "hybrid": false,
   "degree": "msc",
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "greenhouse:AppsFlyer:8882917002": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "greenhouse:Wiz:4726018006": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "comeet:Claroty:CA.471": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "comeet:AllCloud:7A.474": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "comeet:KPMG Israel:1B.37C": {
+  "years": 1,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "v": 5
