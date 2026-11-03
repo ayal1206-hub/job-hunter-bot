@@ -244,3 +244,12 @@ def test_owner_hidden_when_studies_end_too_soon():
         cfg, {}, "2026-11-01", fetch=lambda u: "")}
     assert e["Infrastructure Student"]["owner_hide"] and "דורש עוד 2+ שנות לימוד" in e["Infrastructure Student"]["reasons"]
     assert not e["QA Student"]["owner_hide"]
+
+
+def test_jobs_for_other_disciplines_only():
+    from jobbot.scoring import _OTHER_FIELD_ONLY as r
+    assert r.search("The position is an internship for accounting students only.")
+    assert r.search("Open only to economics students")
+    assert r.search("המשרה מיועדת לסטודנטים לראיית חשבון בלבד")
+    assert not r.search("Computer Science students only")
+    assert not r.search("Knowledge of accounting systems - advantage. Students only.")

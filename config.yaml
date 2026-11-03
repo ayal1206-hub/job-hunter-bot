@@ -87,6 +87,7 @@ possible_tracks: [qa, support, cyber, data, devops, dev]
 # Jobs dropped from the pool after reading the description (nobody using the bot can apply):
 drop:
   masters_only: true     # "M.Sc./PhD student" only
+  other_fields: true     # "for accounting / law / economics students only"
   min_years: 3           # asks for 3+ years of experience
 
 # The owner (whose alerts this repo sends). Used for "N+ years of studies left" requirements.

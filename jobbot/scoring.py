@@ -56,7 +56,12 @@ _YEARS_LEFT_EN = re.compile(
 _YEARS_LEFT_HE = re.compile(
     r"(\d|שנה|שנתיים|שלוש|שלושה|ארבע|ארבעה)\s*(?:שנים|שנות לימוד|סמסטרים)?\s*(?:נוספות|נוספים|לפחות)?\s*"
     r"(?:לסיום|עד סיום|עד לסיום)\s*(?:ה)?(?:תואר|לימודים)")
-FACTS_VERSION = 5   # bump when extract_facts learns something new, so cached facts are re-read
+# Jobs only for students of another discipline: "an internship for accounting students only"
+_OTHER_FIELD_ONLY = re.compile(
+    r"\b(?:accounting|accountancy|economics|law|finance|business(?:\s+administration)?|management|marketing|psychology|industrial engineering|architecture|design|communications?)\s+(?:and\s+(?:accounting|accountancy|economics|law|finance|business(?:\s+administration)?|management|marketing|psychology|industrial engineering|architecture|design|communications?)\s+)?students?\s+only\b|"
+    r"\bonly\s+(?:for\s+|to\s+|open\s+to\s+)?(?:accounting|accountancy|economics|law|finance|business(?:\s+administration)?|management|marketing|psychology|industrial engineering|architecture|design|communications?)\s+students\b|"
+    r"סטודנט(?:ים|ית|יות)?\s*(?:\S+\s+)?(?:ל|ב)(?:ראיית חשבון|חשבונאות|כלכלה|משפטים|מנהל עסקים|ניהול|שיווק|פסיכולוגיה|הנדסת תעשייה וניהול|אדריכלות|עיצוב|תקשורת)\s+בלבד", re.I)
+FACTS_VERSION = 6   # bump when extract_facts learns something new, so cached facts are re-read
 
 
 @dataclass
@@ -67,6 +72,7 @@ class Facts:
     degree: str | None = None    # "msc" when the job is only for Master's/PhD students
     min_gpa: int | None = None   # minimum grade average the job asks for
     years_left: float | None = None  # studies the student must still have ahead ("2+ years left")
+    other_field: bool = False        # only for students of another discipline (accounting, law...)
 
 
 def required_years(text: str) -> int | None:
@@ -137,7 +143,7 @@ def extract_facts(title: str, description: str, level: str) -> Facts:
         employment = "full"
     return Facts(years=required_years(text), employment=employment, hybrid=bool(_HYBRID.search(text)),
                  degree=required_degree(text), min_gpa=required_gpa(text),
-                 years_left=required_years_left(text))
+                 years_left=required_years_left(text), other_field=bool(_OTHER_FIELD_ONLY.search(text)))
 
 
 GENERAL_FIELDS = ("security", "lifeguard", "office", "government")
@@ -198,4 +204,5 @@ def facts_to_dict(f: Facts) -> dict:
 
 def facts_from_dict(d: dict) -> Facts:
     return Facts(years=d.get("years"), employment=d.get("employment", "full"), hybrid=bool(d.get("hybrid")),
-                 degree=d.get("degree"), min_gpa=d.get("min_gpa"), years_left=d.get("years_left"))
+                 degree=d.get("degree"), min_gpa=d.get("min_gpa"), years_left=d.get("years_left"),
+                 other_field=bool(d.get("other_field")))

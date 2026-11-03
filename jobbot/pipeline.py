@@ -47,6 +47,8 @@ def _entry(key, source, company, title, location, region, url, field, field_labe
 def drop_reason(facts, cfg: dict) -> str | None:
     """Why a job that passed the title filter is still not for us, once its description is read."""
     rules = cfg.get("drop", {})
+    if rules.get("other_fields") and facts.other_field:
+        return "other discipline only"
     if rules.get("masters_only") and facts.degree == "msc":
         return "masters only"
     if rules.get("min_years") and facts.years is not None and facts.years >= rules["min_years"]:
