@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T19:38:11+00:00",
+ "generated_at": "2026-11-03T22:48:35+00:00",
  "jobs": [
   {
    "key": "comeet:Global-e:BC.84D",
@@ -110,35 +110,6 @@
    "tier": "hot",
    "reasons": [
     "משרת סטודנט"
-   ],
-   "cv": "tech",
-   "first_seen": "2026-10-28",
-   "owner_only": false
-  },
-  {
-   "key": "comeet:Deloitte Israel:73.856",
-   "source": "comeet",
-   "origin": "board",
-   "company": "Deloitte Israel",
-   "title": "IT Risk Management Intern",
-   "location": "Tel Aviv, Tel-Aviv",
-   "region": "center",
-   "url": "https://careers.deloitte.co.il/position/73-856-en/",
-   "field": "tech",
-   "field_label": "טכנולוגיה",
-   "level": "student",
-   "employment": "student",
-   "years": null,
-   "hybrid": true,
-   "degree": null,
-   "min_gpa": null,
-   "years_left": null,
-   "owner_hide": false,
-   "score": 6,
-   "tier": "hot",
-   "reasons": [
-    "משרת סטודנט",
-    "היברידי / מהבית"
    ],
    "cv": "tech",
    "first_seen": "2026-10-28",
@@ -473,7 +444,7 @@
    "title": "AI Engineer",
    "location": "Ramat Gan, Tel Aviv (Remote)",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/5C.375/ai-engineer/all#jobs",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/5C.375/ai-engineer/all",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",
@@ -1762,7 +1733,7 @@
    "title": "Data Analyst",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/careers/10-379/",
+   "url": "https://www.global-e.com/careers/10-379/?gtm_latency=1",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",
