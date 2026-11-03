@@ -1384,5 +1384,14 @@
   "min_gpa": null,
   "years_left": null,
   "v": 5
+ },
+ "comeet:Claroty:EA.471": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
  }
 }
