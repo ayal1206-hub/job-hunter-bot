@@ -683,24 +683,6 @@
   "years_left": null,
   "v": 5
  },
- "comeet:Claroty:C2.47E": {
-  "years": 6,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "v": 5
- },
- "comeet:Exodigo:EF.273": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "v": 5
- },
  "comeet:Exodigo:75.478": {
   "years": 4,
   "employment": "full",
@@ -1387,6 +1369,33 @@
  },
  "comeet:Claroty:EA.471": {
   "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "comeet:Claroty:BB.478": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "comeet:DRS RADA:CA.37A": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
+ },
+ "comeet:KPMG Israel:AB.479": {
+  "years": null,
   "employment": "full",
   "hybrid": true,
   "degree": null,
