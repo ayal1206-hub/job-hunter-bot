@@ -1402,5 +1402,14 @@
   "min_gpa": null,
   "years_left": null,
   "v": 5
+ },
+ "greenhouse:Cato Networks:5024653101": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "v": 5
  }
 }
