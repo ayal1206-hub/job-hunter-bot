@@ -219,16 +219,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:KPMG Israel:B6.477": {
-  "years": null,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Deloitte Israel:73.856": {
   "years": null,
   "employment": "student",
@@ -979,16 +969,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Fetcherr:A5.D67": {
-  "years": 2,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Fetcherr:B5.079": {
   "years": null,
   "employment": "full",
@@ -1563,6 +1543,16 @@
   "years": 4,
   "employment": "full",
   "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Fetcherr:40.F62-9D.50A": {
+  "years": 1,
+  "employment": "full",
+  "hybrid": true,
   "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
