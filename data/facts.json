@@ -1479,16 +1479,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:KPMG Israel:1B.37C": {
-  "years": 1,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Claroty:BB.478": {
   "years": 6,
   "employment": "full",
@@ -1531,6 +1521,16 @@
  },
  "comeet:AllCloud:3B.47E": {
   "years": 5,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Claroty:EA.471": {
+  "years": 3,
   "employment": "full",
   "hybrid": true,
   "degree": null,

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T00:57:41+00:00",
+ "generated_at": "2026-11-05T12:33:09+00:00",
  "jobs": [
   {
    "key": "comeet:Global-e:BC.84D",
@@ -9,7 +9,7 @@
    "title": "NOC Engineer- Student Position",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/careers/bc-84d/?t=1778594561272",
+   "url": "https://www.global-e.com/careers/bc-84d/",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -807,36 +807,6 @@
    ],
    "cv": "tech",
    "first_seen": "2026-10-28",
-   "owner_only": false
-  },
-  {
-   "key": "comeet:KPMG Israel:1B.37C",
-   "source": "comeet",
-   "origin": "board",
-   "company": "KPMG Israel",
-   "title": "AI & Data Consultant",
-   "location": "Tel Aviv-Yafo, תל אביב",
-   "region": "center",
-   "url": "https://www.comeet.com/jobs/somekhchaikin/F3.007/ai--data-consultant/1B.37C",
-   "field": "data",
-   "field_label": "דאטה / BI",
-   "level": "possible",
-   "employment": "full",
-   "years": 1,
-   "hybrid": false,
-   "degree": "bsc_done",
-   "min_gpa": null,
-   "years_left": null,
-   "owner_hide": false,
-   "score": -2,
-   "tier": "long",
-   "reasons": [
-    "בלי רמה מוגדרת",
-    "שנת ניסיון",
-    "דורש תואר גמור"
-   ],
-   "cv": "tech",
-   "first_seen": "2026-11-02",
    "owner_only": false
   },
   {
