@@ -1509,16 +1509,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Taboola:8229871": {
-  "years": null,
-  "employment": "student",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:AllCloud:3B.47E": {
   "years": 5,
   "employment": "full",
@@ -1533,6 +1523,26 @@
   "years": 3,
   "employment": "full",
   "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Sweet Security:5020233101": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:KPMG Israel:B6.477": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false,
   "degree": null,
   "min_gpa": null,
   "years_left": null,
