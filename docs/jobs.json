@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T22:07:23+00:00",
+ "generated_at": "2026-11-06T07:00:31+00:00",
  "jobs": [
   {
    "key": "comeet:Global-e:BC.84D",
@@ -9,7 +9,7 @@
    "title": "NOC Engineer- Student Position",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/ko/careers/bc-84d/",
+   "url": "https://www.global-e.com/fr/careers/bc-84d/",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -472,7 +472,7 @@
    "title": "AI Engineer",
    "location": "Ramat Gan, Tel Aviv (Remote)",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/5C.375/ai-engineer/all#jobs",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/5C.375/ai-engineer/all",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",
@@ -1616,7 +1616,7 @@
    "title": "Data Analyst",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/ja/careers/10-379/",
+   "url": "https://www.global-e.com/en/careers/10-379/",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",
