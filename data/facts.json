@@ -239,16 +239,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Alma Lasers:60.378": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "greenhouse:Cato Networks:4252047101": {
   "years": 3,
   "employment": "full",
@@ -381,16 +371,6 @@
  },
  "greenhouse:Similarweb:8124606": {
   "years": 5,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "greenhouse:Similarweb:8239121": {
-  "years": 3,
   "employment": "full",
   "hybrid": false,
   "degree": null,
@@ -1179,16 +1159,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Team8:FB.D65": {
-  "years": 4,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Team8:F6.376": {
   "years": 5,
   "employment": "full",
@@ -1544,6 +1514,56 @@
   "employment": "full",
   "hybrid": false,
   "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:CommIT:A4.47B": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Samsung Israel:AE.47A": {
+  "years": null,
+  "employment": "student",
+  "hybrid": false,
+  "degree": "msc",
+  "min_gpa": 85,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:KPMG Israel:1B.37C": {
+  "years": 1,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Deloitte Israel:7E.478": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Alma Lasers:6D.47B": {
+  "years": null,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,

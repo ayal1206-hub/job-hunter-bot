@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-08T06:19:39+00:00",
+ "generated_at": "2026-11-08T15:23:45+00:00",
  "jobs": [
   {
    "key": "comeet:Global-e:BC.84D",
@@ -808,6 +808,36 @@
    "owner_only": false
   },
   {
+   "key": "comeet:KPMG Israel:1B.37C",
+   "source": "comeet",
+   "origin": "board",
+   "company": "KPMG Israel",
+   "title": "AI & Data Consultant",
+   "location": "Tel Aviv-Yafo, תל אביב",
+   "region": "center",
+   "url": "https://www.comeet.com/jobs/somekhchaikin/F3.007/ai--data-consultant/1B.37C",
+   "field": "data",
+   "field_label": "דאטה / BI",
+   "level": "possible",
+   "employment": "full",
+   "years": 1,
+   "hybrid": false,
+   "degree": "bsc_done",
+   "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
+   "score": -2,
+   "tier": "long",
+   "reasons": [
+    "בלי רמה מוגדרת",
+    "שנת ניסיון",
+    "דורש תואר גמור"
+   ],
+   "cv": "tech",
+   "first_seen": "2026-11-08",
+   "owner_only": false
+  },
+  {
    "key": "greenhouse:Payoneer:8208199",
    "source": "greenhouse",
    "origin": "board",
@@ -1365,37 +1395,6 @@
    "owner_only": false
   },
   {
-   "key": "comeet:Alma Lasers:60.378",
-   "source": "comeet",
-   "origin": "board",
-   "company": "Alma Lasers",
-   "title": "V&V System Test Engineer",
-   "location": "Caesarea (Remote)",
-   "region": "north",
-   "url": "https://almalasers.com/careers/co/caesarea/60.378/vv-system-test-engineer/all/",
-   "field": "qa",
-   "field_label": "QA",
-   "level": "possible",
-   "employment": "full",
-   "years": null,
-   "hybrid": true,
-   "degree": "bsc_done",
-   "min_gpa": null,
-   "years_left": null,
-   "owner_hide": false,
-   "score": -3,
-   "tier": "long",
-   "reasons": [
-    "בלי רמה מוגדרת",
-    "דורש תואר גמור",
-    "היברידי / מהבית",
-    "בצפון"
-   ],
-   "cv": "tech",
-   "first_seen": "2026-10-28",
-   "owner_only": false
-  },
-  {
    "key": "comeet:Samsung Israel:AB.D6B",
    "source": "comeet",
    "origin": "board",
@@ -1484,6 +1483,36 @@
    ],
    "cv": "tech",
    "first_seen": "2026-10-28",
+   "owner_only": false
+  },
+  {
+   "key": "comeet:Alma Lasers:6D.47B",
+   "source": "comeet",
+   "origin": "board",
+   "company": "Alma Lasers",
+   "title": "Embedded SW Engineer",
+   "location": "Caesarea",
+   "region": "north",
+   "url": "https://almalasers.com/careers/co/caesarea/6D.47B/embedded-sw-engineer/all/",
+   "field": "dev",
+   "field_label": "פיתוח",
+   "level": "possible",
+   "employment": "full",
+   "years": null,
+   "hybrid": false,
+   "degree": "bsc_done",
+   "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
+   "score": -5,
+   "tier": "long",
+   "reasons": [
+    "בלי רמה מוגדרת",
+    "דורש תואר גמור",
+    "בצפון"
+   ],
+   "cv": "tech",
+   "first_seen": "2026-11-08",
    "owner_only": false
   },
   {
@@ -1616,7 +1645,7 @@
    "title": "Data Analyst",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/careers/10-379/?t=1792997108179",
+   "url": "https://www.global-e.com/careers/10-379/",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",
