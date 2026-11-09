@@ -749,16 +749,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:AllCloud:92.476": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:AllCloud:09.E62": {
   "years": null,
   "employment": "full",
@@ -1089,16 +1079,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Team8:F9.27C": {
-  "years": 6,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Team8:A4.271": {
   "years": 5,
   "employment": "full",
@@ -1199,16 +1179,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:KPMG Israel:8C.A46": {
-  "years": null,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Deloitte Israel:10.F6C": {
   "years": 5,
   "employment": "full",
@@ -1271,16 +1241,6 @@
  },
  "comeet:Deloitte Israel:05.F6E": {
   "years": 5,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "comeet:Deloitte Israel:81.551": {
-  "years": 4,
   "employment": "full",
   "hybrid": true,
   "degree": null,
@@ -1561,6 +1521,46 @@
  },
  "comeet:Alma Lasers:6D.47B": {
   "years": null,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Cato Networks:5028381101": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Payoneer:8355124": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Wiz:4726277006": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:DRS RADA:6E.470": {
+  "years": 5,
   "employment": "full",
   "hybrid": false,
   "degree": "bsc_done",
