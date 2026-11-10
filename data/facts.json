@@ -1269,16 +1269,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Deloitte Israel:FE.B50": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Dream:C9.E64": {
   "years": 3,
   "employment": "full",
@@ -1459,16 +1449,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Sweet Security:5020233101": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:KPMG Israel:B6.477": {
   "years": null,
   "employment": "full",
@@ -1554,16 +1534,6 @@
   "employment": "full",
   "hybrid": false,
   "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "comeet:DRS RADA:6E.470": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
