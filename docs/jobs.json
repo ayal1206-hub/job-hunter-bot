@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T16:20:32+00:00",
+ "generated_at": "2026-11-11T22:51:47+00:00",
  "jobs": [
   {
    "key": "comeet:Global-e:BC.84D",
@@ -118,6 +118,35 @@
    "owner_only": false
   },
   {
+   "key": "comeet:CommIT:A0.578",
+   "source": "comeet",
+   "origin": "board",
+   "company": "CommIT",
+   "title": "NOC Analyst",
+   "location": "Petah Tikva, HQ (Remote)",
+   "region": "center",
+   "url": "https://www.comeet.com/jobs/comm-it/76.008/noc-analyst/A0.578",
+   "field": "support",
+   "field_label": "תמיכה / IT",
+   "level": "possible",
+   "employment": "full",
+   "years": null,
+   "hybrid": true,
+   "degree": null,
+   "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
+   "score": 2,
+   "tier": "long",
+   "reasons": [
+    "בלי רמה מוגדרת",
+    "היברידי / מהבית"
+   ],
+   "cv": "tech",
+   "first_seen": "2026-11-11",
+   "owner_only": false
+  },
+  {
    "key": "comeet:AllCloud:08.470",
    "source": "comeet",
    "origin": "board",
@@ -125,7 +154,7 @@
    "title": "Cloud DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/israel/08.470/cloud-devops-engineer/all/?refresh=1",
+   "url": "https://allcloud.io/careers/co/israel/08.470/cloud-devops-engineer/all/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -444,7 +473,7 @@
    "title": "DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/professional-services/09.E62/devops-engineer/",
+   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/all/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -877,7 +906,7 @@
    "title": "Backend Platform Engineer",
    "location": "Tel Aviv, Israel (Remote)",
    "region": "center",
-   "url": "https://claroty.com/open-positions/58.479",
+   "url": "https://claroty.com/open-positions/58.479?t=1794428399259",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -1676,7 +1705,7 @@
    "title": "Data Analyst",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/careers/10-379/",
+   "url": "https://www.global-e.com/jobs/10-379?t=1791903630120",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",

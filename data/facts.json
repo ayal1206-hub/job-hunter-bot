@@ -1539,16 +1539,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Riskified:8785367002": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "greenhouse:Gong:4728428006": {
   "years": 4,
   "employment": "full",
@@ -1591,6 +1581,16 @@
  },
  "comeet:Deloitte Israel:BF.47B": {
   "years": 6,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:CommIT:A0.578": {
+  "years": null,
   "employment": "full",
   "hybrid": true,
   "degree": null,
