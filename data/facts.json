@@ -1538,5 +1538,65 @@
   "years_left": null,
   "other_field": false,
   "v": 6
+ },
+ "greenhouse:Riskified:8785367002": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Gong:4728428006": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:DRS RADA:6E.470": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Samsung Israel:90.574": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Deloitte Israel:BF.47C": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Deloitte Israel:BF.47B": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
  }
 }
