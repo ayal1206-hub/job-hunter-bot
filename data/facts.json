@@ -109,16 +109,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Claroty:3C.374": {
-  "years": 4,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Exodigo:29.37D": {
   "years": null,
   "employment": "student",
@@ -1289,16 +1279,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Samsung Israel:AB.D6B": {
-  "years": 2,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Samsung Israel:8D.272": {
   "years": 3,
   "employment": "full",
@@ -1489,16 +1469,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Payoneer:8355124": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "greenhouse:Wiz:4726277006": {
   "years": 3,
   "employment": "full",
@@ -1594,6 +1564,36 @@
   "employment": "full",
   "hybrid": true,
   "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Riskified:8785367002": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Upwind:93.57F": {
+  "years": null,
+  "employment": "student",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": 1,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:CommIT:B3.571": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
