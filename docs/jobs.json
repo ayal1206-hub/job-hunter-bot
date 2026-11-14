@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-14T11:37:47+00:00",
+ "generated_at": "2026-11-14T18:17:58+00:00",
  "jobs": [
   {
    "key": "comeet:Upwind:93.57F",
@@ -37,7 +37,7 @@
    "title": "NOC Engineer- Student Position",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/en/careers/bc-84d/?t=1790635499157",
+   "url": "https://www.global-e.com/ko/careers/bc-84d/",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -472,7 +472,7 @@
    "title": "DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/all/",
+   "url": "https://allcloud.io/careers/co/professional-services/09.E62/devops-engineer/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -1164,14 +1164,14 @@
    "owner_only": false
   },
   {
-   "key": "greenhouse:Cato Networks:5030362101",
+   "key": "greenhouse:Cato Networks:5030360101",
    "source": "greenhouse",
    "origin": "board",
    "company": "Cato Networks",
    "title": "Software Engineer",
    "location": "Tel Aviv District, Israel",
    "region": "center",
-   "url": "https://www.catonetworks.com/careers/careers-post/5030362101?gh_jid=5030362101",
+   "url": "https://www.catonetworks.com/careers/careers-post/5030360101?gh_jid=5030360101",
    "field": "dev",
    "field_label": "פיתוח",
    "level": "possible",
@@ -1193,14 +1193,14 @@
    "owner_only": false
   },
   {
-   "key": "greenhouse:Cato Networks:5030360101",
+   "key": "greenhouse:Cato Networks:5030362101",
    "source": "greenhouse",
    "origin": "board",
    "company": "Cato Networks",
    "title": "Software Engineer",
    "location": "Tel Aviv District, Israel",
    "region": "center",
-   "url": "https://www.catonetworks.com/careers/careers-post/5030360101?gh_jid=5030360101",
+   "url": "https://www.catonetworks.com/careers/careers-post/5030362101?gh_jid=5030362101",
    "field": "dev",
    "field_label": "פיתוח",
    "level": "possible",
