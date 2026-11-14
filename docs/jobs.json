@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T19:55:57+00:00",
+ "generated_at": "2026-11-14T00:55:30+00:00",
  "jobs": [
   {
    "key": "comeet:Upwind:93.57F",
@@ -472,7 +472,7 @@
    "title": "DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/all/",
+   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -905,7 +905,7 @@
    "title": "Backend Platform Engineer",
    "location": "Tel Aviv, Israel (Remote)",
    "region": "center",
-   "url": "https://claroty.com/open-positions/58.479",
+   "url": "https://claroty.com/open-positions/58.479?t=1792403123561",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -1164,14 +1164,14 @@
    "owner_only": false
   },
   {
-   "key": "greenhouse:Cato Networks:5030360101",
+   "key": "greenhouse:Cato Networks:5030362101",
    "source": "greenhouse",
    "origin": "board",
    "company": "Cato Networks",
    "title": "Software Engineer",
    "location": "Tel Aviv District, Israel",
    "region": "center",
-   "url": "https://www.catonetworks.com/careers/careers-post/5030360101?gh_jid=5030360101",
+   "url": "https://www.catonetworks.com/careers/careers-post/5030362101?gh_jid=5030362101",
    "field": "dev",
    "field_label": "פיתוח",
    "level": "possible",
@@ -1193,14 +1193,14 @@
    "owner_only": false
   },
   {
-   "key": "greenhouse:Cato Networks:5030362101",
+   "key": "greenhouse:Cato Networks:5030360101",
    "source": "greenhouse",
    "origin": "board",
    "company": "Cato Networks",
    "title": "Software Engineer",
    "location": "Tel Aviv District, Israel",
    "region": "center",
-   "url": "https://www.catonetworks.com/careers/careers-post/5030362101?gh_jid=5030362101",
+   "url": "https://www.catonetworks.com/careers/careers-post/5030360101?gh_jid=5030360101",
    "field": "dev",
    "field_label": "פיתוח",
    "level": "possible",
