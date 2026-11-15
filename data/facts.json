@@ -269,16 +269,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Cato Networks:4895403101": {
-  "years": 4,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "greenhouse:Similarweb:6897277": {
   "years": 2,
   "employment": "full",
@@ -749,16 +739,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Upwind:5C.375": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Upwind:BA.04A": {
   "years": 3,
   "employment": "full",
@@ -934,16 +914,6 @@
   "employment": "full",
   "hybrid": true,
   "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "comeet:CommIT:97.76F": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
