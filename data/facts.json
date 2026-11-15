@@ -279,16 +279,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Cato Networks:4845229101": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "greenhouse:Similarweb:6897277": {
   "years": 2,
   "employment": "full",
@@ -364,16 +354,6 @@
   "employment": "full",
   "hybrid": true,
   "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "greenhouse:Payoneer:8211074": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
@@ -1604,6 +1584,36 @@
   "employment": "full",
   "hybrid": true,
   "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Dream:E4.57F": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Fetcherr:A5.D67": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Samsung Israel:D4.57C": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true,
+  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
