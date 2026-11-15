@@ -1569,16 +1569,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Riskified:8785367002": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Upwind:93.57F": {
   "years": null,
   "employment": "student",
@@ -1594,6 +1584,26 @@
   "employment": "full",
   "hybrid": true,
   "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Riskified:8934820002": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Kela:B6.07B": {
+  "years": null,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
