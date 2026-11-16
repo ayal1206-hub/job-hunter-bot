@@ -99,16 +99,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Global-e:BC.84D": {
-  "years": null,
-  "employment": "student",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Exodigo:29.37D": {
   "years": null,
   "employment": "student",
@@ -130,16 +120,6 @@
   "v": 6
  },
  "comeet:Upwind:63.053": {
-  "years": null,
-  "employment": "student",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "comeet:Upwind:A1.543": {
   "years": null,
   "employment": "student",
   "hybrid": true,
@@ -400,16 +380,6 @@
   "v": 6
  },
  "greenhouse:AppsFlyer:8394076002": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "greenhouse:AppsFlyer:8897823002": {
   "years": 3,
   "employment": "full",
   "hybrid": false,
@@ -899,26 +869,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:CommIT:B6.272": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "comeet:CommIT:72.279": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:CommIT:DE.27A": {
   "years": 2,
   "employment": "full",
@@ -1249,16 +1199,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Samsung Israel:D0.479": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "msc",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "greenhouse:AppsFlyer:8882917002": {
   "years": 3,
   "employment": "full",
@@ -1539,26 +1479,6 @@
   "other_field": false,
   "v": 6
  },
- "greenhouse:Riskified:8934820002": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
- "comeet:Kela:B6.07B": {
-  "years": null,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Dream:E4.57F": {
   "years": null,
   "employment": "full",
@@ -1584,6 +1504,36 @@
   "employment": "full",
   "hybrid": true,
   "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Claroty:3C.374": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Samsung Israel:E4.57B": {
+  "years": null,
+  "employment": "student",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": 85,
+  "years_left": 2.0,
+  "other_field": false,
+  "v": 6
+ },
+ "comeet:Samsung Israel:15.573": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "msc",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
