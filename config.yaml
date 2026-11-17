@@ -67,7 +67,7 @@ general_fields:
     keywords: [מכרז, שירות המדינה, נציבות, רשות המסים, מכס, בודק מכס, בודקת מכס, כלבן, כלבנית, כלבנות, בודק מטענים, בודקת מטענים, בידוק, משרד ה, ממשלתי, ממשלתית, משרד הביטחון]
   office:
     label: "משרדי"
-    keywords: [מזכיר, מזכירה, אדמיניסטרציה, אדמיניסטרטיבי, משרד, פקיד, פקידה, office, admin, back office]
+    keywords: [מזכיר, מזכירה, אדמיניסטרציה, אדמיניסטרטיבי, משרד, פקיד, פקידה, office, admin, back office, בק אופיס, בק-אופיס, קבלה, רכז, רכזת]
 
 # Title words that mark a job as student / entry level.
 student_keywords: [student, intern, internship, סטודנט, סטודנטית, משרת סטודנט]

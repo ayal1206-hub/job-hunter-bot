@@ -9,6 +9,8 @@ from .models import Job
 from .scoring import FACTS_VERSION, extract_facts, facts_from_dict, facts_to_dict, score, years_until
 
 EMAIL_JOB_TTL_DAYS = 14
+SITE_NAMES = {"alljob": "AllJobs", "alljobs": "AllJobs", "drushim": "Drushim", "jobmaster": "JobMaster",
+              "linkedin": "LinkedIn"}
 FIELD_LABELS = {"qa": "QA", "support": "תמיכה / IT", "cyber": "סייבר", "data": "דאטה / BI",
                 "devops": "DevOps / ענן", "dev": "פיתוח", "tech": "טכנולוגיה"}
 
@@ -16,12 +18,17 @@ FIELD_LABELS = {"qa": "QA", "support": "תמיכה / IT", "cyber": "סייבר",
 def _field_of_title(title: str, cfg: dict) -> tuple[str, str]:
     """(field key, label) for a free-text title: tech tracks first, then general fields."""
     text = title.lower()
-    for name, t in cfg["tracks"].items():
-        if _any(text, t["keywords"]):
+    tracks = cfg["tracks"]
+    for name, t in tracks.items():
+        if name != "tech" and _any(text, t["keywords"]):
             return name, FIELD_LABELS.get(name, t["label"])
+    # General fields before the broad "tech" track: "back office for the engineering
+    # department" is an office job, not a tech one.
     for name, f in cfg.get("general_fields", {}).items():
         if _any(text, f["keywords"]):
             return name, f["label"]
+    if "tech" in tracks and _any(text, tracks["tech"]["keywords"]):
+        return "tech", FIELD_LABELS["tech"]
     return "other", "אחר"
 
 
@@ -83,6 +90,7 @@ def email_entries(alerts: list[AlertEmail], cfg: dict, today: str) -> list[dict]
     entries = []
     for alert in alerts:
         source = "linkedin" if "linkedin" in alert.sender else alert.sender.split(".")[0]
+        site = SITE_NAMES.get(source, source)
         for job in alert.jobs:
             title, url, company, location, details = (*job, "", "", "")[:5]
             low = title.lower()
@@ -99,7 +107,7 @@ def email_entries(alerts: list[AlertEmail], cfg: dict, today: str) -> list[dict]
                 continue
             match = Match(track=field, track_label=label, level=level)
             region = region_of(location, cfg) or region_of(title, cfg) or "any"
-            entries.append(_entry(f"email:{url}", source, company or source, title, location, region, url,
+            entries.append(_entry(f"email:{url}", source, company or site, title, location, region, url,
                                   field, label, match, facts, today, "email"))
     return entries
 

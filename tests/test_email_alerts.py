@@ -165,6 +165,7 @@ def test_alljobs_jobs_enter_the_pool_and_sales_jobs_are_skipped():
     assert "נציגי/ות מכירות למוקד באשקלון" not in entries
     cs = entries["סטודנטים למדעי המחשב / מערכות מידע"]
     assert (cs["region"], cs["level"], cs["employment"], cs["source"]) == ("south", "student", "student", "alljob")
+    assert cs["company"] == "AllJobs"
     guard = entries["דרושים/ות מאבטחים/ות - שכר 64 לשעה"]
     assert (guard["field"], guard["region"], guard["company"]) == ("security", "south", "Guard Co")
 
@@ -173,3 +174,12 @@ def test_unknown_sites_lose_personal_query_params():
     html_body = '<a href="https://www.drushim.co.il/job/123/?userId=9&token=abc&utm_source=mail&jobCode=55">QA student</a>'
     (title, url, *_), = ea.extract_jobs(html_body, "drushim.co.il", 5)
     assert url == "https://www.drushim.co.il/job/123/?jobCode=55"
+
+
+def test_office_job_in_engineering_department_is_office_not_tech():
+    from pathlib import Path
+    import yaml
+    from jobbot.pipeline import _field_of_title
+    cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
+    assert _field_of_title("דרוש/ה בק אופיס למחלקת ההנדסה", cfg)[0] == "office"
+    assert _field_of_title("סטודנטים למדעי המחשב / מערכות מידע", cfg)[0] == "tech"
