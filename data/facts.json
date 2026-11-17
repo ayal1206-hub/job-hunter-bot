@@ -1489,16 +1489,6 @@
   "other_field": false,
   "v": 6
  },
- "comeet:Fetcherr:A5.D67": {
-  "years": 2,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "v": 6
- },
  "comeet:Samsung Israel:D4.57C": {
   "years": null,
   "employment": "full",
@@ -1534,6 +1524,16 @@
   "employment": "full",
   "hybrid": false,
   "degree": "msc",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "v": 6
+ },
+ "greenhouse:Cato Networks:5036503101": {
+  "years": 5,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,

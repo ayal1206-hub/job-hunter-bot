@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-17T02:59:44+00:00",
+ "generated_at": "2026-11-17T13:38:34+00:00",
  "jobs": [
   {
    "key": "comeet:Upwind:93.57F",
@@ -9,7 +9,7 @@
    "title": "Technical Support Engineer- Student",
    "location": "Ramat Gan, Tel Aviv",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/93.57F/technical-support-engineer-student/all?#brxe-rkmjgc",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/93.57F/technical-support-engineer-student/all#brxe-rkmjgc",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -125,7 +125,7 @@
    "title": "Cloud DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/israel/08.470/cloud-devops-engineer/",
+   "url": "https://allcloud.io/careers/co/israel/08.470/cloud-devops-engineer/all/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -299,7 +299,7 @@
    "title": "Data Platform Engineer",
    "location": "Tel Aviv, Israel (Remote)",
    "region": "center",
-   "url": "https://claroty.com/open-positions/CA.471",
+   "url": "https://claroty.com/open-positions/CA.471?t=1794918285255",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",
@@ -805,36 +805,6 @@
    "reasons": [
     "בלי רמה מוגדרת",
     "דורש תואר גמור",
-    "היברידי / מהבית"
-   ],
-   "cv": "tech",
-   "first_seen": "2026-11-15",
-   "owner_only": false
-  },
-  {
-   "key": "comeet:Fetcherr:A5.D67",
-   "source": "comeet",
-   "origin": "board",
-   "company": "Fetcherr",
-   "title": "Data Analyst- Tableau",
-   "location": "Netanya (Remote)",
-   "region": "center",
-   "url": "https://www.comeet.com/jobs/fetcherr/68.006/data-analyst--tableau/A5.D67",
-   "field": "data",
-   "field_label": "דאטה / BI",
-   "level": "possible",
-   "employment": "full",
-   "years": 2,
-   "hybrid": true,
-   "degree": null,
-   "min_gpa": null,
-   "years_left": null,
-   "owner_hide": false,
-   "score": -2,
-   "tier": "long",
-   "reasons": [
-    "בלי רמה מוגדרת",
-    "דורש 2+ שנות ניסיון",
     "היברידי / מהבית"
    ],
    "cv": "tech",
