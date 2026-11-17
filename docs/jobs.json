@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T18:41:43+00:00",
+ "generated_at": "2026-11-17T02:59:44+00:00",
  "jobs": [
   {
    "key": "comeet:Upwind:93.57F",
@@ -9,7 +9,7 @@
    "title": "Technical Support Engineer- Student",
    "location": "Ramat Gan, Tel Aviv",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/93.57F/technical-support-engineer-student/all",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/93.57F/technical-support-engineer-student/all?#brxe-rkmjgc",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -125,7 +125,7 @@
    "title": "Cloud DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/israel/08.470/cloud-devops-engineer/all/",
+   "url": "https://allcloud.io/careers/co/israel/08.470/cloud-devops-engineer/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -444,7 +444,7 @@
    "title": "DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/all/",
+   "url": "https://allcloud.io/careers/co/professional-services/09.E62/devops-engineer/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -1137,14 +1137,14 @@
    "owner_only": false
   },
   {
-   "key": "greenhouse:Cato Networks:5030362101",
+   "key": "greenhouse:Cato Networks:5030360101",
    "source": "greenhouse",
    "origin": "board",
    "company": "Cato Networks",
    "title": "Software Engineer",
    "location": "Tel Aviv District, Israel",
    "region": "center",
-   "url": "https://www.catonetworks.com/careers/careers-post/5030362101?gh_jid=5030362101",
+   "url": "https://www.catonetworks.com/careers/careers-post/5030360101?gh_jid=5030360101",
    "field": "dev",
    "field_label": "פיתוח",
    "level": "possible",
@@ -1166,14 +1166,14 @@
    "owner_only": false
   },
   {
-   "key": "greenhouse:Cato Networks:5030360101",
+   "key": "greenhouse:Cato Networks:5030362101",
    "source": "greenhouse",
    "origin": "board",
    "company": "Cato Networks",
    "title": "Software Engineer",
    "location": "Tel Aviv District, Israel",
    "region": "center",
-   "url": "https://www.catonetworks.com/careers/careers-post/5030360101?gh_jid=5030360101",
+   "url": "https://www.catonetworks.com/careers/careers-post/5030362101?gh_jid=5030362101",
    "field": "dev",
    "field_label": "פיתוח",
    "level": "possible",
