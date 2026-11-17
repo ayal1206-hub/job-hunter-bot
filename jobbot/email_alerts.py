@@ -17,6 +17,7 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 from email.header import decode_header, make_header
 from html.parser import HTMLParser
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from .filters import _any
 
@@ -47,8 +48,8 @@ class AlertEmail:
     message_id: str
     sender: str
     subject: str
-    # (title, url, company, location); company/location are "" when the email doesn't say.
-    jobs: list[tuple[str, str, str, str]] = field(default_factory=list)
+    # (title, url, company, location[, details]); "" when the email doesn't say.
+    jobs: list[tuple] = field(default_factory=list)
 
 
 class _LinkCollector(HTMLParser):
@@ -122,10 +123,61 @@ def extract_linkedin_jobs(html_body: str, limit: int) -> list[tuple[str, str, st
             for job_id, (title, company, location) in list(parser.jobs.items())[:limit]]
 
 
-def extract_jobs(html_body: str, sender_domain: str, limit: int) -> list[tuple[str, str, str, str]]:
+def _plain(fragment: str) -> str:
+    text = re.sub(r"<br\s*/?>", " ", fragment, flags=re.I)
+    text = html.unescape(re.sub(r"<[^>]+>", " ", text))
+    return re.sub(r"\s+", " ", text).strip()
+
+
+_AJ_TITLE = re.compile(r"<td[^>]*font-size:\s*13pt;\s*font-weight:\s*bold[^>]*>(.*?)</td>", re.S | re.I)
+
+
+def extract_alljobs_jobs(html_body: str, limit: int) -> list[tuple[str, str, str, str, str]]:
+    """AllJobs alert cards: title, company, workplace, job type, a short description and a
+    personal redirect link. The link carries the user's id and key, so only the job id is
+    kept and a public job URL is built from it."""
+    jobs, seen = [], set()
+    starts = list(_AJ_TITLE.finditer(html_body))
+    for i, m in enumerate(starts):
+        chunk = html_body[m.end(): starts[i + 1].start() if i + 1 < len(starts) else len(html_body)]
+        title = _plain(m.group(1))
+        job_id = re.search(r"JobIDs?=(\d+)", chunk)
+        if not title or not job_id or job_id.group(1) in seen:
+            continue
+        seen.add(job_id.group(1))
+
+        def field(label):
+            f = re.search(label + r"\s*:?\s*</strong>\s*(?:</span>)?(.*?)</td>", chunk, re.S)
+            return _plain(f.group(1)) if f else ""
+
+        company = field("חברה")
+        desc = re.search(r'class="LH"[^>]*>(.*?)</td>', chunk, re.S)
+        details = " ".join(p for p in (field("סוג משרה"), _plain(desc.group(1)) if desc else "") if p)
+        jobs.append((title, f"https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID={job_id.group(1)}",
+                     "" if company == "אחר" else company, field("מקום העבודה"), details))
+        if len(jobs) >= limit:
+            break
+    return jobs
+
+
+_PERSONAL_PARAM = re.compile(r"(user|uid|key|token|email|mail|hash|sig|auth|session|utm_|ref|trk)", re.I)
+
+
+def _public_url(url: str) -> str:
+    """Drop query parameters that identify the recipient (the job list is public)."""
+    parts = urlsplit(url)
+    query = [(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if not _PERSONAL_PARAM.search(k)]
+    return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(query), ""))
+
+
+def extract_jobs(html_body: str, sender_domain: str, limit: int) -> list[tuple]:
+    """(title, url, company, location[, details]) for each job in an alert email."""
     if "linkedin.com" in sender_domain:
         return extract_linkedin_jobs(html_body, limit)
-    """Return (title, url) for links that look like job postings."""
+    if "alljob" in sender_domain:
+        cards = extract_alljobs_jobs(html_body, limit)
+        if cards:
+            return cards
     parser = _LinkCollector()
     parser.feed(html_body)
     jobs, seen_urls = [], set()
@@ -136,6 +188,7 @@ def extract_jobs(html_body: str, sender_domain: str, limit: int) -> list[tuple[s
             continue
         if any(skip in text.lower() for skip in _SKIP_TEXT):
             continue
+        url = _public_url(url)
         if url in seen_urls:
             continue
         seen_urls.add(url)

@@ -52,7 +52,7 @@ tracks:
   tech:
     label: "Tech (other)"
     # Broad tech words. Not in junior_tracks/possible_tracks, so only student positions use it.
-    keywords: [engineer, engineering, hardware, chip, electrical, electronics, vlsi, asic, fpga, security, monitoring, network, it, research, ai, ml, הנדסה, חומרה]
+    keywords: [engineer, engineering, hardware, chip, electrical, electronics, vlsi, asic, fpga, security, monitoring, network, it, research, ai, ml, computer science, information systems, הנדסה, חומרה, מדעי המחשב, מערכות מידע, הנדסת תוכנה, הייטק]
 
 # Fields used only to label jobs that arrive via alert emails (no seniority filter).
 general_fields:
@@ -104,7 +104,10 @@ python_alerts: true
 email_alerts:
   enabled: true
   # LinkedIn: create Job Alerts on linkedin.com/jobs (they arrive from jobalerts-noreply@linkedin.com).
-  senders: [alljobs.co.il, drushim.co.il, jobmaster.co.il, jobalerts-noreply@linkedin.com]
+  # AllJobs sends from Alljobs@alljob.co.il (no "s").
+  senders: [alljob.co.il, drushim.co.il, jobmaster.co.il, jobalerts-noreply@linkedin.com]
+  # Jobs whose title matches no tech track or general field (sales, call centres) are skipped.
+  keep_other_fields: false
   lookback_days: 3
   max_jobs_per_email: 10
 

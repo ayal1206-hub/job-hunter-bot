@@ -84,14 +84,19 @@ def email_entries(alerts: list[AlertEmail], cfg: dict, today: str) -> list[dict]
     for alert in alerts:
         source = "linkedin" if "linkedin" in alert.sender else alert.sender.split(".")[0]
         for job in alert.jobs:
-            title, url, company, location = (*job, "", "")[:4]
+            title, url, company, location, details = (*job, "", "", "")[:5]
             low = title.lower()
             if _any(low, cfg["exclude_keywords"]):
                 continue   # senior / lead / manager roles from alert emails too
             field, label = _field_of_title(title, cfg)
-            level = ("student" if _any(low, cfg["student_keywords"])
+            if field == "other" and not cfg.get("email_alerts", {}).get("keep_other_fields", False):
+                continue   # sales, call centres... job sites send plenty of those
+            text = f"{title} {details}".lower()
+            level = ("student" if _any(text, cfg["student_keywords"]) or "מתאים גם לסטודנטים" in text
                      else "junior" if _any(low, cfg["junior_keywords"]) else "possible")
-            facts = extract_facts(title, "", level)
+            facts = extract_facts(title, details, level)
+            if drop_reason(facts, cfg):
+                continue
             match = Match(track=field, track_label=label, level=level)
             region = region_of(location, cfg) or region_of(title, cfg) or "any"
             entries.append(_entry(f"email:{url}", source, company or source, title, location, region, url,

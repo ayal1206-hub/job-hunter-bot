@@ -136,3 +136,40 @@ def test_linkedin_jobs_enter_the_pool_with_region_and_level():
     assert (qa["company"], qa["region"], qa["level"], qa["field"], qa["source"]) == ("Acme Ltd", "south", "student", "qa", "linkedin")
     it = entries["Junior IT Support"]
     assert (it["region"], it["level"], it["field"]) == ("south", "junior", "support")
+
+
+def _alljobs_html():
+    from pathlib import Path
+    return (Path(__file__).parent / "fixtures" / "alljobs_alert.html").read_text(encoding="utf-8")
+
+
+def test_alljobs_cards_give_title_company_place_and_a_public_link():
+    jobs = ea.extract_jobs(_alljobs_html(), "alljob.co.il", 10)
+    assert [j[0] for j in jobs] == ["סטודנטים למדעי המחשב / מערכות מידע", "נציגי/ות מכירות למוקד באשקלון",
+                                    "דרושים/ות מאבטחים/ות - שכר 64 לשעה"]
+    title, url, company, place, details = jobs[0]
+    assert url == "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=9000001"
+    assert (company, place) == ("", "באר שבע")          # "אחר" (other) means no company name
+    assert "מתאים גם לסטודנטים" in details
+    assert not any("UserID" in j[1] or "SECRETKEY" in j[1] for j in jobs)   # the job list is public
+
+
+def test_alljobs_jobs_enter_the_pool_and_sales_jobs_are_skipped():
+    from pathlib import Path
+    import yaml
+    from jobbot.pipeline import email_entries
+    cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
+    alert = ea.AlertEmail("<a>", "alljob.co.il", "איל, עלתה משרה חדשה שיכולה להתאים לך",
+                          ea.extract_jobs(_alljobs_html(), "alljob.co.il", 10))
+    entries = {e["title"]: e for e in email_entries([alert], cfg, "2026-11-18")}
+    assert "נציגי/ות מכירות למוקד באשקלון" not in entries
+    cs = entries["סטודנטים למדעי המחשב / מערכות מידע"]
+    assert (cs["region"], cs["level"], cs["employment"], cs["source"]) == ("south", "student", "student", "alljob")
+    guard = entries["דרושים/ות מאבטחים/ות - שכר 64 לשעה"]
+    assert (guard["field"], guard["region"], guard["company"]) == ("security", "south", "Guard Co")
+
+
+def test_unknown_sites_lose_personal_query_params():
+    html_body = '<a href="https://www.drushim.co.il/job/123/?userId=9&token=abc&utm_source=mail&jobCode=55">QA student</a>'
+    (title, url, *_), = ea.extract_jobs(html_body, "drushim.co.il", 5)
+    assert url == "https://www.drushim.co.il/job/123/?jobCode=55"
