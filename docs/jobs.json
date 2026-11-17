@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-17T22:25:53+00:00",
+ "generated_at": "2026-11-17T22:27:41+00:00",
  "jobs": [
   {
    "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8135779",
@@ -152,35 +152,6 @@
    "owner_only": true
   },
   {
-   "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8904096",
-   "source": "alljob",
-   "origin": "email",
-   "company": "alljob",
-   "title": "סטודנטים למדעי המחשב / מערכות מידע /הנדסת חשמל",
-   "location": "באר שבע",
-   "region": "south",
-   "url": "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8904096",
-   "field": "tech",
-   "field_label": "טכנולוגיה",
-   "level": "student",
-   "employment": "student",
-   "years": null,
-   "hybrid": false,
-   "degree": null,
-   "min_gpa": null,
-   "years_left": null,
-   "owner_hide": false,
-   "score": 7,
-   "tier": "hot",
-   "reasons": [
-    "משרת סטודנט",
-    "בדרום"
-   ],
-   "cv": "tech",
-   "first_seen": "2026-11-17",
-   "owner_only": true
-  },
-  {
    "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8904838",
    "source": "alljob",
    "origin": "email",
@@ -189,6 +160,36 @@
    "location": "חדרה, אשדוד, קרית מלאכי, קרית גת ואשקלון",
    "region": "south",
    "url": "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8904838",
+   "field": "office",
+   "field_label": "משרדי",
+   "level": "student",
+   "employment": "student",
+   "years": null,
+   "hybrid": false,
+   "degree": null,
+   "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
+   "score": 9,
+   "tier": "hot",
+   "reasons": [
+    "משרת סטודנט",
+    "בדרום",
+    "תחום שבחרת"
+   ],
+   "cv": "general",
+   "first_seen": "2026-11-17",
+   "owner_only": true
+  },
+  {
+   "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8904096",
+   "source": "alljob",
+   "origin": "email",
+   "company": "AllJobs",
+   "title": "סטודנטים למדעי המחשב / מערכות מידע /הנדסת חשמל",
+   "location": "באר שבע",
+   "region": "south",
+   "url": "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8904096",
    "field": "tech",
    "field_label": "טכנולוגיה",
    "level": "student",
