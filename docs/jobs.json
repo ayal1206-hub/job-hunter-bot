@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-17T13:38:34+00:00",
+ "generated_at": "2026-11-17T22:22:18+00:00",
  "jobs": [
   {
    "key": "comeet:Upwind:93.57F",
@@ -9,7 +9,7 @@
    "title": "Technical Support Engineer- Student",
    "location": "Ramat Gan, Tel Aviv",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/93.57F/technical-support-engineer-student/all#brxe-rkmjgc",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/93.57F/technical-support-engineer-student/all",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -206,6 +206,35 @@
    "owner_only": false
   },
   {
+   "key": "greenhouse:Riskified:8934820002",
+   "source": "greenhouse",
+   "origin": "board",
+   "company": "Riskified",
+   "title": "Product Data Analyst",
+   "location": "Tel Aviv",
+   "region": "center",
+   "url": "https://www.riskified.com/careers/job-description/?gh_jid=8934820002",
+   "field": "data",
+   "field_label": "דאטה / BI",
+   "level": "possible",
+   "employment": "full",
+   "years": null,
+   "hybrid": true,
+   "degree": null,
+   "min_gpa": null,
+   "years_left": null,
+   "owner_hide": false,
+   "score": 1,
+   "tier": "long",
+   "reasons": [
+    "בלי רמה מוגדרת",
+    "היברידי / מהבית"
+   ],
+   "cv": "tech",
+   "first_seen": "2026-11-17",
+   "owner_only": false
+  },
+  {
    "key": "comeet:Dream:E4.57F",
    "source": "comeet",
    "origin": "board",
@@ -299,7 +328,7 @@
    "title": "Data Platform Engineer",
    "location": "Tel Aviv, Israel (Remote)",
    "region": "center",
-   "url": "https://claroty.com/open-positions/CA.471?t=1794918285255",
+   "url": "https://claroty.com/open-positions/CA.471",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "possible",
@@ -444,7 +473,7 @@
    "title": "DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/professional-services/09.E62/devops-engineer/",
+   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/all/?_gl=1*10m1l8d*_up*MQ..*_gs*MQ..&gclid=Cj0KCQiAk_DXBhCoARIsAHE-omMFWp9kBnyABG3s_u5IOlnT-xGK-3be5ZLhh2_DDns0hcs3gpEV-lUaAvtHEALw_wcB&gbraid=0AAAAADRW_GgAtx8DK9XpyO_nRRt6j3---",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
@@ -473,7 +502,7 @@
    "title": "Cloud Security Researcher",
    "location": "Ramat Gan, Tel Aviv (Remote)",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/14.078/cloud-security-researcher/all",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/14.078/platform-security-researcher/all",
    "field": "cyber",
    "field_label": "סייבר",
    "level": "possible",
