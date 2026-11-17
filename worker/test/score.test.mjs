@@ -113,3 +113,11 @@ test("jobs that need more years of studies than the user has left are hidden", (
   assert.deepEqual(cleanProfile({ graduation: "2028-07" }), { graduation: "2028-07" });
   assert.deepEqual(cleanProfile({ graduation: "soon" }), { graduation: null });
 });
+
+test("final-year and third-year-only jobs are hidden for a second-year student", () => {
+  const base = { level: "student", employment: "student", region: "south", field: "qa", years: null };
+  const grad = String(new Date().getUTCFullYear() + 2);   // ~1.5-2.5 years left: not final year
+  assert.equal(scoreAll([{ ...base, key: "f", final_year: true }], { graduation: grad }).length, 0);
+  assert.equal(scoreAll([{ ...base, key: "y", min_study_year: 3 }], { graduation: grad }).length, 0);
+  assert.equal(scoreAll([{ ...base, key: "o" }], { graduation: grad }).length, 1);
+});

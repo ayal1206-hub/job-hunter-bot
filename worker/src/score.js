@@ -92,6 +92,9 @@ export function studiesLeft(graduation, now = new Date()) {
   return (y - now.getUTCFullYear()) + (m - (now.getUTCMonth() + 1)) / 12;
 }
 
+const DEGREE_YEARS = 3;
+export const studyYear = (left) => Math.max(1, Math.min(DEGREE_YEARS, DEGREE_YEARS - Math.trunc(left)));
+
 // Jobs this user can't apply to at all, once the description is known.
 export function excluded(job, profile) {
   const p = { ...DEFAULT_PROFILE, ...profile };
@@ -101,6 +104,8 @@ export function excluded(job, profile) {
   if (job.min_gpa && p.gpa && p.gpa < job.min_gpa) return "gpa";
   const left = studiesLeft(p.graduation);
   if (job.years_left && left != null && left < job.years_left) return "studies";
+  if (job.final_year && left != null && left > 1) return "final_year";
+  if (job.min_study_year && left != null && studyYear(left) < job.min_study_year) return "study_year";
   return null;
 }
 

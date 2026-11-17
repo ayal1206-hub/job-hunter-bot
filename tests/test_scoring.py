@@ -17,7 +17,7 @@ CFG = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(en
     ("At least 2 years of hands-on experience with Linux", 2),
     ("1-2 years experience in support", 1),
     ("two years of professional experience", 2),
-    ("Requirements: 3+ years of experience. Nice to have: 1 year experience with Jira", 1),
+    ("Requirements: 3+ years of experience. Nice to have: 1 year experience with Jira", 3),
     ("לפחות 3 שנות ניסיון בבדיקות", 3),
     ("שנתיים ניסיון בתמיכה", 2),
     ("שנת ניסיון לפחות", 1),
@@ -253,3 +253,54 @@ def test_jobs_for_other_disciplines_only():
     assert r.search("המשרה מיועדת לסטודנטים לראיית חשבון בלבד")
     assert not r.search("Computer Science students only")
     assert not r.search("Knowledge of accounting systems - advantage. Students only.")
+
+
+def test_final_year_and_study_year_requirements():
+    from jobbot.scoring import _FINAL_YEAR, required_study_year, study_year, owner_block, extract_facts
+    assert _FINAL_YEAR.search("אנחנו מחפשים סטודנטים למדעי המחשב, הנמצאים בשנה האחרונה בלימודים")
+    assert _FINAL_YEAR.search("Final-year B.Sc. students in Computer Science")
+    assert not _FINAL_YEAR.search("Join us for the last year of growth")
+    assert required_study_year("Second- or third-year student in Computer Science") == 2
+    assert required_study_year("Third-year students and above") == 3
+    assert required_study_year("סטודנט/ית שנה ג' ומעלה למדעי המחשב") == 3
+    assert required_study_year("first year in the company") is None
+    assert study_year(1.67) == 2 and study_year(0.67) == 3 and study_year(2.5) == 1
+    final = extract_facts("סטודנטים למדעי המחשב", "הנמצאים בשנה האחרונה בלימודים", "student")
+    assert owner_block(final, 1.67) == "רק לסטודנטים בשנה האחרונה"
+    assert owner_block(final, 0.67) is None
+    third = extract_facts("QA Student", "Third-year students and above", "student")
+    assert owner_block(third, 1.67) == "רק משנה ג' ומעלה"
+    second = extract_facts("Support Student", "Second- or third-year student", "student")
+    assert owner_block(second, 1.67) is None
+
+
+def test_years_requirements_in_the_wild():
+    from jobbot.scoring import required_years
+    assert required_years("5+ years running production organization with internet-facing traffic") == 5
+    assert required_years("Qualifications 5+ years in product, business or data analytics") == 5
+    assert required_years("4+ years as a Data or Software Engineer in cloud-native environments") == 4
+    assert required_years("1 - 2 years of proven hands-on experience with AWS - Must.") == 1
+    assert required_years("Requirements 2-4 years of hands-on experience in the cyber-security industry.") == 2
+    assert required_years("5+ years of data science experience. 2+ years of software engineering.") == 5
+    assert required_years("1+ years of experience in support. 3+ years with Kubernetes - advantage") == 1
+    assert required_years("Founded 10 years ago, we grew for 12 years of growth.") is None
+    assert required_years("At least one full year remaining until graduation") is None
+
+
+def test_bare_degree_requirements():
+    from jobbot.scoring import required_degree
+    assert required_degree("Requirements: 2-4 years of experience. B.Sc.") == "bsc_done"
+    assert required_degree("BA/BS degree or equivalent experience.") == "bsc_done"
+    assert required_degree("Degree in computer science or equivalent.") == "bsc_done"
+    assert required_degree("מתאים כמשרה התחלתית תואר ראשון - חובה ניסיון באקסל") == "bsc_done"
+    assert required_degree("Currently pursuing a degree (Computer Science) - Must. Student position") is None
+    assert required_degree("B.Sc. in Computer Science - advantage") is None
+
+
+def test_requirements_inside_one_long_bullet_blob():
+    from jobbot.scoring import required_years
+    blob = ("At least 3 years of work experience as Analyst in a Tech Company - Must At least 2 years' experience "
+            "in Python scripting - Must Experience with SQL Knowledge of Spark - advantage Experience with Airflow")
+    assert required_years(blob) == 3
+    assert required_years("Over 5 years in Embedded SW development - mandatory Experience with ST - big advantage") == 5
+    assert required_years("Nice to have: 3+ years with Kafka") is None

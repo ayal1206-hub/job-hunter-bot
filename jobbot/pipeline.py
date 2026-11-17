@@ -6,7 +6,7 @@ from .details import fetch_description, page_to_text
 from .email_alerts import AlertEmail
 from .filters import Match, _any, evaluate, region_of
 from .models import Job
-from .scoring import FACTS_VERSION, extract_facts, facts_from_dict, facts_to_dict, score, years_until
+from .scoring import FACTS_VERSION, extract_facts, facts_from_dict, facts_to_dict, owner_block, score, years_until
 
 EMAIL_JOB_TTL_DAYS = 14
 SITE_NAMES = {"alljob": "AllJobs", "alljobs": "AllJobs", "drushim": "Drushim", "jobmaster": "JobMaster",
@@ -43,7 +43,8 @@ def _entry(key, source, company, title, location, region, url, field, field_labe
         "employment": facts.employment, "years": facts.years, "hybrid": facts.hybrid,
         "degree": facts.degree, "min_gpa": facts.min_gpa, "years_left": facts.years_left,
         # The owner can't apply: needs more years of studies than the owner has left.
-        "owner_hide": bool(facts.years_left and studies_left is not None and studies_left < facts.years_left),
+        "final_year": facts.final_year, "min_study_year": facts.min_study_year,
+        "owner_hide": bool(owner_block(facts, studies_left)),
         "score": s, "tier": tier, "reasons": reasons,
         "cv": "tech" if is_tech else "general", "first_seen": today,
         # Jobs from the owner's personal alert emails are shown only to the owner.
@@ -108,7 +109,8 @@ def email_entries(alerts: list[AlertEmail], cfg: dict, today: str) -> list[dict]
             match = Match(track=field, track_label=label, level=level)
             region = region_of(location, cfg) or region_of(title, cfg) or "any"
             entries.append(_entry(f"email:{url}", source, company or site, title, location, region, url,
-                                  field, label, match, facts, today, "email"))
+                                  field, label, match, facts, today, "email",
+                                  years_until((cfg.get("owner") or {}).get("graduation"))))
     return entries
 
 
