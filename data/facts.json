@@ -513,18 +513,6 @@
   "min_study_year": null,
   "v": 9
  },
- "greenhouse:Wiz:4645081006": {
-  "years": 2,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 9
- },
  "greenhouse:Wiz:4422889006": {
   "years": 5,
   "employment": "full",
@@ -758,18 +746,6 @@
   "employment": "full",
   "hybrid": true,
   "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 9
- },
- "comeet:Exodigo:75.478": {
-  "years": 4,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
@@ -1725,18 +1701,6 @@
   "min_study_year": null,
   "v": 9
  },
- "comeet:Deloitte Israel:BF.47B": {
-  "years": 6,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 9
- },
  "comeet:CommIT:A0.578": {
   "years": null,
   "employment": "full",
@@ -1845,10 +1809,22 @@
   "min_study_year": null,
   "v": 9
  },
- "greenhouse:Riskified:8934820002": {
-  "years": 5,
+ "comeet:KPMG Israel:B6.572": {
+  "years": 3,
   "employment": "full",
-  "hybrid": true,
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 9
+ },
+ "greenhouse:Wiz:4720879006": {
+  "years": 2,
+  "employment": "full",
+  "hybrid": false,
   "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
@@ -1857,11 +1833,11 @@
   "min_study_year": null,
   "v": 9
  },
- "comeet:KPMG Israel:B6.572": {
-  "years": 3,
+ "comeet:DRS RADA:CA.37A": {
+  "years": null,
   "employment": "full",
   "hybrid": false,
-  "degree": null,
+  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
