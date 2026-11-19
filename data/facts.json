@@ -119,18 +119,6 @@
   "min_study_year": null,
   "v": 9
  },
- "comeet:Exodigo:29.37D": {
-  "years": null,
-  "employment": "student",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": 2,
-  "other_field": false,
-  "final_year": false,
-  "min_study_year": 2,
-  "v": 9
- },
  "comeet:DRS RADA:0B.374": {
   "years": 3,
   "employment": "full",
@@ -313,18 +301,6 @@
  },
  "greenhouse:Similarweb:7972320": {
   "years": 4,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 9
- },
- "greenhouse:Similarweb:8284137": {
-  "years": 2,
   "employment": "full",
   "hybrid": false,
   "degree": "bsc_done",
@@ -1461,18 +1437,6 @@
   "min_study_year": null,
   "v": 9
  },
- "comeet:Claroty:BB.478": {
-  "years": 6,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 9
- },
  "comeet:KPMG Israel:AB.479": {
   "years": null,
   "employment": "full",
@@ -1850,6 +1814,42 @@
   "employment": "full",
   "hybrid": false,
   "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 9
+ },
+ "comeet:Claroty:D5.076": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 9
+ },
+ "comeet:DRS RADA:08.579": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": false,
+  "degree": "bsc_done",
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 9
+ },
+ "comeet:Deloitte Israel:A6.578": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": "bsc_done",
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
