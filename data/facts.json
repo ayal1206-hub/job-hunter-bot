@@ -1844,5 +1844,17 @@
   "final_year": false,
   "min_study_year": null,
   "v": 9
+ },
+ "comeet:Team8:97.571": {
+  "years": 6,
+  "employment": "full",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 9
  }
 }
