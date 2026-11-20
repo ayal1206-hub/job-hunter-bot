@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-19T23:07:36+00:00",
+ "generated_at": "2026-11-20T07:30:13+00:00",
  "jobs": [
   {
    "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8906173",
@@ -32,6 +32,38 @@
    ],
    "cv": "general",
    "first_seen": "2026-11-19",
+   "owner_only": true
+  },
+  {
+   "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8864806",
+   "source": "alljob",
+   "origin": "email",
+   "company": "מיקוד אבטחה",
+   "title": "דרוש /ה מאבטח /ת רמה א למפעל ביטחוני בשדרות | שכר 43 ש\"ח",
+   "location": "שדרות",
+   "region": "south",
+   "url": "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8864806",
+   "field": "security",
+   "field_label": "אבטחה",
+   "level": "student",
+   "employment": "student",
+   "years": null,
+   "hybrid": false,
+   "degree": null,
+   "min_gpa": null,
+   "years_left": null,
+   "final_year": false,
+   "min_study_year": null,
+   "owner_hide": false,
+   "score": 9,
+   "tier": "hot",
+   "reasons": [
+    "משרת סטודנט",
+    "בדרום",
+    "תחום שבחרת"
+   ],
+   "cv": "general",
+   "first_seen": "2026-11-20",
    "owner_only": true
   },
   {
@@ -508,6 +540,38 @@
    "owner_only": false
   },
   {
+   "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8909356",
+   "source": "alljob",
+   "origin": "email",
+   "company": "AllJobs",
+   "title": "סייר/ת ברכב למגרש מכוניות באשקלון",
+   "location": "אשקלון",
+   "region": "south",
+   "url": "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8909356",
+   "field": "security",
+   "field_label": "אבטחה",
+   "level": "possible",
+   "employment": "full",
+   "years": null,
+   "hybrid": false,
+   "degree": null,
+   "min_gpa": null,
+   "years_left": null,
+   "final_year": false,
+   "min_study_year": null,
+   "owner_hide": false,
+   "score": 4,
+   "tier": "good",
+   "reasons": [
+    "בלי רמה מוגדרת",
+    "בדרום",
+    "תחום שבחרת"
+   ],
+   "cv": "general",
+   "first_seen": "2026-11-20",
+   "owner_only": true
+  },
+  {
    "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8902923",
    "source": "alljob",
    "origin": "email",
@@ -952,7 +1016,7 @@
    "title": "Junior Data Analyst",
    "location": "Netanya",
    "region": "center",
-   "url": "https://www.drsrada.com/apply?position=CA.37A&-updates",
+   "url": "https://www.drsrada.com/apply?position=CA.37A",
    "field": "data",
    "field_label": "דאטה / BI",
    "level": "junior",
