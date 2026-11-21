@@ -63,6 +63,18 @@ class FakeIMAP:
         FakeIMAP.selected_box = box
         return "OK", [b"1"]
 
+    stored = None
+
+    def uid(self, command, *args):
+        if command == "search":
+            return self.search(*args)
+        if command == "fetch":
+            return self.fetch(*args)
+        if command == "store":
+            FakeIMAP.stored = args
+            return "OK", [b""]
+        raise AssertionError(command)
+
     def search(self, charset, *criteria):
         return "OK", [b"1" if "alljobs.co.il" in criteria else b""]
 
@@ -183,3 +195,20 @@ def test_office_job_in_engineering_department_is_office_not_tech():
     cfg = yaml.safe_load((Path(__file__).parent.parent / "config.yaml").read_text(encoding="utf-8"))
     assert _field_of_title("דרוש/ה בק אופיס למחלקת ההנדסה", cfg)[0] == "office"
     assert _field_of_title("סטודנטים למדעי המחשב / מערכות מידע", cfg)[0] == "tech"
+
+
+def test_handled_emails_are_marked_read_but_empty_ones_stay_unread():
+    original = ea.imaplib.IMAP4_SSL
+    ea.imaplib.IMAP4_SSL = FakeIMAP
+    try:
+        FakeIMAP.stored = None
+        alerts = ea.fetch_alert_emails("me@gmail.com", "apppassword", ["alljobs.co.il"], 3, 10)
+        assert FakeIMAP.selected_readonly is True and FakeIMAP.stored is None   # reading changes nothing
+        assert alerts[0].uid == "1"
+        empty = ea.AlertEmail("<e>", "alljob.co.il", "s", [], uid="7")
+        assert ea.mark_as_read("me@gmail.com", "apppassword", alerts + [empty]) == 1
+        assert FakeIMAP.selected_readonly is False                      # write session only to mark
+        assert FakeIMAP.stored == ("1", "+FLAGS", "(\\Seen)")           # the empty email (uid 7) stays unread
+        assert ea.mark_as_read("me@gmail.com", "apppassword", [empty]) == 0
+    finally:
+        ea.imaplib.IMAP4_SSL = original

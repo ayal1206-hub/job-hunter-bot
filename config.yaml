@@ -108,6 +108,8 @@ email_alerts:
   senders: [alljob.co.il, drushim.co.il, jobmaster.co.il, jobalerts-noreply@linkedin.com]
   # Jobs whose title matches no tech track or general field (sales, call centres) are skipped.
   keep_other_fields: false
+  # Mark handled alert emails as read in Gmail (emails with no jobs found stay unread).
+  mark_as_read: true
   lookback_days: 3
   max_jobs_per_email: 10
 

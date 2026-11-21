@@ -50,6 +50,7 @@ class AlertEmail:
     subject: str
     # (title, url, company, location[, details]); "" when the email doesn't say.
     jobs: list[tuple] = field(default_factory=list)
+    uid: str = ""   # IMAP UID in All Mail, used to mark the email as read once handled
 
 
 class _LinkCollector(HTMLParser):
@@ -233,13 +234,13 @@ def fetch_alert_emails(address: str, app_password: str, senders: list[str],
     results = []
     with imaplib.IMAP4_SSL(IMAP_HOST) as imap:
         imap.login(address, app_password)
-        imap.select(_all_mail(imap), readonly=True)  # never changes the mailbox
+        imap.select(_all_mail(imap), readonly=True)  # reading never changes the mailbox
         for domain in senders:
-            status, data = imap.search(None, "SINCE", since, "FROM", domain)
+            status, data = imap.uid("search", None, "SINCE", since, "FROM", domain)
             if status != "OK":
                 continue
             for num in data[0].split():
-                status, msg_data = imap.fetch(num, "(BODY.PEEK[])")
+                status, msg_data = imap.uid("fetch", num, "(BODY.PEEK[])")
                 if status != "OK" or not msg_data or not isinstance(msg_data[0], tuple):
                     continue
                 msg = email.message_from_bytes(msg_data[0][1])
@@ -250,8 +251,23 @@ def fetch_alert_emails(address: str, app_password: str, senders: list[str],
                     sender=domain,
                     subject=_decode(msg.get("Subject")),
                     jobs=extract_jobs(_html_part(msg), domain, max_jobs),
+                    uid=num.decode(),
                 ))
     return results
+
+
+def mark_as_read(address: str, app_password: str, alerts: list[AlertEmail]) -> int:
+    """Mark the alert emails the bot handled as read, so the unread ones in Gmail are the ones
+    it hasn't gone through (or couldn't read). Only emails with at least one job are marked:
+    an email the bot found no jobs in stays unread for a human to open. Changes nothing else."""
+    uids = sorted({a.uid for a in alerts if a.uid and a.jobs}, key=int)
+    if not uids:
+        return 0
+    with imaplib.IMAP4_SSL(IMAP_HOST) as imap:
+        imap.login(address, app_password)
+        imap.select(_all_mail(imap))   # read-write, only to set the \Seen flag
+        status, _ = imap.uid("store", ",".join(uids), "+FLAGS", "(\\Seen)")
+    return len(uids) if status == "OK" else 0
 
 
 def is_tech(title: str, cfg: dict | None) -> bool:

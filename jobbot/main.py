@@ -18,7 +18,7 @@ from pathlib import Path
 
 import yaml
 
-from .email_alerts import fetch_alert_emails
+from .email_alerts import fetch_alert_emails, mark_as_read
 from .pipeline import board_entries, email_entries, merge, state
 from .scoring import tier_emoji
 from .sources import FETCHERS, SourceError
@@ -89,7 +89,23 @@ def fetch_emails(cfg: dict):
         print(f"Email alerts: failed ({type(exc).__name__}: {exc})")
         return []
     print(f"Email alerts: {len(alerts)} emails, {sum(len(a.jobs) for a in alerts)} job links")
+    LAST_ALERTS[:] = alerts
     return alerts
+
+
+LAST_ALERTS: list = []   # alert emails read in this run, marked as read once the run has saved them
+
+
+def mark_emails_read(cfg: dict) -> None:
+    ecfg = cfg.get("email_alerts") or {}
+    address, password = os.environ.get("GMAIL_ADDRESS"), os.environ.get("GMAIL_APP_PASSWORD")
+    if not ecfg.get("mark_as_read") or not LAST_ALERTS or not (address and password):
+        return
+    try:
+        n = mark_as_read(address, password.replace(" ", ""), LAST_ALERTS)
+        print(f"Email alerts: marked {n} handled email(s) as read")
+    except Exception as exc:  # never break the run
+        print(f"Email alerts: could not mark as read ({type(exc).__name__}: {exc})")
 
 
 def build(cfg: dict, today: str) -> tuple[list[dict], list[str], int]:
@@ -118,6 +134,7 @@ def run(cfg: dict) -> int:
     for e in entries:
         seen.setdefault(e["key"], today)
     save_seen(seen)
+    mark_emails_read(cfg)   # only after the jobs are saved and alerts sent
 
     tiers = {t: sum(1 for e in entries if e["tier"] == t) for t in ("hot", "good", "long")}
     print(f"\nScanned {scanned} jobs -> {len(entries)} in the app "
