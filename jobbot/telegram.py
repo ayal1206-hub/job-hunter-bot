@@ -9,6 +9,11 @@ API = "https://api.telegram.org/bot{token}/sendMessage"
 EMPLOYMENT = {"student": "משרת סטודנט", "part": "משרה חלקית", "full": "משרה מלאה"}
 
 
+def _alert_reason(entry: dict) -> str | None:
+    from .pipeline import alert_reason   # late import: pipeline imports scoring, not telegram
+    return alert_reason(entry)
+
+
 def format_hot(entry: dict, app_url: str | None = None) -> str:
     """Immediate alert for a 🔥 job."""
     where = entry["location"] or {"south": "דרום", "center": "מרכז", "north": "צפון"}.get(entry["region"], "")
@@ -16,6 +21,7 @@ def format_hot(entry: dict, app_url: str | None = None) -> str:
         f"🔥 <b>{html.escape(entry['title'])}</b>",
         f"🏢 {html.escape(entry['company'])}" + (f"  ·  📍 {html.escape(where)}" if where else ""),
         "✅ " + html.escape(" · ".join(entry["reasons"])),
+        *([f"🎯 {html.escape(why)}"] if (why := _alert_reason(entry)) else []),
         "📄 CV: " + ("Tech (English)" if entry["cv"] == "tech" else "General (Hebrew)"),
         f'<a href="{html.escape(entry["url"], quote=True)}">View and apply</a>',
     ]

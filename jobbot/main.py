@@ -19,7 +19,7 @@ from pathlib import Path
 import yaml
 
 from .email_alerts import fetch_alert_emails, mark_as_read
-from .pipeline import board_entries, email_entries, merge, state
+from .pipeline import alert_reason, board_entries, email_entries, merge, state
 from .scoring import tier_emoji
 from .sources import FETCHERS, SourceError
 from .telegram import Telegram, format_hot
@@ -125,7 +125,8 @@ def run(cfg: dict) -> int:
 
     telegram = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
     seen = load_seen()
-    hot = [e for e in entries if e["tier"] == "hot" and e["key"] not in seen] if cfg.get("python_alerts", True) else []
+    # Only the very best matches are sent (see alert_reason); the rest are in the app.
+    hot = [e for e in entries if alert_reason(e) and e["key"] not in seen] if cfg.get("python_alerts", True) else []
     for e in hot:
         telegram.send(format_hot(e, cfg.get("app_url")))
         seen[e["key"]] = today

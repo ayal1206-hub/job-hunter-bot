@@ -304,3 +304,27 @@ def test_requirements_inside_one_long_bullet_blob():
     assert required_years(blob) == 3
     assert required_years("Over 5 years in Embedded SW development - mandatory Experience with ST - big advantage") == 5
     assert required_years("Nice to have: 3+ years with Kafka") is None
+
+
+def test_alerts_only_for_the_very_best_matches():
+    from jobbot.pipeline import alert_reason
+    base = {"field": "qa", "level": "student", "region": "south", "years": None, "degree": None,
+            "min_gpa": None, "owner_hide": False, "remote": False, "relocation": False}
+    assert alert_reason(base) == "בדרום"
+    assert alert_reason({**base, "region": "center"}) is None                       # center, no housing/travel
+    assert alert_reason({**base, "region": "center", "relocation": True}) == "במרכז, עם דירה / החזרי נסיעות"
+    assert alert_reason({**base, "region": "any", "remote": True}) == "מהבית"
+    assert alert_reason({**base, "field": "security"}) is None                      # not a CS job
+    assert alert_reason({**base, "level": "possible"}) is None                     # not a student position
+    assert alert_reason({**base, "owner_hide": True}) is None                      # final year / 2+ years left...
+    assert alert_reason({**base, "years": 1}) is None
+
+
+def test_remote_and_relocation_facts():
+    from jobbot.scoring import extract_facts
+    f = extract_facts("QA Student", "Work from home. Travel expenses reimbursed.", "student")
+    assert f.remote and f.relocation
+    f = extract_facts("QA Student", "Hybrid model, 3 days in the office", "student")
+    assert not f.remote and not f.relocation
+    assert extract_facts("סטודנט QA", "עבודה מהבית, החזרי נסיעות", "student").remote
+    assert extract_facts("סטודנט QA", "החזר נסיעות מלא", "student").relocation

@@ -44,6 +44,7 @@ def _entry(key, source, company, title, location, region, url, field, field_labe
         "degree": facts.degree, "min_gpa": facts.min_gpa, "years_left": facts.years_left,
         # The owner can't apply: needs more years of studies than the owner has left.
         "final_year": facts.final_year, "min_study_year": facts.min_study_year,
+        "remote": facts.remote or "remote" in (location or "").lower(), "relocation": facts.relocation,
         "owner_hide": bool(owner_block(facts, studies_left)),
         "score": s, "tier": tier, "reasons": reasons,
         "cv": "tech" if is_tech else "general", "first_seen": today,
@@ -126,6 +127,24 @@ def merge(previous: list[dict], fresh: list[dict], today: str) -> list[dict]:
         if e["origin"] == "email" and e["key"] not in by_key and e["first_seen"] >= cutoff:
             by_key[e["key"]] = e
     return sorted(by_key.values(), key=lambda e: (e["score"], e["first_seen"]), reverse=True)
+
+
+def alert_reason(e: dict) -> str | None:
+    """Telegram alerts go out only for the very best matches; everything else waits in the app.
+    A job qualifies when it is a student position in a CS field that a second-year student can
+    apply to, and it is reachable: in the south, from home, or in the center with housing or
+    travel paid. Returns the reason shown in the alert, or None."""
+    if e.get("field") not in FIELD_LABELS or e.get("level") != "student":
+        return None
+    if e.get("owner_hide") or e.get("min_gpa") or e.get("degree") in ("msc", "bsc_done") or (e.get("years") or 0) > 0:
+        return None
+    if e.get("region") == "south":
+        return "בדרום"
+    if e.get("remote"):
+        return "מהבית"
+    if e.get("region") == "center" and e.get("relocation"):
+        return "במרכז, עם דירה / החזרי נסיעות"
+    return None
 
 
 def all_fields(cfg: dict) -> list[list[str]]:

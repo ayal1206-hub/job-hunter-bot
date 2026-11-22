@@ -56,6 +56,13 @@ _PART_TIME = re.compile(r"part[\s-]?time|משרה חלקית|חלקית|\d{2}\s*
 _STUDENT_JOB = re.compile(r"student position|student job|for students|משרת סטודנט|לסטודנטים|סטודנט", re.I)
 _FULL_TIME = re.compile(r"full[\s-]?time|משרה מלאה", re.I)
 _HYBRID = re.compile(r"hybrid|remote|work from home|היברידי|מהבית|עבודה מרחוק", re.I)
+# Fully from home (not hybrid): "Remote", "work from home", "עבודה מהבית"
+_REMOTE = re.compile(r"\bremote\b|work(?:ing)? from home|\bwfh\b|מהבית|עבודה מרחוק", re.I)
+# Housing or travel paid by the employer: makes a job in the center reachable from the south
+_RELOCATION = re.compile(
+    r"relocation|housing|accommodation|apartment|travel (?:expenses|reimbursement)|"
+    r"commut\w* (?:reimburs\w*|allowance|covered)|transportation (?:provided|covered|reimburs\w*)|shuttle|"
+    r"דירה|מגורים|לינה|החזר(?:י)?\s+(?:נסיעות|הוצאות נסיעה)|הסעות|הסעה", re.I)
 _MASTERS = re.compile(
     r"\b(?:m\.?\s?sc|m\.?\s?s|m\.?\s?a|master'?s?|ph\.?\s?d)\.?\s+(?:degree\s+)?(?:student|candidate)|"
     r"(?<!under)graduate students? only|תואר שני|סטודנט(?:ית|ים)? ל?מאסטר", re.I)
@@ -98,7 +105,7 @@ _STUDY_YEAR_HE = re.compile(r"שנה\s+([אבגד])\s*['׳]")
 _ORD = {"first": 1, "1st": 1, "second": 2, "2nd": 2, "third": 3, "3rd": 3, "fourth": 4, "4th": 4,
         "א": 1, "ב": 2, "ג": 3, "ד": 4}
 DEGREE_YEARS = 3
-FACTS_VERSION = 9   # bump when extract_facts learns something new, so cached facts are re-read
+FACTS_VERSION = 10   # bump when extract_facts learns something new, so cached facts are re-read
 
 
 @dataclass
@@ -110,6 +117,8 @@ class Facts:
     min_gpa: int | None = None   # minimum grade average the job asks for
     years_left: float | None = None  # studies the student must still have ahead ("2+ years left")
     other_field: bool = False        # only for students of another discipline (accounting, law...)
+    remote: bool = False             # can be done from home
+    relocation: bool = False         # housing / travel paid by the employer
     final_year: bool = False         # only for students in their final year
     min_study_year: int | None = None  # lowest year of studies accepted ("third-year students")
 
@@ -218,7 +227,8 @@ def extract_facts(title: str, description: str, level: str) -> Facts:
     return Facts(years=required_years(text), employment=employment, hybrid=bool(_HYBRID.search(text)),
                  degree=required_degree(text), min_gpa=required_gpa(text),
                  years_left=required_years_left(text), other_field=bool(_OTHER_FIELD_ONLY.search(text)),
-                 final_year=bool(_FINAL_YEAR.search(text)), min_study_year=required_study_year(text))
+                 final_year=bool(_FINAL_YEAR.search(text)), min_study_year=required_study_year(text),
+                 remote=bool(_REMOTE.search(text)), relocation=bool(_RELOCATION.search(text)))
 
 
 GENERAL_FIELDS = ("security", "lifeguard", "office", "government")
@@ -281,4 +291,5 @@ def facts_from_dict(d: dict) -> Facts:
     return Facts(years=d.get("years"), employment=d.get("employment", "full"), hybrid=bool(d.get("hybrid")),
                  degree=d.get("degree"), min_gpa=d.get("min_gpa"), years_left=d.get("years_left"),
                  other_field=bool(d.get("other_field")), final_year=bool(d.get("final_year")),
-                 min_study_year=d.get("min_study_year"))
+                 min_study_year=d.get("min_study_year"), remote=bool(d.get("remote")),
+                 relocation=bool(d.get("relocation")))
