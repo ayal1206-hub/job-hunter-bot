@@ -328,3 +328,16 @@ def test_remote_and_relocation_facts():
     assert not f.remote and not f.relocation
     assert extract_facts("סטודנט QA", "עבודה מהבית, החזרי נסיעות", "student").remote
     assert extract_facts("סטודנט QA", "החזר נסיעות מלא", "student").relocation
+
+
+def test_reposted_jobs_show_once():
+    from jobbot.pipeline import merge
+    mk = lambda jid, day, title="מחפש/ת עבודה משרדית? דרוש/ה בק אופיס": {
+        "key": f"email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID={jid}", "origin": "email",
+        "title": title, "company": "אורטל", "location": "קרית גת", "score": 8, "first_seen": day}
+    prev = [mk(8904838, "2026-11-17"), mk(8906719, "2026-11-19")]
+    out = merge(prev, [mk(8908774, "2026-11-22"), mk(1, "2026-11-22", "מאבטח/ת")], "2026-11-22")
+    backoffice = [e for e in out if "בק אופיס" in e["title"]]
+    assert len(backoffice) == 1
+    assert backoffice[0]["key"].endswith("8908774") and backoffice[0]["first_seen"] == "2026-11-17"
+    assert len(out) == 2

@@ -19,7 +19,7 @@ from pathlib import Path
 import yaml
 
 from .email_alerts import fetch_alert_emails, mark_as_read
-from .pipeline import alert_reason, board_entries, email_entries, merge, state
+from .pipeline import alert_reason, board_entries, email_entries, merge, signature, state
 from .scoring import tier_emoji
 from .sources import FETCHERS, SourceError
 from .telegram import Telegram, format_hot
@@ -126,14 +126,17 @@ def run(cfg: dict) -> int:
     telegram = Telegram(os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID"))
     seen = load_seen()
     # Only the very best matches are sent (see alert_reason); the rest are in the app.
-    hot = [e for e in entries if alert_reason(e) and e["key"] not in seen] if cfg.get("python_alerts", True) else []
+    # A repost of an already-alerted job (same title/company/place, new link) isn't sent again.
+    hot = [e for e in entries if alert_reason(e) and e["key"] not in seen and "sig:" + signature(e) not in seen] \
+        if cfg.get("python_alerts", True) else []
     for e in hot:
         telegram.send(format_hot(e, cfg.get("app_url")))
-        seen[e["key"]] = today
+        seen[e["key"]] = seen["sig:" + signature(e)] = today
         save_seen(seen)  # save after each send so a crash never re-sends
     # Everything else is shown in the app; mark it so it never triggers an alert later.
     for e in entries:
         seen.setdefault(e["key"], today)
+        seen.setdefault("sig:" + signature(e), today)
     save_seen(seen)
     mark_emails_read(cfg)   # only after the jobs are saved and alerts sent
 

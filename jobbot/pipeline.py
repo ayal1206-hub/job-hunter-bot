@@ -1,5 +1,6 @@
 """Turn raw jobs (boards + alert emails) into the scored list the app shows."""
 
+import re
 from datetime import date, datetime, timedelta, timezone
 
 from .details import fetch_description, page_to_text
@@ -115,6 +116,28 @@ def email_entries(alerts: list[AlertEmail], cfg: dict, today: str) -> list[dict]
     return entries
 
 
+def signature(e: dict) -> str:
+    """Same job, different link: agencies repost the same ad daily on AllJobs with a new id,
+    and a few boards list one role twice. Same title + company + place = same job."""
+    if not e.get("title"):
+        return e["key"]
+    norm = lambda s: re.sub(r"[\s/\\\-–|,.!?]+", " ", (s or "").lower()).strip()
+    return f"{norm(e.get('title'))}|{norm(e.get('company'))}|{norm(e.get('location'))}"
+
+
+def dedupe(entries: list[dict]) -> list[dict]:
+    """Keep one entry per signature: the newest post (its link is the live one), with the date
+    the job was first seen under any of its posts."""
+    groups: dict[str, list[dict]] = {}
+    for e in entries:
+        groups.setdefault(signature(e), []).append(e)
+    out = []
+    for posts in groups.values():
+        newest = max(posts, key=lambda e: (e["first_seen"], e["key"]))
+        out.append({**newest, "first_seen": min(e["first_seen"] for e in posts)} if len(posts) > 1 else newest)
+    return out
+
+
 def merge(previous: list[dict], fresh: list[dict], today: str) -> list[dict]:
     """Keep first_seen dates; drop board jobs that closed; keep email jobs for a while."""
     first_seen = {e["key"]: e["first_seen"] for e in previous}
@@ -126,7 +149,7 @@ def merge(previous: list[dict], fresh: list[dict], today: str) -> list[dict]:
     for e in previous:
         if e["origin"] == "email" and e["key"] not in by_key and e["first_seen"] >= cutoff:
             by_key[e["key"]] = e
-    return sorted(by_key.values(), key=lambda e: (e["score"], e["first_seen"]), reverse=True)
+    return sorted(dedupe(list(by_key.values())), key=lambda e: (e["score"], e["first_seen"]), reverse=True)
 
 
 def alert_reason(e: dict) -> str | None:
