@@ -181,20 +181,6 @@
   "min_study_year": null,
   "v": 10
  },
- "comeet:Kela:CF.E6B": {
-  "years": 2,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": true,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
  "comeet:Kela:81.A6C": {
   "years": 1,
   "employment": "full",

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-22T16:31:43+00:00",
+ "generated_at": "2026-11-22T19:35:39+00:00",
  "jobs": [
   {
    "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8906173",
@@ -935,7 +935,7 @@
    "title": "Software Engineer Intern",
    "location": "Ramat Gan, Tel Aviv",
    "region": "center",
-   "url": "https://www.upwind.io/careers/co/tel-aviv/D6.370/software-engineer-intern/all#brxe-rkmjgc",
+   "url": "https://www.upwind.io/careers/co/tel-aviv/D6.370/software-engineer-intern/all",
    "field": "dev",
    "field_label": "פיתוח",
    "level": "student",
@@ -1553,40 +1553,6 @@
    ],
    "cv": "tech",
    "first_seen": "2026-10-28",
-   "owner_only": false
-  },
-  {
-   "key": "comeet:Kela:CF.E6B",
-   "source": "comeet",
-   "origin": "board",
-   "company": "Kela",
-   "title": "IT Administrator",
-   "location": "Tel Aviv-Yafo, Tel aviv",
-   "region": "center",
-   "url": "https://www.comeet.com/jobs/kelatechnologies/2A.007/it-administrator/CF.E6B",
-   "field": "support",
-   "field_label": "תמיכה / IT",
-   "level": "possible",
-   "employment": "full",
-   "years": 2,
-   "hybrid": true,
-   "degree": null,
-   "min_gpa": null,
-   "years_left": null,
-   "final_year": false,
-   "min_study_year": null,
-   "remote": true,
-   "relocation": false,
-   "owner_hide": false,
-   "score": -1,
-   "tier": "long",
-   "reasons": [
-    "בלי רמה מוגדרת",
-    "דורש 2+ שנות ניסיון",
-    "היברידי / מהבית"
-   ],
-   "cv": "tech",
-   "first_seen": "2026-11-17",
    "owner_only": false
   },
   {
