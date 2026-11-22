@@ -64,6 +64,14 @@
   .btn.primary { background: var(--accent); color: var(--accent-text); }
   .btn.ghost { background: var(--bg2); color: var(--text); }
   .empty { text-align: center; color: var(--hint); padding: 40px 0; }
+  .btn.dismiss { flex: 0 0 auto; background: transparent; color: var(--hint); border: 1px solid var(--line); padding: 10px 12px; }
+  .hidden-link { background: none; border: 0; color: var(--hint); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 8px 0; align-self: center; }
+  .toast {
+    position: fixed; inset-inline: 16px; bottom: 16px; z-index: 10; display: flex; align-items: center; gap: 12px;
+    justify-content: space-between; background: var(--text); color: var(--bg); border-radius: 12px; padding: 12px 14px;
+    font-size: 14px; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  }
+  .toast button { background: none; border: 0; color: inherit; font: inherit; font-weight: 650; text-decoration: underline; cursor: pointer; min-height: 36px; }
   [dir="auto"] { unicode-bidi: plaintext; }
 </style>
 </head>
@@ -101,20 +109,41 @@ let jobs = [];
 let knownFields = [];
 let filters = store.get("filters") || { employment: [], region: [], field: [], hot: false, hideApplied: false };
 let applied = new Set(store.get("applied") || []);
+let hidden = new Set(store.get("hidden") || []);   // jobs marked "not relevant to me"
+let showHidden = false;
 
-// Applied jobs follow the user across devices through Telegram CloudStorage when available.
-function cloudLoadApplied() {
-  if (!tg || !tg.CloudStorage || !tg.isVersionAtLeast || !tg.isVersionAtLeast("6.9")) return;
+// Applied / hidden jobs follow the user across devices through Telegram CloudStorage when available.
+const cloudOk = () => tg && tg.CloudStorage && tg.isVersionAtLeast && tg.isVersionAtLeast("6.9");
+function cloudLoad(key, set) {
+  if (!cloudOk()) return;
   try {
-    tg.CloudStorage.getItem("applied", (err, val) => {
-      if (!err && val) { try { JSON.parse(val).forEach(k => applied.add(k)); render(); } catch {} }
+    tg.CloudStorage.getItem(key, (err, val) => {
+      if (!err && val) { try { JSON.parse(val).forEach(k => set.add(k)); render(); } catch {} }
     });
   } catch {}
 }
-function saveApplied() {
-  const arr = [...applied].slice(-300);
-  store.set("applied", arr);
-  try { if (tg && tg.CloudStorage && tg.isVersionAtLeast("6.9")) tg.CloudStorage.setItem("applied", JSON.stringify(arr)); } catch {}
+function cloudLoadApplied() { cloudLoad("applied", applied); cloudLoad("hidden", hidden); }
+function saveSet(key, set) {
+  const arr = [...set].slice(-300);   // CloudStorage values are limited to 4096 chars
+  store.set(key, arr);
+  try { if (cloudOk()) tg.CloudStorage.setItem(key, JSON.stringify(arr)); } catch {}
+}
+function saveApplied() { saveSet("applied", applied); }
+function saveHidden() { saveSet("hidden", hidden); }
+
+let toastTimer;
+function toast(text, undo) {
+  document.querySelector(".toast")?.remove();
+  clearTimeout(toastTimer);
+  const t = el("div", { class: "toast", role: "status" }, el("span", {}, text),
+    el("button", { type: "button", onclick: () => { undo(); t.remove(); } }, "ביטול"));
+  document.body.append(t);
+  toastTimer = setTimeout(() => t.remove(), 5000);
+}
+
+function dismiss(j) {
+  hidden.add(j.key); saveHidden(); render();
+  toast("המשרה הוסתרה", () => { hidden.delete(j.key); saveHidden(); render(); });
 }
 
 function el(tag, attrs = {}, ...kids) {
@@ -138,6 +167,7 @@ function matches(j, skip) {
   if (j.owner_hide) return false;               // needs more years of studies than I have left
 
   if (filters.hideApplied && applied.has(j.key)) return false;
+  if (hidden.has(j.key) !== showHidden) return false;   // "not relevant" jobs only in the hidden view
   return true;
 }
 
@@ -197,6 +227,11 @@ function card(j) {
         class: "btn ghost", type: "button", "aria-pressed": String(done),
         onclick: () => { done ? applied.delete(j.key) : applied.add(j.key); saveApplied(); render(); },
       }, done ? "✓ הגשתי" : "סמן שהגשתי"),
+      hidden.has(j.key)
+        ? el("button", { class: "btn dismiss", type: "button",
+            onclick: () => { hidden.delete(j.key); saveHidden(); render(); } }, "החזר")
+        : el("button", { class: "btn dismiss", type: "button", "aria-label": "לא רלוונטי לי - הסתר את המשרה",
+            onclick: () => dismiss(j) }, "לא רלוונטי לי"),
     ),
   );
 }
@@ -215,10 +250,16 @@ function render() {
   chipRow("f-field", "field", fields);
   extraRow();
   const shown = jobs.filter(j => matches(j));
+  const hiddenCount = jobs.filter(j => hidden.has(j.key)).length;
+  if (showHidden && !hiddenCount) showHidden = false;
   const list = document.getElementById("list");
+  const toggle = hiddenCount ? el("button", { class: "hidden-link", type: "button",
+      onclick: () => { showHidden = !showHidden; render(); window.scrollTo(0, 0); } },
+    showHidden ? "חזרה לכל המשרות" : `הסתרת ${hiddenCount} משרות שלא רלוונטיות · הצג`) : null;
   list.replaceChildren(
-    el("div", { class: "count" }, `${shown.length} משרות`),
+    el("div", { class: "count" }, showHidden ? `${shown.length} משרות שהסתרת` : `${shown.length} משרות`),
     ...(shown.length ? shown.map(card) : [el("div", { class: "empty" }, "אין משרות שמתאימות לסינון הזה")]),
+    toggle,
   );
 }
 
