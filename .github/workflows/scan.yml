@@ -2,8 +2,13 @@ name: Scan for jobs
 
 on:
   schedule:
-    # Every 4 hours (UTC). GitHub may delay scheduled runs by a few minutes.
-    - cron: "23 */4 * * *"
+    # Times are UTC (Israel = UTC+2 in winter, UTC+3 in summer).
+    # Chosen from when new jobs actually appeared in the week of 16-23 Nov 2026 (board posts
+    # and AllJobs emails): ~90% between 09:00 and 21:00 Israel time, peaks 09-12, 14 and 18.
+    # Hourly through the day, once at night. GitHub skips some scheduled runs under load,
+    # so frequent attempts also make the real schedule more reliable.
+    - cron: "50 5-19 * * *"   # 07:50-21:50 Israel (winter), hourly
+    - cron: "50 22 * * *"     # 00:50 Israel: the evening's late posts
   workflow_dispatch:
     inputs:
       check:
