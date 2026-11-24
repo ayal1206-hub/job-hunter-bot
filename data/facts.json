@@ -27,20 +27,6 @@
   "min_study_year": null,
   "v": 10
  },
- "greenhouse:Cato Networks:4961284101": {
-  "years": 2,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
  "comeet:VAST Data:96.61C": {
   "years": 3,
   "employment": "full",
@@ -1927,20 +1913,6 @@
   "min_study_year": null,
   "v": 10
  },
- "comeet:Samsung Israel:E4.57B": {
-  "years": null,
-  "employment": "student",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": 85,
-  "years_left": 2.0,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
  "comeet:Samsung Israel:15.573": {
   "years": 5,
   "employment": "full",
@@ -2096,6 +2068,34 @@
   "v": 10
  },
  "comeet:KPMG Israel:E8.571": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "remote": false,
+  "relocation": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 10
+ },
+ "greenhouse:Payoneer:8355124": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "remote": false,
+  "relocation": true,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 10
+ },
+ "comeet:KPMG Israel:CB.476": {
   "years": 3,
   "employment": "full",
   "hybrid": true,
