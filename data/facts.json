@@ -359,20 +359,6 @@
   "min_study_year": null,
   "v": 10
  },
- "greenhouse:Similarweb:7938197": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
  "greenhouse:Payoneer:8261034": {
   "years": 4,
   "employment": "full",
@@ -406,20 +392,6 @@
   "employment": "full",
   "hybrid": true,
   "degree": "msc",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
- "greenhouse:Taboola:8200807": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
   "min_gpa": null,
   "years_left": null,
   "other_field": false,
@@ -775,20 +747,6 @@
   "other_field": false,
   "remote": false,
   "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
- "comeet:Claroty:58.479": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": true,
   "final_year": false,
   "min_study_year": null,
   "v": 10
@@ -2025,34 +1983,6 @@
   "min_study_year": null,
   "v": 10
  },
- "greenhouse:Wiz:4720879006": {
-  "years": 2,
-  "employment": "full",
-  "hybrid": false,
-  "degree": "bsc_done",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
- "comeet:Team8:97.571": {
-  "years": 6,
-  "employment": "full",
-  "hybrid": false,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
  "comeet:Claroty:D5.076": {
   "years": 6,
   "employment": "full",
@@ -2109,20 +2039,6 @@
   "min_study_year": null,
   "v": 10
  },
- "greenhouse:Payoneer:8392388": {
-  "years": 3,
-  "employment": "full",
-  "hybrid": true,
-  "degree": null,
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": true,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
  "greenhouse:AppsFlyer:8957960002": {
   "years": 3,
   "employment": "full",
@@ -2165,9 +2081,9 @@
   "min_study_year": null,
   "v": 10
  },
- "comeet:Upwind:D6.370": {
-  "years": null,
-  "employment": "student",
+ "comeet:Team8:19.571": {
+  "years": 5,
+  "employment": "full",
   "hybrid": false,
   "degree": null,
   "min_gpa": null,
@@ -2176,7 +2092,21 @@
   "remote": false,
   "relocation": false,
   "final_year": false,
-  "min_study_year": 2,
+  "min_study_year": null,
+  "v": 10
+ },
+ "comeet:KPMG Israel:E8.571": {
+  "years": 3,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "remote": false,
+  "relocation": false,
+  "final_year": false,
+  "min_study_year": null,
   "v": 10
  }
 }
