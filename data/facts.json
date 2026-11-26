@@ -373,20 +373,6 @@
   "min_study_year": null,
   "v": 10
  },
- "greenhouse:Taboola:8081260": {
-  "years": 4,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "msc",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
  "greenhouse:Riskified:8653104002": {
   "years": 2,
   "employment": "full",
@@ -1018,20 +1004,6 @@
   "v": 10
  },
  "comeet:Fetcherr:DB.D6C-9D.50A": {
-  "years": 5,
-  "employment": "full",
-  "hybrid": true,
-  "degree": "msc",
-  "min_gpa": null,
-  "years_left": null,
-  "other_field": false,
-  "remote": false,
-  "relocation": false,
-  "final_year": false,
-  "min_study_year": null,
-  "v": 10
- },
- "comeet:Fetcherr:F6.47E": {
   "years": 5,
   "employment": "full",
   "hybrid": true,
@@ -2157,6 +2129,34 @@
   "hybrid": true,
   "degree": null,
   "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "remote": false,
+  "relocation": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 10
+ },
+ "comeet:Team8:99.576": {
+  "years": 4,
+  "employment": "full",
+  "hybrid": false,
+  "degree": null,
+  "min_gpa": null,
+  "years_left": null,
+  "other_field": false,
+  "remote": false,
+  "relocation": false,
+  "final_year": false,
+  "min_study_year": null,
+  "v": 10
+ },
+ "comeet:Team8:3E.578": {
+  "years": 0,
+  "employment": "full",
+  "hybrid": true,
+  "degree": null,
+  "min_gpa": 90,
   "years_left": null,
   "other_field": false,
   "remote": false,
