@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-25T16:10:55+00:00",
+ "generated_at": "2026-11-26T00:43:56+00:00",
  "jobs": [
   {
    "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8906173",
@@ -441,14 +441,14 @@
    "owner_only": true
   },
   {
-   "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8908774",
+   "key": "email:https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8917645",
    "source": "alljob",
    "origin": "email",
    "company": "אורטל משאבי אנוש (קרית גת)",
    "title": "מחפש /ת עבודה משרדית? דרוש /ה בק אופיס למחלקת ההנדסה- שכר גבוה! רק בוקר! ללא שישי!",
    "location": "חדרה, אשדוד, קרית מלאכי, קרית גת ואשקלון",
    "region": "south",
-   "url": "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8908774",
+   "url": "https://www.alljobs.co.il/Search/UploadSingle.aspx?JobID=8917645",
    "field": "office",
    "field_label": "משרדי",
    "level": "student",
@@ -1010,7 +1010,7 @@
    "title": "NOC Engineer- Student Position",
    "location": "Petah-Tikva, Israel, Petah Tikva",
    "region": "center",
-   "url": "https://www.global-e.com/ja/careers/bc-84d/",
+   "url": "https://www.global-e.com/careers/bc-84d/?fbclid=IwZXh0bgNhZW0CMTEAcGRvZgFmZGlkFlEuZo3-1TbPt6INOkrj0rRmOfw428FzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEfq-srP443qT7sFbTOpXTUif45vwGRUl_RbzmoOZnAFCzBECtk9Zxq_y1nIg0_aem_fo5zTwkitP4j_PYwn5lGIw",
    "field": "support",
    "field_label": "תמיכה / IT",
    "level": "student",
@@ -1241,7 +1241,7 @@
    "title": "DevOps Engineer",
    "location": "Ra'anana, Israel (Remote)",
    "region": "center",
-   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/all/?t=1792579068024",
+   "url": "https://allcloud.io/careers/co/israel/09.E62/devops-engineer/all/",
    "field": "devops",
    "field_label": "DevOps / ענן",
    "level": "possible",
